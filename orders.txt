@@ -37,3 +37,23 @@ Rating: 5 stars
 Special Instructions: 
 ═══════════════════════════════════════════════════════════════
 
+═══════════════════════════════════════════════════════════════
+=== ORDER #1001 ===
+Date: 23/07/2026 13:17:14
+Customer: praveen
+Phone: 98843
+Order Type: Dine-in
+Table: 2
+Status: Delivered
+Items:
+  Buttermilk x6 = ₹360.0
+Subtotal: ₹360.0
+Combo Discount: ₹0.0
+Special Discount: ₹0.0
+GST: ₹64.8
+Grand Total: ₹424.8
+Payment: UPI
+Rating: 5 stars
+Special Instructions: 
+═══════════════════════════════════════════════════════════════
+
