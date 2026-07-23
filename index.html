@@ -1,473 +1,3079 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Food Haven Restaurant</title>
-  <style>
-    :root {
-      --primary: #e63946;
-      --secondary: #f1faee;
-      --dark: #1d3557;
-      --accent: #457b9d;
-      --light-bg: #f8f9fa;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASTYBITES - Premium Dining</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== CSS VARIABLES & THEME ===== */
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #f5d061;
+            --gold-dark: #a8892e;
+            --black: #110707;
+            --black-light: #1e0f0f;
+            --cream: #f5f0e8;
+            --glass-bg: rgba(30, 15, 15, 0.7);
+            --glass-border: rgba(201, 168, 76, 0.2);
+            --shadow-gold: 0 8px 32px rgba(201, 168, 76, 0.15);
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
-    body {
-      background-color: var(--light-bg);
-      color: #333;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--black);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    header {
-      background-color: var(--dark);
-      color: white;
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
 
-    header h1 {
-      color: var(--primary);
-      font-size: 1.8rem;
-    }
+        .scroll-reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .scroll-reveal-left.active { opacity: 1; transform: translateX(0); }
 
-    nav button {
-      background: none;
-      border: 1px solid white;
-      color: white;
-      padding: 0.5rem 1rem;
-      margin-left: 0.5rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+        .scroll-reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .scroll-reveal-right.active { opacity: 1; transform: translateX(0); }
 
-    nav button:hover, nav button.active {
-      background-color: var(--primary);
-      border-color: var(--primary);
-    }
+        .scroll-reveal-scale {
+            opacity: 0;
+            transform: scale(0.7);
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .scroll-reveal-scale.active { opacity: 1; transform: scale(1); }
 
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
+        .text-animate {
+            opacity: 0;
+            animation: textFadeUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .text-animate-d1 { animation-delay: 0.2s; }
+        .text-animate-d2 { animation-delay: 0.4s; }
+        .text-animate-d3 { animation-delay: 0.6s; }
+        .text-animate-d4 { animation-delay: 0.8s; }
+        .text-animate-d5 { animation-delay: 1.0s; }
 
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      justify-content: center;
-    }
+        @keyframes textFadeUp {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
-    .filter-btn {
-      padding: 0.6rem 1.2rem;
-      border: none;
-      background-color: #e0e0e0;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.2s;
-    }
+        .pop-up {
+            animation: popUp 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        @keyframes popUp {
+            0% { transform: scale(0.5) rotate(-2deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
 
-    .filter-btn:hover, .filter-btn.active {
-      background-color: var(--primary);
-      color: white;
-    }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
+        .gold-text {
+            color: var(--gold);
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+        }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 0 20px;
+        }
+        .section-tag {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .section-header p {
+            color: rgba(245, 240, 232, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease;
+        }
+        #preloader.hidden { opacity: 0; pointer-events: none; }
 
-    .card-img-wrapper {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-    }
+        .loader-content { text-align: center; }
+        .gold-spinner {
+            width: 70px;
+            height: 70px;
+            border: 3px solid rgba(201, 168, 76, 0.1);
+            border-top: 3px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            margin: 0 auto 20px;
+        }
+        .loader-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        .loader-content p {
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-    .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            z-index: 999;
+            transition: var(--transition);
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(17, 7, 7, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 12px 40px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        }
 
-    .type-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: bold;
-      color: white;
-    }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
 
-    .type-veg { background-color: #2e7d32; }
-    .type-nonveg { background-color: #c62828; }
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--cream);
+        }
+        .nav-logo .stars { font-size: 10px; color: var(--gold); margin-left: 5px; vertical-align: middle; }
 
-    .card-body {
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
 
-    .card-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: var(--dark);
-    }
+        .nav-link {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link:hover, .nav-link.active { color: var(--gold); }
 
-    .card-category {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 0.8rem;
-    }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 0.8rem;
-      border-top: 1px solid #eee;
-    }
+        .cart-btn, .admin-btn {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 18px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(245, 240, 232, 0.1);
+        }
+        .cart-btn:hover, .admin-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+        }
 
-    .price {
-      font-size: 1.25rem;
-      font-weight: bold;
-      color: var(--dark);
-    }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .add-btn {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 22px;
+            cursor: pointer;
+        }
 
-    .add-btn:hover {
-      background-color: #c02735;
-    }
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(17, 7, 7, 0.85), rgba(17, 7, 7, 0.75)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80') center/cover no-repeat;
+            padding: 100px 20px 50px;
+        }
 
-    /* Cart Sidebar Modal */
-    .cart-modal {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 380px;
-      height: 100%;
-      background-color: white;
-      box-shadow: -4px 0 12px rgba(0,0,0,0.15);
-      transition: right 0.3s ease;
-      z-index: 101;
-      display: flex;
-      flex-direction: column;
-    }
+        .hero-content {
+            text-align: center;
+            max-width: 850px;
+            z-index: 2;
+        }
 
-    .cart-modal.open {
-      right: 0;
-    }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid var(--gold);
+            border-radius: 30px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 25px;
+            background: rgba(201, 168, 76, 0.05);
+        }
 
-    .cart-header {
-      background-color: var(--dark);
-      color: white;
-      padding: 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
 
-    .close-cart {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
+        .hero-subtitle {
+            font-size: 16px;
+            color: rgba(245, 240, 232, 0.7);
+            margin-bottom: 35px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
 
-    .cart-items {
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 1rem;
-    }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
 
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid #eee;
-    }
+        .btn-primary {
+            padding: 12px 35px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+            filter: brightness(1.1);
+        }
 
-    .cart-footer {
-      padding: 1.2rem;
-      background-color: #f1f1f1;
-      border-top: 1px solid #ddd;
-    }
+        .gold-border-btn {
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--cream);
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .gold-border-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-2px);
+        }
 
-    .checkout-btn {
-      width: 100%;
-      padding: 0.8rem;
-      background-color: #2e7d32;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 0.8rem;
-    }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            border-top: 1px solid rgba(245, 240, 232, 0.1);
+            padding-top: 30px;
+        }
+        .stat-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .stat-item p {
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      display: none;
-      z-index: 100;
-    }
+        /* ===== OFFERS SECTION ===== */
+        .offers-section {
+            padding: 80px 40px;
+            background: var(--black-light);
+        }
+        .offers-container { max-width: 1200px; margin: 0 auto; }
 
-    .overlay.active {
-      display: block;
-    }
-  </style>
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .offer-card {
+            background: rgba(30, 15, 15, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold);
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+        .offer-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
+        }
+        .offer-card:hover::before { opacity: 1; height: 100%; }
+
+        .offer-icon {
+            font-size: 24px;
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .offer-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .offer-info p {
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.6);
+            margin-bottom: 12px;
+        }
+        .offer-badge {
+            display: inline-block;
+            font-size: 10px;
+            padding: 3px 10px;
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--gold);
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* ===== MENU SECTION ===== */
+        .menu-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .search-filter-bar {
+            background: var(--black-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+        .search-box input {
+            width: 100%;
+            background: var(--black);
+            border: 1px solid rgba(245, 240, 232, 0.15);
+            padding: 12px 20px 12px 45px;
+            border-radius: 30px;
+            color: var(--cream);
+            font-family: inherit;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+        .search-box input:focus { outline: none; border-color: var(--gold); }
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(245, 240, 232, 0.4);
+            font-size: 14px;
+        }
+
+        .filter-controls, .diet-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn, .diet-btn {
+            background: transparent;
+            border: 1px solid rgba(245, 240, 232, 0.15);
+            color: var(--cream);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+        }
+        .diet-btn.active[data-diet="Veg"] {
+            border-color: #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+        .diet-btn.active[data-diet="Non-Veg"] {
+            border-color: #ef4444;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+        .diet-btn.active[data-diet="all"] {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-card {
+            background: var(--black-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .menu-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        .menu-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .menu-card:hover .menu-image-container img { transform: scale(1.05); }
+
+        .item-tags {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .veg-indicator {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #10b981;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+        .veg-indicator::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+        }
+
+        .non-veg-indicator {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ef4444;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+        }
+        .non-veg-indicator::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+
+        .card-special-badge {
+            background: var(--gold);
+            color: var(--black);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .menu-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+        .menu-card-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .menu-card-body p {
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.6);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 36px;
+        }
+
+        .menu-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(245, 240, 232, 0.05);
+            padding-top: 15px;
+        }
+        .item-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .add-cart-btn {
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            color: var(--gold);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .add-cart-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .view-more-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .view-more-btn {
+            padding: 15px 50px;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .view-more-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-3px);
+        }
+        .view-more-btn i { margin-left: 10px; transition: var(--transition); }
+        .view-more-btn:hover i { transform: rotate(180deg); }
+
+        /* ===== TABLE BOOKING ===== */
+        .booking-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            background: var(--black-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .booking-visual {
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(45, 27, 14, 0.3), rgba(17, 7, 7, 0.9)), 
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .booking-visual-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .booking-visual-text p {
+            font-size: 14px;
+            color: rgba(245, 240, 232, 0.7);
+            margin-bottom: 25px;
+        }
+
+        .table-legend {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+        .legend-color.available { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--gold); }
+        .legend-color.booked { background: var(--gold); }
+        .legend-color.selected { background: #3b82f6; }
+
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .table-node {
+            aspect-ratio: 1;
+            border: 1px solid var(--gold);
+            background: rgba(201, 168, 76, 0.03);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .table-node:hover:not(.booked) {
+            background: rgba(201, 168, 76, 0.1);
+            transform: scale(1.05);
+        }
+        .table-node.booked {
+            background: var(--gold);
+            color: var(--black);
+            cursor: not-allowed;
+        }
+        .table-node.selected {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+        .table-node i { font-size: 16px; margin-bottom: 5px; }
+        .table-node span { font-size: 10px; font-weight: 500; }
+        .table-node .capacity { font-size: 8px; opacity: 0.8; }
+
+        .booking-form-container { padding: 40px; }
+        .booking-form-container h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(245, 240, 232, 0.1);
+            padding-bottom: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group.full-width { grid-column: span 2; }
+
+        .form-group label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(245, 240, 232, 0.6);
+        }
+        .form-group input, .form-group select {
+            background: rgba(17, 7, 7, 0.6);
+            border: 1px solid rgba(245, 240, 232, 0.15);
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: var(--cream);
+            font-family: inherit;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(17, 7, 7, 0.9);
+        }
+
+        /* ===== PAYMENT BUTTONS ===== */
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .payment-btn {
+            background: rgba(17, 7, 7, 0.6);
+            border: 1px solid rgba(245, 240, 232, 0.15);
+            color: var(--cream);
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+        .payment-btn:hover {
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+            transform: translateY(-3px);
+        }
+        .payment-btn.selected {
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+        }
+        .payment-btn i {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        /* ===== SHOPPING CART ===== */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100%;
+            background: var(--black-light);
+            border-left: 1px solid var(--glass-border);
+            z-index: 1001;
+            transition: cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        }
+        .cart-sidebar.active { right: 0; }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(245, 240, 232, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cart-close-btn {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .cart-close-btn:hover { color: var(--gold); }
+
+        .cart-items-container {
+            padding: 25px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .cart-empty-state {
+            text-align: center;
+            margin: auto;
+            color: rgba(245, 240, 232, 0.4);
+        }
+        .cart-empty-state i { font-size: 48px; margin-bottom: 15px; }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background: rgba(17, 7, 7, 0.4);
+            border: 1px solid rgba(245, 240, 232, 0.05);
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .cart-item-info { flex: 1; }
+        .cart-item-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+        .cart-item-info p { color: var(--gold); font-size: 13px; font-weight: 600; }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--black);
+            border: 1px solid rgba(245, 240, 232, 0.1);
+            border-radius: 20px;
+            padding: 3px 8px;
+        }
+        .cart-item-controls button {
+            background: none;
+            border: none;
+            color: var(--cream);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+        }
+        .cart-item-controls span { font-size: 12px; font-weight: 600; }
+
+        .cart-item-remove {
+            color: rgba(239, 68, 68, 0.6);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 13px;
+        }
+        .cart-item-remove:hover { color: #ef4444; }
+
+        .cart-footer {
+            padding: 25px;
+            border-top: 1px solid rgba(245, 240, 232, 0.1);
+            background: rgba(17, 7, 7, 0.5);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.6);
+            margin-bottom: 8px;
+        }
+        .summary-row.grand-total {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--cream);
+            font-weight: 700;
+            border-top: 1px solid rgba(245, 240, 232, 0.1);
+            padding-top: 12px;
+            margin-top: 12px;
+            margin-bottom: 20px;
+        }
+        .summary-row.grand-total span:last-child { color: var(--gold); }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        .cart-overlay.active { opacity: 1; pointer-events: auto; }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-window {
+            background: var(--black-light);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+        .modal-overlay.active .modal-window { transform: scale(1); }
+
+        .modal-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(245, 240, 232, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+        }
+        .modal-body { padding: 25px; }
+
+        /* ===== BILL/RECEIPT ===== */
+        .bill-container {
+            background: #fff;
+            color: #000;
+            padding: 30px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            margin-top: 20px;
+            display: none;
+        }
+        .bill-container.active { display: block; }
+
+        .bill-header {
+            text-align: center;
+            border-bottom: 2px dashed #000;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .bill-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: #c9a84c;
+            font-size: 24px;
+        }
+
+        .bill-details { font-size: 12px; margin-bottom: 15px; }
+        .bill-details p { margin: 3px 0; }
+
+        .bill-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        .bill-table th, .bill-table td {
+            padding: 8px 5px;
+            border-bottom: 1px dashed #ddd;
+            text-align: left;
+        }
+        .bill-table th { border-bottom: 2px solid #000; }
+        .bill-table .text-right { text-align: right; }
+
+        .bill-totals {
+            border-top: 2px solid #000;
+            padding-top: 10px;
+            font-size: 13px;
+        }
+        .bill-totals .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+        }
+        .bill-totals .grand-total {
+            font-size: 16px;
+            font-weight: 700;
+            border-top: 2px solid #000;
+            padding-top: 8px;
+            margin-top: 5px;
+        }
+        .bill-footer {
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px dashed #000;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        /* ===== ORDER TRACKING ===== */
+        .tracking-container {
+            background: rgba(17, 7, 7, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: none;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+        }
+        .tracking-container.active { display: block; }
+
+        .veggie-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .veggie {
+            position: absolute;
+            font-size: 35px;
+            opacity: 0.12;
+            animation: floatVeggie 6s infinite ease-in-out;
+        }
+        .veggie:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; font-size: 40px; }
+        .veggie:nth-child(2) { top: 20%; right: 10%; animation-delay: 1.2s; font-size: 30px; }
+        .veggie:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 2.4s; font-size: 45px; }
+        .veggie:nth-child(4) { bottom: 30%; right: 5%; animation-delay: 0.8s; font-size: 35px; }
+        .veggie:nth-child(5) { top: 50%; left: 30%; animation-delay: 1.8s; font-size: 25px; }
+        .veggie:nth-child(6) { top: 60%; right: 25%; animation-delay: 3.0s; font-size: 40px; }
+        .veggie:nth-child(7) { top: 5%; left: 50%; animation-delay: 0.5s; font-size: 28px; }
+        .veggie:nth-child(8) { bottom: 10%; left: 45%; animation-delay: 2.0s; font-size: 32px; }
+        .veggie:nth-child(9) { top: 40%; left: 60%; animation-delay: 1.0s; font-size: 38px; }
+        .veggie:nth-child(10) { bottom: 40%; right: 40%; animation-delay: 2.8s; font-size: 30px; }
+
+        @keyframes floatVeggie {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-15px) rotate(5deg) scale(1.05); }
+            50% { transform: translateY(0px) rotate(0deg) scale(1); }
+            75% { transform: translateY(-10px) rotate(-5deg) scale(0.95); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        .tracking-content { position: relative; z-index: 1; }
+
+        .tracking-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 20px;
+        }
+        .tracking-timeline::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(245, 240, 232, 0.1);
+            z-index: 1;
+        }
+
+        .tracking-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+            flex: 1;
+        }
+        .tracking-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--black-light);
+            border: 2px solid rgba(245, 240, 232, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: var(--transition);
+        }
+        .tracking-node.active .tracking-circle {
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 15px rgba(201, 168, 76, 0.4);
+            animation: pulse-ring 1.5s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(201, 168, 76, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+        }
+        .tracking-node.completed .tracking-circle {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+        }
+        .tracking-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(245, 240, 232, 0.4);
+        }
+        .tracking-node.active .tracking-label {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        .tracking-node.completed .tracking-label { color: var(--gold); }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .toast-notification {
+            background: var(--black-light);
+            border: 1px solid var(--gold);
+            color: var(--cream);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            animation: slideInLeft 0.3s forwards;
+            min-width: 280px;
+        }
+        .toast-notification.fadeOut { animation: slideOutLeft 0.3s forwards; }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-120%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-120%); opacity: 0; }
+        }
+
+        /* ===== ADMIN DASHBOARD ===== */
+        .admin-dashboard-section {
+            display: none;
+            padding: 100px 40px 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .admin-dashboard-section.active { display: block; }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .admin-sidebar {
+            background: var(--black-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .admin-nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .admin-nav-item button {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--cream);
+            padding: 12px 15px;
+            border-radius: 8px;
+            text-align: left;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-nav-item button:hover, .admin-nav-item.active button {
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+        }
+
+        .admin-main-panel {
+            background: var(--black-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 35px;
+        }
+        .admin-panel-tab { display: none; }
+        .admin-panel-tab.active { display: block; }
+
+        .admin-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .kpi-card {
+            background: rgba(17, 7, 7, 0.4);
+            border: 1px solid rgba(245, 240, 232, 0.08);
+            border-radius: 12px;
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .kpi-icon {
+            font-size: 24px;
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.08);
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .kpi-details h4 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1.2;
+        }
+        .kpi-details p {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(245, 240, 232, 0.5);
+        }
+
+        .admin-section-split {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+        }
+
+        .elegant-table-wrapper {
+            overflow-x: auto;
+            margin-top: 15px;
+            border: 1px solid rgba(245, 240, 232, 0.08);
+            border-radius: 10px;
+        }
+        .elegant-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+        .elegant-table th, .elegant-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(245, 240, 232, 0.05);
+        }
+        .elegant-table th {
+            background: rgba(17, 7, 7, 0.6);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .badge-status.placed { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        .badge-status.preparing { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .badge-status.ready { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .badge-status.delivered { background: rgba(245, 240, 232, 0.1); color: var(--cream); }
+
+        .menu-manager-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .admin-active .navbar .nav-menu { display: none !important; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0d0505;
+            padding: 80px 40px 30px;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        .footer-brand h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .footer-brand p {
+            color: rgba(245, 240, 232, 0.5);
+            font-size: 13px;
+            margin-bottom: 25px;
+            max-width: 320px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: var(--cream);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(245, 240, 232, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .social-icons a:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+            transform: translateY(-2px);
+        }
+        .footer-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-links a {
+            color: rgba(245, 240, 232, 0.6);
+            text-decoration: none;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+        .footer-contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 13px;
+            color: rgba(245, 240, 232, 0.6);
+        }
+        .footer-contact-info i { color: var(--gold); width: 20px; }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(245, 240, 232, 0.05);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.4);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .booking-layout, .admin-layout, .admin-section-split {
+                grid-template-columns: 1fr;
+            }
+            .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 48px; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .navbar.scrolled { padding: 10px 20px; }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--black-light);
+                border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-toggle { display: block; }
+            .hero-stats { gap: 30px; }
+            .hero-title { font-size: 38px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .tables-grid { grid-template-columns: repeat(3, 1fr); }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .cart-sidebar { width: 100%; right: -100%; }
+            .payment-options { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>🍽️ Food Haven</h1>
-    <nav>
-      <button class="active" onclick="filterCategory('All')">Full Menu</button>
-      <button onclick="toggleCart()">Cart (<span id="cart-count">0</span>)</button>
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="gold-spinner"></div>
+            <h2>TASTYBITES</h2>
+            <p>Loading Experiential Dining...</p>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="gold-text">TASTY</span>BITES
+                <span class="stars">★★★★★</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#offers" class="nav-link">Offers</a></li>
+                <li><a href="#menu" class="nav-link">Our Menu</a></li>
+                <li><a href="#booking" class="nav-link">Reservations</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="cart-btn" id="cart-toggle-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+                <button class="admin-btn" id="admin-panel-btn" title="Admin Panel">
+                    <i class="fas fa-user-shield"></i>
+                </button>
+                <button class="nav-toggle" id="nav-toggle-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <div class="container">
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterCategory('All', this)">All</button>
-      <button class="filter-btn" onclick="filterCategory('Starter', this)">Starters</button>
-      <button class="filter-btn" onclick="filterCategory('Main Course', this)">Main Course</button>
-      <button class="filter-btn" onclick="filterCategory('South Indian', this)">South Indian</button>
-      <button class="filter-btn" onclick="filterCategory('Dessert', this)">Desserts</button>
-      <button class="filter-btn" onclick="filterCategory('Beverage', this)">Beverages</button>
-      <button class="filter-btn" onclick="filterCategory('Special', this)">Today's Special</button>
+    <!-- CUSTOMER VIEW -->
+    <div id="customer-view-container">
+        
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="hero-badge text-animate text-animate-d1">✦ MICHELIN GUIDED LUXURY ✦</div>
+                <h1 class="hero-title text-animate text-animate-d2">Where Every<br><span class="gold-text">Meal Tells a Story</span></h1>
+                <p class="hero-subtitle text-animate text-animate-d3">Indulge in a curated culinary masterpiece blending legacy recipes with contemporary aesthetics.</p>
+                <div class="hero-buttons text-animate text-animate-d4">
+                    <button class="btn-primary" onclick="scrollToSection('menu')">
+                        <i class="fas fa-utensils"></i> Explore Menu
+                    </button>
+                    <button class="gold-border-btn" onclick="scrollToSection('booking')">
+                        <i class="fas fa-chair"></i> Book Private Dining
+                    </button>
+                </div>
+                <div class="hero-stats text-animate text-animate-d5">
+                    <div class="stat-item"><h3>60+</h3><p>Artisanal Dishes</p></div>
+                    <div class="stat-item"><h3>8</h3><p>Private Salons</p></div>
+                    <div class="stat-item"><h3>5★</h3><p>Gastronomy Rating</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OFFERS SECTION -->
+        <section class="offers-section" id="offers">
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">✦ PRIVILEGES ✦</span>
+                <h2>Gourmet <span class="gold-text">Privileges & Combos</span></h2>
+                <p>Exquisite promotional pricing meticulously engineered to complement your dining profile.</p>
+            </div>
+            <div class="offers-container">
+                <div class="offers-grid">
+                    <div class="offer-card scroll-reveal-left">
+                        <div class="offer-icon"><i class="fas fa-tags"></i></div>
+                        <div class="offer-info">
+                            <h3>High-Value Elite Benefit</h3>
+                            <p>Receive an automatic 10% markdown on bills exceeding ₹500.</p>
+                            <span class="offer-badge">Always Active</span>
+                        </div>
+                    </div>
+                    <div class="offer-card scroll-reveal-scale">
+                        <div class="offer-icon"><i class="fas fa-gift"></i></div>
+                        <div class="offer-info">
+                            <h3>Royal Combo Multipliers</h3>
+                            <p>Unlock cascading benefits: 10% off for 3 unique items, or 20% off for 4+ unique items.</p>
+                            <span class="offer-badge">Auto Applied</span>
+                        </div>
+                    </div>
+                    <div class="offer-card scroll-reveal-right">
+                        <div class="offer-icon"><i class="fas fa-crown"></i></div>
+                        <div class="offer-info">
+                            <h3>Loyalty Ledger</h3>
+                            <p>Earn 10 points for every ₹100 settled. Redeem 100 points to save ₹10.</p>
+                            <span class="offer-badge">Member Benefit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU SECTION -->
+        <section class="menu-section" id="menu">
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">✦ LA CARTE ✦</span>
+                <h2>The Gastronomic <span class="gold-text">Compendium</span></h2>
+                <p>Browse through structured sections meticulously refined to please critical palettes.</p>
+            </div>
+            
+            <div class="search-filter-bar scroll-reveal">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="menu-search-input" placeholder="Search menu...">
+                </div>
+                <div class="filter-controls" id="category-filters-container"></div>
+                <div class="diet-controls">
+                    <button class="diet-btn active" data-diet="all">All</button>
+                    <button class="diet-btn" data-diet="Veg"><i class="fas fa-leaf" style="color:#10b981; margin-right:5px;"></i>Veg</button>
+                    <button class="diet-btn" data-diet="Non-Veg"><i class="fas fa-drumstick-bite" style="color:#ef4444; margin-right:5px;"></i>Non-Veg</button>
+                </div>
+            </div>
+
+            <div class="menu-grid" id="menu-display-grid"></div>
+            
+            <div class="view-more-container">
+                <button class="view-more-btn" id="view-more-btn">
+                    View More <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- TABLE BOOKING SECTION -->
+        <section class="booking-section" id="booking">
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">✦ RESERVATIONS ✦</span>
+                <h2>Secure Your <span class="gold-text">Private Salon</span></h2>
+                <p>Reserve an exclusive structural layout space for an uninterrupted culinary ceremony.</p>
+            </div>
+            <div class="booking-layout scroll-reveal-scale">
+                <div class="booking-visual">
+                    <div class="booking-visual-text">
+                        <h3>Interactive Map</h3>
+                        <p>Select your table from our blueprint layout map. Green indicates availability.</p>
+                        <div class="table-legend">
+                            <div class="legend-item"><div class="legend-color available"></div><span>Ready</span></div>
+                            <div class="legend-item"><div class="legend-color booked"></div><span>Reserved</span></div>
+                            <div class="legend-item"><div class="legend-color selected"></div><span>Selected</span></div>
+                        </div>
+                    </div>
+                    <div class="tables-grid" id="booking-layout-grid"></div>
+                </div>
+                <div class="booking-form-container">
+                    <h3>Reservation Registry</h3>
+                    <form id="reservation-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="reserve-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Phone</label>
+                                <input type="tel" id="reserve-phone" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar-alt"></i> Date</label>
+                                <input type="date" id="reserve-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-clock"></i> Time</label>
+                                <input type="time" id="reserve-time" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label><i class="fas fa-chair"></i> Selected Table</label>
+                                <input type="text" id="reserve-table-num" placeholder="Select a table from the map" readonly required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+                            <i class="fas fa-signature"></i> Finalize Booking
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="menu-grid" id="menu-container"></div>
-  </div>
+    <!-- ADMIN PANEL -->
+    <section class="admin-dashboard-section" id="admin-view-panel">
+        <div class="section-header" style="margin-bottom:20px; text-align:left; padding:0;">
+            <span class="section-tag">✦ EXECUTIVE PORTAL ✦</span>
+            <h2>Control <span class="gold-text">Console</span></h2>
+            <p>Admin Operations and Performance Analytics.</p>
+        </div>
+        <div class="admin-layout">
+            <aside class="admin-sidebar">
+                <ul class="admin-nav-list">
+                    <li class="admin-nav-item active" data-tab="admin-kpi-tab">
+                        <button><i class="fas fa-chart-line"></i> Dashboard</button>
+                    </li>
+                    <li class="admin-nav-item" data-tab="admin-orders-tab">
+                        <button><i class="fas fa-file-invoice-dollar"></i> Order Queue</button>
+                    </li>
+                    <li class="admin-nav-item" data-tab="admin-menu-tab">
+                        <button><i class="fas fa-utensils"></i> Menu Manager</button>
+                    </li>
+                    <li class="admin-nav-item" data-tab="admin-tables-tab">
+                        <button><i class="fas fa-table"></i> Salon Status</button>
+                    </li>
+                    <li class="admin-nav-item" style="margin-top:30px;">
+                        <button id="admin-exit-btn" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Exit Admin</button>
+                    </li>
+                </ul>
+            </aside>
+            <main class="admin-main-panel">
+                <div class="admin-panel-tab active" id="admin-kpi-tab">
+                    <div class="admin-kpi-grid">
+                        <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-coins"></i></div><div class="kpi-details"><h4 id="kpi-sales">₹0.00</h4><p>Gross Sales</p></div></div>
+                        <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-shopping-cart"></i></div><div class="kpi-details"><h4 id="kpi-orders">0</h4><p>Processed Bills</p></div></div>
+                        <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-chart-pie"></i></div><div class="kpi-details"><h4 id="kpi-aov">₹0.00</h4><p>Average Ticket Size</p></div></div>
+                        <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-star"></i></div><div class="kpi-details"><h4 id="kpi-rating">0.0 / 5</h4><p>Average Score</p></div></div>
+                    </div>
+                    <div class="admin-section-split">
+                        <div>
+                            <h3 style="font-family:'Playfair Display',serif; margin-bottom:15px;">Live Queue Analysis</h3>
+                            <div class="elegant-table-wrapper">
+                                <table class="elegant-table">
+                                    <thead><tr><th>ID</th><th>Client</th><th>Value</th><th>Status</th></tr></thead>
+                                    <tbody id="kpi-orders-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="font-family:'Playfair Display',serif; margin-bottom:15px;">Dietary Distribution</h3>
+                            <div style="background:rgba(17,7,7,0.3); padding:30px; border-radius:12px; border:1px solid rgba(245,240,232,0.05); text-align:center;">
+                                <div style="display:flex; justify-content:space-around; margin-top:10px;">
+                                    <div><h4 id="pie-veg-count" style="font-size:24px; color:#10b981;">0</h4><p style="font-size:11px; color:rgba(245,240,232,0.5);">VEGETARIAN</p></div>
+                                    <div style="border-left:1px solid rgba(245,240,232,0.1);"></div>
+                                    <div><h4 id="pie-nonveg-count" style="font-size:24px; color:#ef4444;">0</h4><p style="font-size:11px; color:rgba(245,240,232,0.5);">NON-VEG</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+                <div class="admin-panel-tab" id="admin-orders-tab">
+                    <h3 style="font-family:'Playfair Display',serif; margin-bottom:15px;">Order Register</h3>
+                    <div class="elegant-table-wrapper">
+                        <table class="elegant-table">
+                            <thead><tr><th>Order #</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th></tr></thead>
+                            <tbody id="admin-detailed-orders-body"></tbody>
+                        </table>
+                    </div>
+                </div>
 
-  <div class="cart-modal" id="cart-modal">
-    <div class="cart-header">
-      <h3>Your Orders</h3>
-      <button class="close-cart" onclick="toggleCart()">&times;</button>
+                <div class="admin-panel-tab" id="admin-menu-tab">
+                    <div class="menu-manager-header">
+                        <h3 style="font-family:'Playfair Display',serif;">Menu Catalog</h3>
+                        <button class="btn-primary" id="open-add-item-modal"><i class="fas fa-plus-circle"></i> Add Item</button>
+                    </div>
+                    <div class="elegant-table-wrapper">
+                        <table class="elegant-table">
+                            <thead><tr><th>ID</th><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead>
+                            <tbody id="admin-menu-manager-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-panel-tab" id="admin-tables-tab">
+                    <h3 style="font-family:'Playfair Display',serif; margin-bottom:15px;">Salon Status</h3>
+                    <div class="elegant-table-wrapper">
+                        <table class="elegant-table">
+                            <thead><tr><th>Salon ID</th><th>Capacity</th><th>State</th><th>Host</th><th>Actions</th></tr></thead>
+                            <tbody id="admin-table-manager-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- SHOPPING CART -->
+    <div class="cart-overlay" id="cart-sidebar-overlay"></div>
+    <aside class="cart-sidebar" id="cart-sidebar-panel">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag gold-text"></i> Your Cart</h3>
+            <button class="cart-close-btn" id="cart-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items-container" id="cart-items-container"></div>
+        <div class="cart-footer">
+            <div class="summary-row"><span>Subtotal</span><span id="cart-subtotal">₹0.00</span></div>
+            <div class="summary-row"><span>Combo Discount</span><span id="cart-combo-discount" style="color:#10b981;">-₹0.00</span></div>
+            <div class="summary-row"><span>Value Discount</span><span id="cart-special-discount" style="color:#10b981;">-₹0.00</span></div>
+            <div class="summary-row"><span>GST (18%)</span><span id="cart-gst-charge">₹0.00</span></div>
+            <div class="summary-row grand-total"><span>Grand Total</span><span id="cart-grand-total">₹0.00</span></div>
+            <button class="btn-primary" id="checkout-start-btn" style="width:100%; justify-content:center; padding:15px;">
+                <i class="fas fa-key"></i> Place Order
+            </button>
+        </div>
+    </aside>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Place Your Order</h3>
+                <button class="cart-close-btn" id="close-checkout"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label>Your Name</label>
+                    <input type="text" id="order-name" placeholder="Enter your name" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                </div>
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label>Phone Number</label>
+                    <input type="tel" id="order-phone" placeholder="Enter phone number" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                </div>
+                
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label>Order Type</label>
+                    <select id="order-type" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                        <option value="">-- Select Order Type --</option>
+                        <option value="Dine-in">Dine-in</option>
+                        <option value="Takeaway">Takeaway</option>
+                    </select>
+                </div>
+                
+                <div id="dine-in-fields" style="display:none;">
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Table Number</label>
+                        <select id="order-table" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                            <option value="Table 1 (2 People)">Table 1 (2 People)</option>
+                            <option value="Table 2 (2 People)">Table 2 (2 People)</option>
+                            <option value="Table 3 (4 People)">Table 3 (4 People)</option>
+                            <option value="Table 4 (4 People)">Table 4 (4 People)</option>
+                            <option value="Table 5 (6 People)">Table 5 (6 People)</option>
+                            <option value="Table 6 (6 People)">Table 6 (6 People)</option>
+                            <option value="Table 7 (8 People)">Table 7 (8 People)</option>
+                            <option value="Table 8 (8 People)">Table 8 (8 People)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Number of Guests</label>
+                        <select id="order-guests" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6 People</option>
+                            <option value="7">7 People</option>
+                            <option value="8">8 People</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label>Special Instructions</label>
+                    <input type="text" id="order-instructions" placeholder="Any special requests..." style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                </div>
+
+                <div id="order-summary" style="background:rgba(17,7,7,0.3); padding:15px; border-radius:10px; margin-bottom:15px; display:none;">
+                    <h4 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Order Summary</h4>
+                    <div id="order-summary-items"></div>
+                    <div style="border-top:1px solid rgba(245,240,232,0.1); padding-top:10px; margin-top:10px;">
+                        <div style="display:flex; justify-content:space-between;"><span>Subtotal:</span> <span id="summary-subtotal">₹0.00</span></div>
+                        <div style="display:flex; justify-content:space-between; color:#10b981;"><span>Discount:</span> <span id="summary-discount">-₹0.00</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>GST (18%):</span> <span id="summary-gst">₹0.00</span></div>
+                        <div style="display:flex; justify-content:space-between; font-size:18px; font-weight:700; color:var(--gold); border-top:1px solid rgba(245,240,232,0.1); padding-top:8px; margin-top:8px;">
+                            <span>Grand Total:</span> <span id="summary-grand">₹0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" id="place-order-btn" style="width:100%; justify-content:center; padding:15px;">
+                    <i class="fas fa-check"></i> Confirm Order
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="cart-items" id="cart-items">
-      <p style="text-align: center; color: #888; margin-top: 2rem;">Your cart is empty.</p>
+
+    <!-- PAYMENT MODAL -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="modal-window" style="max-width:550px;">
+            <div class="modal-header">
+                <h3>💳 Payment Options</h3>
+                <button class="cart-close-btn" id="close-payment"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-options">
+                    <button class="payment-btn" onclick="selectPayment('cash')">
+                        <i class="fas fa-money-bill-wave"></i> Cash
+                    </button>
+                    <button class="payment-btn" onclick="selectPayment('online')">
+                        <i class="fas fa-mobile-alt"></i> Pay Online
+                    </button>
+                    <button class="payment-btn" onclick="selectPayment('others')">
+                        <i class="fas fa-credit-card"></i> Others
+                    </button>
+                </div>
+                <div id="qr-container" style="display:none; text-align:center; margin-top:20px;">
+                    <h4 style="color:var(--gold);">Scan to Pay</h4>
+                    <div id="qr-code" style="background:white; padding:20px; border-radius:10px; display:inline-block; margin-top:10px;">
+                        <img id="qr-image" src="" alt="QR Code" style="width:200px; height:200px;">
+                    </div>
+                    <p style="margin-top:10px; color:rgba(245,240,232,0.6); font-size:12px;">UPI: tastybites@pay</p>
+                    <p style="color:rgba(245,240,232,0.4); font-size:11px;">Amount: ₹<span id="payment-amount">0.00</span></p>
+                </div>
+                <button class="btn-primary" id="confirm-payment-btn" style="width:100%; justify-content:center; padding:15px; margin-top:20px; display:none;">
+                    <i class="fas fa-check"></i> Confirm Payment
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="cart-footer">
-      <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem;">
-        <span>Total Amount:</span>
-        <span>₹<span id="cart-total">0</span></span>
-      </div>
-      <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+
+    <!-- BILL / RECEIPT MODAL -->
+    <div class="modal-overlay" id="bill-modal">
+        <div class="modal-window" style="max-width:550px;">
+            <div class="modal-header">
+                <h3>📄 Tax Invoice</h3>
+                <button class="cart-close-btn" id="close-bill"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="bill-container active" id="bill-content">
+                    <div class="bill-header">
+                        <h2>✦ TASTYBITES ✦</h2>
+                        <p style="font-size:10px; text-transform:uppercase; letter-spacing:1px;">Premium Dining Experience</p>
+                        <p style="font-size:9px;">7 Luxury Lane, Elite Enclave | +91 98765 43210</p>
+                    </div>
+                    <div class="bill-details">
+                        <p><strong>Order #:</strong> <span id="bill-order">TB-1001</span></p>
+                        <p><strong>Date:</strong> <span id="bill-date">--/--/----</span></p>
+                        <p><strong>Customer:</strong> <span id="bill-customer">--</span></p>
+                        <p><strong>Phone:</strong> <span id="bill-phone">--</span></p>
+                        <p><strong>Order Type:</strong> <span id="bill-type">--</span></p>
+                        <p><strong>Table:</strong> <span id="bill-table">--</span></p>
+                        <p><strong>Guests:</strong> <span id="bill-guests">--</span></p>
+                        <p><strong>Payment:</strong> <span id="bill-payment">--</span></p>
+                    </div>
+                    <table class="bill-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th class="text-right">Qty</th>
+                                <th class="text-right">Price</th>
+                                <th class="text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bill-items"></tbody>
+                    </table>
+                    <div class="bill-totals">
+                        <div class="row"><span>Subtotal</span><span id="bill-subtotal">₹0.00</span></div>
+                        <div class="row" style="color:#ff0000;"><span>Discount</span><span id="bill-discount">-₹0.00</span></div>
+                        <div class="row"><span>GST (18%)</span><span id="bill-gst">₹0.00</span></div>
+                        <div class="row grand-total"><span>Grand Total</span><span id="bill-grand">₹0.00</span></div>
+                    </div>
+                    <div class="bill-footer">
+                        <p>Thank you for dining with us!</p>
+                        <p style="font-size:9px; margin-top:5px;">✦ Every Meal Tells a Story ✦</p>
+                    </div>
+                </div>
+                <button class="btn-primary" id="print-bill-btn" style="width:100%; justify-content:center; padding:12px; margin-top:15px;">
+                    <i class="fas fa-print"></i> Print / Download Bill
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // ACCURATELY MATCHED FOOD DATA & IMAGES
-    const foodData = [
-      // ===== STARTERS =====
-      { id: 101, name: "Paneer Tikka", price: 220, category: "Starter", type: "Veg", image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80" },
-      { id: 102, name: "Spring Rolls", price: 180, category: "Starter", type: "Veg", image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" },
-      { id: 103, name: "Mushroom Fry", price: 200, category: "Starter", type: "Veg", image: "https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=600&q=80" },
-      { id: 104, name: "Hara Bhara Kabab", price: 190, category: "Starter", type: "Veg", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80" },
-      { id: 105, name: "Veg Seekh Kabab", price: 210, category: "Starter", type: "Veg", image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80" },
-      { id: 106, name: "Chicken Tikka", price: 280, category: "Starter", type: "Non-Veg", image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80" },
-      { id: 107, name: "Fish Fry", price: 300, category: "Starter", type: "Non-Veg", image: "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=600&q=80" },
-      { id: 108, name: "Chicken Wings", price: 260, category: "Starter", type: "Non-Veg", image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=600&q=80" },
-      { id: 109, name: "Mutton Seekh", price: 320, category: "Starter", type: "Non-Veg", image: "https://images.unsplash.com/photo-1610057099443-f222bf090c2a?auto=format&fit=crop&w=600&q=80" },
-      { id: 110, name: "Prawn Fry", price: 350, category: "Starter", type: "Non-Veg", image: "https://images.unsplash.com/photo-1559742811-822863c46f83?auto=format&fit=crop&w=600&q=80" },
+    <!-- ORDER TRACKING MODAL -->
+    <div class="modal-overlay" id="tracking-modal">
+        <div class="modal-window" style="max-width:550px;">
+            <div class="modal-header">
+                <h3>🌿 Live Order Tracking</h3>
+                <button class="cart-close-btn" id="close-tracking"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="tracking-container active">
+                    <div class="veggie-bg">
+                        <div class="veggie">🥬</div>
+                        <div class="veggie">🥕</div>
+                        <div class="veggie">🍅</div>
+                        <div class="veggie">🥦</div>
+                        <div class="veggie">🌽</div>
+                        <div class="veggie">🧅</div>
+                        <div class="veggie">🫑</div>
+                        <div class="veggie">🥒</div>
+                        <div class="veggie">🧄</div>
+                        <div class="veggie">🌶️</div>
+                    </div>
+                    
+                    <div class="tracking-content">
+                        <h4 style="font-family:'Playfair Display',serif; margin-bottom:5px;">Order #<span id="tracking-order">TB-1001</span></h4>
+                        <p style="font-size:12px; color:rgba(245,240,232,0.6); margin-bottom:15px;">Status: <span id="tracking-status" style="color:var(--gold); font-weight:600;">Order Placed</span></p>
+                        <div class="tracking-timeline" id="tracking-timeline">
+                            <div class="tracking-node active" data-step="0">
+                                <div class="tracking-circle"><i class="fas fa-clipboard-list"></i></div>
+                                <span class="tracking-label">Placed</span>
+                            </div>
+                            <div class="tracking-node" data-step="1">
+                                <div class="tracking-circle"><i class="fas fa-mortar-pestle"></i></div>
+                                <span class="tracking-label">Preparing</span>
+                            </div>
+                            <div class="tracking-node" data-step="2">
+                                <div class="tracking-circle"><i class="fas fa-fire"></i></div>
+                                <span class="tracking-label">Cooking</span>
+                            </div>
+                            <div class="tracking-node" data-step="3">
+                                <div class="tracking-circle"><i class="fas fa-concierge-bell"></i></div>
+                                <span class="tracking-label">Ready</span>
+                            </div>
+                            <div class="tracking-node" data-step="4">
+                                <div class="tracking-circle"><i class="fas fa-truck"></i></div>
+                                <span class="tracking-label">Delivered</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:20px; text-align:center; font-size:12px; color:rgba(245,240,232,0.4);">
+                            <i class="fas fa-clock"></i> Estimated time: 20-25 minutes
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-      // ===== MAIN COURSE =====
-      { id: 201, name: "Paneer Butter Masala", price: 320, category: "Main Course", type: "Veg", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80" },
-      { id: 202, name: "Veg Biryani", price: 280, category: "Main Course", type: "Veg", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80" },
-      { id: 203, name: "Dal Makhani", price: 250, category: "Main Course", type: "Veg", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80" },
-      { id: 204, name: "Shahi Paneer", price: 340, category: "Main Course", type: "Veg", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80" },
-      { id: 205, name: "Malai Kofta", price: 310, category: "Main Course", type: "Veg", image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80" },
-      { id: 206, name: "Chicken Butter Masala", price: 380, category: "Main Course", type: "Non-Veg", image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=600&q=80" },
-      { id: 207, name: "Mutton Biryani", price: 420, category: "Main Course", type: "Non-Veg", image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=600&q=80" },
-      { id: 208, name: "Fish Curry", price: 350, category: "Main Course", type: "Non-Veg", image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
-      { id: 209, name: "Chicken Biryani", price: 360, category: "Main Course", type: "Non-Veg", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80" },
-      { id: 210, name: "Prawn Curry", price: 400, category: "Main Course", type: "Non-Veg", image: "https://images.unsplash.com/photo-1559742811-822863c46f83?auto=format&fit=crop&w=600&q=80" },
+    <!-- ADMIN GATE -->
+    <div class="modal-overlay" id="admin-gate-modal">
+        <div class="modal-window" style="max-width:400px;">
+            <div class="modal-header">
+                <h3>Executive Access</h3>
+                <button class="cart-close-btn" onclick="closeAdminGate()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Passkey</label>
+                    <input type="password" id="admin-passkey-input" placeholder="••••••••" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream); text-align:center; letter-spacing:5px;">
+                </div>
+                <button class="btn-primary" id="validate-admin-btn" style="width:100%; justify-content:center; margin-top:20px;">Unlock Controls</button>
+            </div>
+        </div>
+    </div>
 
-      // ===== SOUTH INDIAN =====
-      { id: 301, name: "Plain Idli (2 pcs)", price: 80, category: "South Indian", type: "Veg", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80" },
-      { id: 306, name: "Plain Dosa", price: 100, category: "South Indian", type: "Veg", image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80" },
-      { id: 307, name: "Masala Dosa", price: 120, category: "South Indian", type: "Veg", image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80" },
-      { id: 321, name: "Medu Vada (2 pcs)", price: 90, category: "South Indian", type: "Veg", image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
-      { id: 325, name: "Lemon Rice", price: 120, category: "South Indian", type: "Veg", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80" },
-      { id: 330, name: "South Indian Thali", price: 250, category: "South Indian", type: "Veg", image: "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80" },
+    <!-- ADMIN ADD ITEM MODAL -->
+    <div class="modal-overlay" id="add-item-modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Add New Item</h3>
+                <button class="cart-close-btn" onclick="document.getElementById('add-item-modal-overlay').classList.remove('active')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="admin-item-form">
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Dish Name</label>
+                        <input type="text" id="add-item-name" placeholder="Enter dish name" required style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="add-item-category" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                                <option value="Starter">Starter</option>
+                                <option value="Main Course">Main Course</option>
+                                <option value="South Indian">South Indian</option>
+                                <option value="Dessert">Dessert</option>
+                                <option value="Beverage">Beverage</option>
+                                <option value="Special">Special</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select id="add-item-type" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                                <option value="Veg">Veg</option>
+                                <option value="Non-Veg">Non-Veg</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Price (₹)</label>
+                            <input type="number" id="add-item-price" min="1" step="0.01" required style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                        </div>
+                        <div class="form-group">
+                            <label>Special</label>
+                            <select id="add-item-special" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Image URL</label>
+                        <input type="url" id="add-item-image" placeholder="https://images.unsplash.com/..." style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Description</label>
+                        <input type="text" id="add-item-desc" placeholder="Brief description..." style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:15px;">
+                        <i class="fas fa-save"></i> Add Item
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-      // ===== DESSERTS =====
-      { id: 401, name: "Gulab Jamun", price: 120, category: "Dessert", type: "Veg", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80" },
-      { id: 402, name: "Ice Cream", price: 100, category: "Dessert", type: "Veg", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
-      { id: 403, name: "Brownie", price: 150, category: "Dessert", type: "Veg", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80" },
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>TASTY<span class="gold-text">BITES</span></h2>
+                <p>Establishing paradigms of modern luxurious experiential dining globally since inception.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home Base</a></li>
+                    <li><a href="#offers">Offers</a></li>
+                    <li><a href="#menu">Our Menu</a></li>
+                    <li><a href="#booking">Reservations</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <div class="footer-contact-info">
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> info@tastybites.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 7 Luxury Lane, Elite Enclave</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TASTYBITES Luxury Dining. All rights reserved.</p>
+            <p>✧ Premium Dining Experience ✧</p>
+        </div>
+    </footer>
 
-      // ===== BEVERAGES =====
-      { id: 503, name: "Coffee", price: 90, category: "Beverage", type: "Veg", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" },
-      { id: 504, name: "Tea", price: 70, category: "Beverage", type: "Veg", image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80" },
-      { id: 506, name: "Filter Coffee", price: 100, category: "Beverage", type: "Veg", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" },
-
-      // ===== TODAY'S SPECIAL =====
-      { id: 601, name: "Chef's Special Pizza", price: 450, category: "Special", type: "Veg", isSpecial: true, image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80" },
-      { id: 602, name: "Grilled Chicken", price: 500, category: "Special", type: "Non-Veg", isSpecial: true, image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80" }
+    <script>
+    // ===== MENU DATA =====
+    const menuData = [
+        { id: 101, name: "Paneer Tikka", price: 220, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=300&fit=crop&crop=center", description: "Cottage cheese marinated in royal spices, slow-grilled" },
+        { id: 102, name: "Spring Rolls", price: 180, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop&crop=center", description: "Crispy skin rolls packed with julienned exotic vegetables" },
+        { id: 103, name: "Mushroom Fry", price: 200, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1587590227264-0ac64ce63ce9?w=400&h=300&fit=crop&crop=center", description: "Fresh farm mushrooms wok-tossed with green peppercorns" },
+        { id: 104, name: "Hara Bhara Kabab", price: 190, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop&crop=center", description: "Minced spinach, sweet potato, and green pea patties" },
+        { id: 105, name: "Veg Seekh Kabab", price: 210, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=300&fit=crop&crop=center", description: "Skewered vegetable paste cooked over structural flame pits" },
+        { id: 106, name: "Chicken Tikka", price: 280, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop&crop=center", description: "Yogurt-mustard tempered chicken chunks charcoal-cooked" },
+        { id: 107, name: "Fish Fry", price: 300, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=300&fit=crop&crop=center", description: "Coastal-spice coated sea bass pieces crispy-pan-seared" },
+        { id: 108, name: "Chicken Wings", price: 260, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400&h=300&fit=crop&crop=center", description: "Crisp chicken wings glazed in high-sweet chili reductions" },
+        { id: 109, name: "Mutton Seekh", price: 320, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop&crop=center", description: "Tender minced lamb with dynamic spices cooked over hickory" },
+        { id: 110, name: "Prawn Fry", price: 350, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1565680018434-b5132b0e0c75?w=400&h=300&fit=crop&crop=center", description: "Golden fried tiger prawns coated lightly with coastal crust" },
+        { id: 201, name: "Paneer Butter Masala", price: 320, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=400&h=300&fit=crop&crop=center", description: "Cottage cheese cubes slow-simmered in rich tomato gravy" },
+        { id: 202, name: "Veg Biryani", price: 280, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop&crop=center", description: "Saffron stained basmati rice with exotic forest vegetables" },
+        { id: 203, name: "Dal Makhani", price: 250, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center", description: "Whole black urad lentils slow-churned on low charcoal" },
+        { id: 204, name: "Shahi Paneer", price: 340, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=400&h=300&fit=crop&crop=center", description: "Paneer in royal white cashew and pine-nut gravy" },
+        { id: 205, name: "Malai Kofta", price: 310, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center", description: "Vegetable cream cheese dumplings in aromatic reduction" },
+        { id: 206, name: "Chicken Butter Masala", price: 380, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop&crop=center", description: "Tandoori chicken in thick sweet-butter gravy" },
+        { id: 207, name: "Mutton Biryani", price: 420, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop&crop=center", description: "Fragrant rice with tender mutton in whole spices" },
+        { id: 208, name: "Fish Curry", price: 350, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=300&fit=crop&crop=center", description: "Catfish steaks simmered in mustard seed paste" },
+        { id: 209, name: "Chicken Biryani", price: 360, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop&crop=center", description: "Dum cooked basmati with spice-engorged chicken" },
+        { id: 210, name: "Prawn Curry", price: 400, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1565680018434-b5132b0e0c75?w=400&h=300&fit=crop&crop=center", description: "Shelled pink prawns slow-stewed in coconut milk" },
+        { id: 301, name: "Plain Idli (2 pcs)", price: 80, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Steamed fermented rice cakes, light and soft" },
+        { id: 302, name: "Rava Idli (2 pcs)", price: 90, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Semolina idli with cashews and curry leaves" },
+        { id: 306, name: "Plain Dosa", price: 100, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Crispy golden fermented rice crepe" },
+        { id: 307, name: "Masala Dosa", price: 120, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Crisp dosa with seasoned turmeric potato stuffing" },
+        { id: 321, name: "Medu Vada (2 pcs)", price: 90, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Crispy lentil donuts served with chutney" },
+        { id: 401, name: "Gulab Jamun", price: 120, category: "Dessert", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Golden milk globes in saffron syrup" },
+        { id: 402, name: "Ice Cream", price: 100, category: "Dessert", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop&crop=center", description: "Premium vanilla ice cream with chocolate sauce" },
+        { id: 403, name: "Brownie", price: 150, category: "Dessert", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop&crop=center", description: "Warm chocolate brownie with ice cream" },
+        { id: 501, name: "Soft Drink", price: 80, category: "Beverage", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Chilled carbonated drink" },
+        { id: 502, name: "Fresh Juice", price: 120, category: "Beverage", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop&crop=center", description: "Seasonal fresh fruit juice" },
+        { id: 503, name: "Coffee", price: 90, category: "Beverage", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&crop=center", description: "Premium freshly brewed coffee" },
+        { id: 601, name: "Chef's Special Pizza", price: 450, category: "Special", type: "Veg", special: true, image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop&crop=center", description: "Artisan pizza with gourmet toppings" },
+        { id: 602, name: "Grilled Chicken", price: 500, category: "Special", type: "Non-Veg", special: true, image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop&crop=center", description: "Herb-marinated grilled chicken" }
     ];
 
-    let cart = [];
+    // ===== SYSTEM STATE =====
+    let state = {
+        menu: JSON.parse(localStorage.getItem('tb_menu_catalogue')) || menuData,
+        cart: [],
+        orders: JSON.parse(localStorage.getItem('tb_order_register')) || [],
+        tables: [
+            { id: 1, capacity: 2, booked: false, bookedBy: '', phone: '', time: '' },
+            { id: 2, capacity: 2, booked: false, bookedBy: '', phone: '', time: '' },
+            { id: 3, capacity: 4, booked: false, bookedBy: '', phone: '', time: '' },
+            { id: 4, capacity: 4, booked: false, bookedBy: '', phone: '', time: '' },
+            { id: 5, capacity: 6, booked: false, bookedBy: '', phone: '', time: '' },
+            { id: 6, capacity: 6, booked: false, bookedBy: '', phone: '', time: '' },
+            { id: 7, capacity: 8, booked: false, bookedBy: '', phone: '', time: '' },
+            { id: 8, capacity: 8, booked: false, bookedBy: '', phone: '', time: '' }
+        ],
+        currentSearch: '',
+        currentCategory: 'all',
+        currentDiet: 'all',
+        selectedBookingTable: null,
+        adminAuthenticated: false,
+        showAllItems: false,
+        selectedPayment: '',
+        currentOrder: null
+    };
 
-    function displayMenu(items) {
-      const container = document.getElementById('menu-container');
-      container.innerHTML = '';
-
-      items.forEach(item => {
-        const isVeg = item.type.toLowerCase() === 'veg';
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="card-img-wrapper">
-            <img src="${item.image}" alt="${item.name}" loading="lazy" />
-            <span class="type-badge ${isVeg ? 'type-veg' : 'type-nonveg'}">${item.type}</span>
-          </div>
-          <div class="card-body">
-            <div class="card-title">${item.name}</div>
-            <div class="card-category">${item.category}</div>
-            <div class="card-footer">
-              <span class="price">₹${item.price}</span>
-              <button class="add-btn" onclick="addToCart(${item.id})">Add to Order</button>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+    function syncLocalStorage() {
+        localStorage.setItem('tb_menu_catalogue', JSON.stringify(state.menu));
+        localStorage.setItem('tb_order_register', JSON.stringify(state.orders));
+        localStorage.setItem('tb_tables', JSON.stringify(state.tables));
     }
 
-    function filterCategory(category, btnElement) {
-      if (btnElement) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        btnElement.classList.add('active');
-      }
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTables = localStorage.getItem('tb_tables');
+        if (savedTables) state.tables = JSON.parse(savedTables);
+        
+        setTimeout(function() {
+            document.getElementById('preloader').classList.add('hidden');
+        }, 1000);
 
-      if (category === 'All') {
-        displayMenu(foodData);
-      } else {
-        const filtered = foodData.filter(item => item.category === category);
-        displayMenu(filtered);
-      }
+        renderCategoryFilters();
+        renderMenuGrid();
+        renderInteractiveBookingGrid();
+        updateCartSidebarView();
+        setupEventListeners();
+        initHeaderTracking();
+        updateAdminDashboard();
+        initScrollReveal();
+        syncLocalStorage();
+
+        document.getElementById('view-more-btn').addEventListener('click', function() {
+            state.showAllItems = !state.showAllItems;
+            this.textContent = state.showAllItems ? 'Show Less ' : 'View More ';
+            this.innerHTML += state.showAllItems ? '<i class="fas fa-arrow-up"></i>' : '<i class="fas fa-arrow-down"></i>';
+            renderMenuGrid();
+        });
+    });
+
+    // ===== SCROLL REVEAL =====
+    function initScrollReveal() {
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                    void entry.target.offsetWidth;
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(function(el) {
+            observer.observe(el);
+        });
+        
+        window.addEventListener('scroll', function() {
+            document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(function(el) {
+                var rect = el.getBoundingClientRect();
+                var windowHeight = window.innerHeight;
+                if (rect.top < windowHeight - 100 && rect.bottom > 0) {
+                    el.classList.add('active');
+                }
+            });
+        });
     }
 
-    function addToCart(id) {
-      const item = foodData.find(i => i.id === id);
-      const existing = cart.find(i => i.id === id);
-
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ ...item, quantity: 1 });
-      }
-
-      updateCartUI();
+    // ===== RENDER FUNCTIONS =====
+    function renderCategoryFilters() {
+        var categories = ['all'];
+        var uniqueCategories = [];
+        state.menu.forEach(function(item) {
+            if (uniqueCategories.indexOf(item.category) === -1) {
+                uniqueCategories.push(item.category);
+                categories.push(item.category);
+            }
+        });
+        
+        var container = document.getElementById('category-filters-container');
+        container.innerHTML = '';
+        categories.forEach(function(cat) {
+            var btn = document.createElement('button');
+            btn.className = 'filter-btn' + (state.currentCategory === cat ? ' active' : '');
+            btn.textContent = cat.toUpperCase();
+            btn.onclick = function() {
+                document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                state.currentCategory = cat;
+                renderMenuGrid();
+            };
+            container.appendChild(btn);
+        });
     }
 
-    function updateCartUI() {
-      const cartCount = document.getElementById('cart-count');
-      const cartItemsContainer = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
+    function renderMenuGrid() {
+        var grid = document.getElementById('menu-display-grid');
+        grid.innerHTML = '';
 
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        var filtered = state.menu.filter(function(item) {
+            var matchSearch = item.name.toLowerCase().includes(state.currentSearch) || 
+                               item.description.toLowerCase().includes(state.currentSearch);
+            var matchCategory = state.currentCategory === 'all' || item.category === state.currentCategory;
+            var matchDiet = state.currentDiet === 'all' || item.type === state.currentDiet;
+            return matchSearch && matchCategory && matchDiet;
+        });
 
-      cartCount.innerText = totalItems;
-      cartTotal.innerText = totalPrice;
+        var displayItems = state.showAllItems ? filtered : filtered.slice(0, 9);
 
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p style="text-align: center; color: #888; margin-top: 2rem;">Your cart is empty.</p>';
-        return;
-      }
+        if (displayItems.length === 0) {
+            grid.innerHTML = '<div style="grid-column:span 4; text-align:center; padding:40px; color:rgba(245,240,232,0.4);">' +
+                '<i class="fas fa-search-minus" style="font-size:32px; margin-bottom:10px;"></i>' +
+                '<p>No dishes match your criteria.</p></div>';
+            return;
+        }
 
-      cartItemsContainer.innerHTML = cart.map(item => `
-        <div class="cart-item">
-          <div>
-            <strong>${item.name}</strong><br>
-            <small>₹${item.price} x ${item.quantity}</small>
-          </div>
-          <div>
-            <strong>₹${item.price * item.quantity}</strong>
-          </div>
-        </div>
-      `).join('');
+        displayItems.forEach(function(item, index) {
+            var card = document.createElement('div');
+            card.className = 'menu-card scroll-reveal-scale pop-up';
+            card.style.animationDelay = (index * 0.05) + 's';
+            card.innerHTML = 
+                '<div class="menu-image-container">' +
+                    '<img src="' + item.image + '" alt="' + item.name + '" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center\'">' +
+                    '<div class="item-tags">' +
+                        '<span class="' + (item.type === 'Veg' ? 'veg' : 'non-veg') + '-indicator"></span>' +
+                        (item.special ? '<span class="card-special-badge">SPECIAL</span>' : '') +
+                    '</div>' +
+                '</div>' +
+                '<div class="menu-card-body">' +
+                    '<div>' +
+                        '<h3>' + item.name + '</h3>' +
+                        '<p>' + item.description + '</p>' +
+                    '</div>' +
+                    '<div class="menu-card-footer">' +
+                        '<span class="item-price">₹' + parseFloat(item.price).toFixed(2) + '</span>' +
+                        '<button class="add-cart-btn" onclick="addItemToCart(' + item.id + ')"><i class="fas fa-plus"></i></button>' +
+                    '</div>' +
+                '</div>';
+            grid.appendChild(card);
+        });
+        
+        initScrollReveal();
     }
 
-    function toggleCart() {
-      document.getElementById('cart-modal').classList.toggle('open');
-      document.getElementById('overlay').classList.toggle('active');
+    function renderInteractiveBookingGrid() {
+        var grid = document.getElementById('booking-layout-grid');
+        grid.innerHTML = '';
+
+        state.tables.forEach(function(table) {
+            var node = document.createElement('div');
+            node.className = 'table-node' + (table.booked ? ' booked' : '') + (state.selectedBookingTable === table.id ? ' selected' : '');
+            node.innerHTML = 
+                '<i class="fas fa-chair"></i>' +
+                '<span>T - ' + table.id + '</span>' +
+                '<span class="capacity">Cap: ' + table.capacity + '</span>';
+            if(!table.booked) {
+                node.addEventListener('click', function() {
+                    document.querySelectorAll('.table-node').forEach(function(n) { n.classList.remove('selected'); });
+                    node.classList.add('selected');
+                    state.selectedBookingTable = table.id;
+                    document.getElementById('reserve-table-num').value = 'Table ' + table.id + ' (Capacity: ' + table.capacity + ')';
+                });
+            }
+            grid.appendChild(node);
+        });
     }
 
-    function checkout() {
-      if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
-      }
-      alert('Order placed successfully!');
-      cart = [];
-      updateCartUI();
-      toggleCart();
+    // ===== CART FUNCTIONS =====
+    function addItemToCart(itemId) {
+        var item = state.menu.find(function(i) { return i.id === itemId; });
+        if (!item) return;
+        var existing = state.cart.find(function(i) { return i.id === itemId; });
+        if (existing) {
+            existing.quantity++;
+        } else {
+            state.cart.push({ id: item.id, name: item.name, price: item.price, image: item.image, quantity: 1 });
+        }
+        updateCartSidebarView();
+        showToast(item.name + ' added to cart!');
     }
 
-    // Initial load
-    displayMenu(foodData);
-  </script>
+    function updateCartQuantity(itemId, delta) {
+        var item = state.cart.find(function(i) { return i.id === itemId; });
+        if (!item) return;
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+            state.cart = state.cart.filter(function(i) { return i.id !== itemId; });
+        }
+        updateCartSidebarView();
+    }
+
+    function removeCartItem(itemId) {
+        state.cart = state.cart.filter(function(i) { return i.id !== itemId; });
+        updateCartSidebarView();
+    }
+
+    function calculateCartTotals() {
+        var subtotal = 0;
+        state.cart.forEach(function(item) {
+            subtotal += item.price * item.quantity;
+        });
+        var uniqueItems = state.cart.length;
+        var comboDiscount = 0;
+        if (uniqueItems >= 4) comboDiscount = subtotal * 0.20;
+        else if (uniqueItems >= 3) comboDiscount = subtotal * 0.10;
+        var afterCombo = subtotal - comboDiscount;
+        var specialDiscount = afterCombo > 500 ? afterCombo * 0.10 : 0;
+        var taxable = afterCombo - specialDiscount;
+        var gst = taxable * 0.18;
+        var grandTotal = taxable + gst;
+        return { subtotal: subtotal, comboDiscount: comboDiscount, specialDiscount: specialDiscount, gst: gst, grandTotal: grandTotal };
+    }
+
+    function updateCartSidebarView() {
+        var container = document.getElementById('cart-items-container');
+        var totalQty = 0;
+        state.cart.forEach(function(item) { totalQty += item.quantity; });
+        document.getElementById('cart-count').textContent = totalQty;
+
+        if (state.cart.length === 0) {
+            container.innerHTML = '<div class="cart-empty-state"><i class="fas fa-shopping-bag"></i><p style="margin-top:10px;">Your cart is empty.</p></div>';
+            document.getElementById('checkout-start-btn').disabled = true;
+            document.getElementById('checkout-start-btn').style.opacity = 0.5;
+            return;
+        }
+
+        document.getElementById('checkout-start-btn').disabled = false;
+        document.getElementById('checkout-start-btn').style.opacity = 1;
+
+        var cartHTML = '';
+        state.cart.forEach(function(item) {
+            cartHTML += 
+                '<div class="cart-item">' +
+                    '<img src="' + item.image + '" alt="' + item.name + '" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=150&fit=crop&crop=center\'">' +
+                    '<div class="cart-item-info"><h4>' + item.name + '</h4><p>₹' + item.price.toFixed(2) + '</p></div>' +
+                    '<div class="cart-item-controls">' +
+                        '<button onclick="updateCartQuantity(' + item.id + ', -1)"><i class="fas fa-minus"></i></button>' +
+                        '<span>' + item.quantity + '</span>' +
+                        '<button onclick="updateCartQuantity(' + item.id + ', 1)"><i class="fas fa-plus"></i></button>' +
+                    '</div>' +
+                    '<button class="cart-item-remove" onclick="removeCartItem(' + item.id + ')"><i class="fas fa-trash-alt"></i></button>' +
+                '</div>';
+        });
+        container.innerHTML = cartHTML;
+
+        var totals = calculateCartTotals();
+        document.getElementById('cart-subtotal').textContent = '₹' + totals.subtotal.toFixed(2);
+        document.getElementById('cart-combo-discount').textContent = '-₹' + totals.comboDiscount.toFixed(2);
+        document.getElementById('cart-special-discount').textContent = '-₹' + totals.specialDiscount.toFixed(2);
+        document.getElementById('cart-gst-charge').textContent = '₹' + totals.gst.toFixed(2);
+        document.getElementById('cart-grand-total').textContent = '₹' + totals.grandTotal.toFixed(2);
+    }
+
+    // ===== PAYMENT FUNCTIONS =====
+    function selectPayment(method) {
+        state.selectedPayment = method;
+        document.querySelectorAll('.payment-btn').forEach(function(b) { b.classList.remove('selected'); });
+        var btn = document.querySelector('.payment-btn[onclick="selectPayment(\'' + method + '\')"]');
+        if (btn) btn.classList.add('selected');
+        
+        var qrContainer = document.getElementById('qr-container');
+        var confirmBtn = document.getElementById('confirm-payment-btn');
+        var amount = document.getElementById('payment-amount');
+        
+        if (method === 'online') {
+            var total = calculateCartTotals().grandTotal;
+            amount.textContent = total.toFixed(2);
+            generateQRCode(total);
+            qrContainer.style.display = 'block';
+            confirmBtn.style.display = 'block';
+        } else {
+            qrContainer.style.display = 'none';
+            confirmBtn.style.display = 'block';
+        }
+    }
+
+    function generateQRCode(amount) {
+        var qrImage = document.getElementById('qr-image');
+        var upiString = 'upi://pay?pa=tastybites@pay&pn=TASTYBITES&am=' + amount + '&cu=INR';
+        qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(upiString);
+    }
+
+    function confirmPayment() {
+        if (!state.selectedPayment) {
+            showToast('Please select a payment method.', 'warning');
+            return;
+        }
+        document.getElementById('payment-modal').classList.remove('active');
+        completeOrder(state.selectedPayment);
+    }
+
+    // ===== ORDER FUNCTIONS =====
+    function placeOrder() {
+        var name = document.getElementById('order-name').value.trim();
+        var phone = document.getElementById('order-phone').value.trim();
+        var orderType = document.getElementById('order-type').value;
+        
+        if (!name || !phone) {
+            showToast('Please enter your name and phone number.', 'warning');
+            return;
+        }
+
+        if (orderType === '') {
+            showToast('Please select an order type.', 'warning');
+            return;
+        }
+
+        if (state.cart.length === 0) {
+            showToast('Cart is empty! Add some items first.', 'warning');
+            return;
+        }
+
+        state.currentOrder = {
+            name: name,
+            phone: phone,
+            orderType: orderType,
+            table: orderType === 'Dine-in' ? document.getElementById('order-table').value : 'Takeaway',
+            guests: orderType === 'Dine-in' ? document.getElementById('order-guests').value : 'N/A',
+            instructions: document.getElementById('order-instructions').value || 'None',
+            items: state.cart.slice(),
+            totals: calculateCartTotals()
+        };
+
+        document.getElementById('checkout-modal').classList.remove('active');
+        document.getElementById('payment-modal').classList.add('active');
+        document.getElementById('payment-amount').textContent = state.currentOrder.totals.grandTotal.toFixed(2);
+        
+        state.selectedPayment = '';
+        document.querySelectorAll('.payment-btn').forEach(function(b) { b.classList.remove('selected'); });
+        document.getElementById('qr-container').style.display = 'none';
+        document.getElementById('confirm-payment-btn').style.display = 'none';
+    }
+
+    function completeOrder(paymentMethod) {
+        var order = state.currentOrder;
+        var orderNumber = 1001 + state.orders.length;
+        
+        var tableInfo = order.table;
+        var selectedTableId = null;
+
+        if (order.orderType === 'Dine-in') {
+            var tableMatch = tableInfo.match(/Table (\d+)/);
+            if (tableMatch) {
+                selectedTableId = parseInt(tableMatch[1]);
+                var table = state.tables.find(function(t) { return t.id === selectedTableId; });
+                if (table && !table.booked) {
+                    table.booked = true;
+                    table.bookedBy = order.name;
+                    table.phone = order.phone;
+                    table.time = new Date().toLocaleString();
+                    syncLocalStorage();
+                    renderInteractiveBookingGrid();
+                    updateAdminDashboard();
+                }
+            }
+        }
+
+        var newOrder = {
+            orderNumber: orderNumber,
+            date: new Date().toLocaleString(),
+            customer: { name: order.name, phone: order.phone, orderType: order.orderType },
+            table: tableInfo,
+            guests: order.guests,
+            items: order.items,
+            subtotal: order.totals.subtotal,
+            comboDiscount: order.totals.comboDiscount,
+            specialDiscount: order.totals.specialDiscount,
+            gst: order.totals.gst,
+            grandTotal: order.totals.grandTotal,
+            status: 'Order Placed',
+            instructions: order.instructions,
+            payment: paymentMethod === 'cash' ? 'Cash' : paymentMethod === 'online' ? 'Pay Online' : 'Others'
+        };
+
+        state.orders.push(newOrder);
+        localStorage.setItem('tb_order_register', JSON.stringify(state.orders));
+        state.cart = [];
+        updateCartSidebarView();
+
+        showBill(newOrder);
+        showTracking(newOrder);
+        updateAdminDashboard();
+        syncLocalStorage();
+        state.currentOrder = null;
+
+        showToast('Order #TB-' + orderNumber + ' placed successfully! 🎉');
+    }
+
+    function showBill(order) {
+        document.getElementById('bill-order').textContent = 'TB-' + order.orderNumber;
+        document.getElementById('bill-date').textContent = order.date;
+        document.getElementById('bill-customer').textContent = order.customer.name;
+        document.getElementById('bill-phone').textContent = order.customer.phone;
+        document.getElementById('bill-type').textContent = order.customer.orderType;
+        document.getElementById('bill-table').textContent = order.table;
+        document.getElementById('bill-guests').textContent = order.guests;
+        document.getElementById('bill-payment').textContent = order.payment;
+
+        var itemsBody = document.getElementById('bill-items');
+        itemsBody.innerHTML = '';
+        order.items.forEach(function(item) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = 
+                '<td>' + item.name + '</td>' +
+                '<td class="text-right">' + item.quantity + '</td>' +
+                '<td class="text-right">₹' + item.price.toFixed(2) + '</td>' +
+                '<td class="text-right">₹' + (item.price * item.quantity).toFixed(2) + '</td>';
+            itemsBody.appendChild(tr);
+        });
+
+        document.getElementById('bill-subtotal').textContent = '₹' + order.subtotal.toFixed(2);
+        document.getElementById('bill-discount').textContent = '-₹' + (order.comboDiscount + order.specialDiscount).toFixed(2);
+        document.getElementById('bill-gst').textContent = '₹' + order.gst.toFixed(2);
+        document.getElementById('bill-grand').textContent = '₹' + order.grandTotal.toFixed(2);
+
+        document.getElementById('bill-modal').classList.add('active');
+    }
+
+    function showTracking(order) {
+        document.getElementById('tracking-order').textContent = 'TB-' + order.orderNumber;
+        document.getElementById('tracking-status').textContent = 'Order Placed';
+
+        var nodes = document.querySelectorAll('.tracking-node');
+        var statuses = ['Order Placed', 'Preparing', 'Cooking', 'Ready', 'Delivered'];
+
+        nodes.forEach(function(node, idx) {
+            node.classList.remove('active', 'completed');
+            if (idx === 0) node.classList.add('active');
+        });
+
+        document.getElementById('tracking-modal').classList.add('active');
+
+        var step = 0;
+        var interval = setInterval(function() {
+            if (step < statuses.length - 1) {
+                step++;
+                nodes.forEach(function(node, idx) {
+                    node.classList.remove('active', 'completed');
+                    if (idx === step) node.classList.add('active');
+                    else if (idx < step) node.classList.add('completed');
+                });
+                document.getElementById('tracking-status').textContent = statuses[step];
+                
+                var savedOrder = state.orders.find(function(o) { return o.orderNumber === order.orderNumber; });
+                if (savedOrder) {
+                    savedOrder.status = statuses[step];
+                    localStorage.setItem('tb_order_register', JSON.stringify(state.orders));
+                    updateAdminDashboard();
+                }
+            } else {
+                clearInterval(interval);
+                document.getElementById('tracking-status').textContent = '✅ Delivered!';
+            }
+        }, 4000);
+    }
+
+    function showToast(message, type) {
+        type = type || 'success';
+        var container = document.getElementById('toast-container');
+        var toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = '<i class="fas ' + (type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle') + '" style="color:var(--gold)"></i> ' + message;
+        container.appendChild(toast);
+        setTimeout(function() {
+            toast.classList.add('fadeOut');
+            setTimeout(function() { toast.remove(); }, 400);
+        }, 3000);
+    }
+
+    // ===== ADMIN FUNCTIONS =====
+    function updateAdminDashboard() {
+        var totalSales = 0;
+        state.orders.forEach(function(o) { totalSales += o.grandTotal; });
+        var totalOrders = state.orders.length;
+        var avgOrder = totalOrders > 0 ? totalSales / totalOrders : 0;
+        document.getElementById('kpi-sales').textContent = '₹' + totalSales.toFixed(2);
+        document.getElementById('kpi-orders').textContent = totalOrders;
+        document.getElementById('kpi-aov').textContent = '₹' + avgOrder.toFixed(2);
+        document.getElementById('kpi-rating').textContent = '4.8 / 5';
+
+        var vegCount = 0;
+        var nonVegCount = 0;
+        state.menu.forEach(function(i) {
+            if (i.type === 'Veg') vegCount++;
+            else nonVegCount++;
+        });
+        document.getElementById('pie-veg-count').textContent = vegCount;
+        document.getElementById('pie-nonveg-count').textContent = nonVegCount;
+
+        var kpiBody = document.getElementById('kpi-orders-table-body');
+        kpiBody.innerHTML = '';
+        var allOrders = state.orders.slice().reverse().slice(0, 10);
+        allOrders.forEach(function(o) {
+            var tr = document.createElement('tr');
+            var statusClass = 'placed';
+            if (o.status === 'Delivered') statusClass = 'delivered';
+            else if (o.status === 'Preparing') statusClass = 'preparing';
+            tr.innerHTML = 
+                '<td>TB-' + o.orderNumber + '</td>' +
+                '<td>' + o.customer.name + '</td>' +
+                '<td>₹' + o.grandTotal.toFixed(2) + '</td>' +
+                '<td><span class="badge-status ' + statusClass + '">' + (o.status || 'Order Placed') + '</span></td>';
+            kpiBody.appendChild(tr);
+        });
+
+        var body = document.getElementById('admin-detailed-orders-body');
+        body.innerHTML = '';
+        state.orders.slice().reverse().slice(0, 5).forEach(function(o) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = 
+                '<td>TB-' + o.orderNumber + '</td>' +
+                '<td>' + o.customer.name + '</td>' +
+                '<td>' + o.items.map(function(i) { return i.name; }).join(', ') + '</td>' +
+                '<td>₹' + o.grandTotal.toFixed(2) + '</td>' +
+                '<td><span class="badge-status ' + (o.status === 'Delivered' ? 'delivered' : 'placed') + '">' + (o.status || 'Order Placed') + '</span></td>';
+            body.appendChild(tr);
+        });
+
+        var tableBody = document.getElementById('admin-table-manager-body');
+        tableBody.innerHTML = '';
+        state.tables.forEach(function(t) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = 
+                '<td>Salon ' + t.id + '</td>' +
+                '<td>' + t.capacity + ' Person</td>' +
+                '<td><span class="badge-status ' + (t.booked ? 'preparing' : 'ready') + '">' + (t.booked ? 'Occupied' : 'Vacant') + '</span></td>' +
+                '<td>' + (t.booked ? t.bookedBy : '-') + '</td>' +
+                '<td>' + (t.booked ? '<button class="btn-primary" style="padding:5px 10px; font-size:11px; background:#ef4444;" onclick="vacateTable(' + t.id + ')">Release</button>' : '-') + '</td>';
+            tableBody.appendChild(tr);
+        });
+
+        var menuBody = document.getElementById('admin-menu-manager-body');
+        menuBody.innerHTML = '';
+        state.menu.forEach(function(item) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = 
+                '<td>' + item.id + '</td>' +
+                '<td><img src="' + item.image + '" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=100&h=100&fit=crop&crop=center\'"></td>' +
+                '<td>' + item.name + '</td>' +
+                '<td>' + item.category + '</td>' +
+                '<td>₹' + item.price.toFixed(2) + '</td>' +
+                '<td><button class="btn-primary" style="padding:5px 10px; font-size:11px; background:#ef4444;" onclick="deleteMenuItem(' + item.id + ')">Delete</button></td>';
+            menuBody.appendChild(tr);
+        });
+    }
+
+    function vacateTable(tableId) {
+        var table = state.tables.find(function(t) { return t.id === tableId; });
+        if (table) {
+            table.booked = false;
+            table.bookedBy = '';
+            table.phone = '';
+            table.time = '';
+            syncLocalStorage();
+            renderInteractiveBookingGrid();
+            updateAdminDashboard();
+            showToast('Table ' + tableId + ' released.');
+        }
+    }
+
+    function deleteMenuItem(itemId) {
+        if (confirm('Delete this item?')) {
+            state.menu = state.menu.filter(function(i) { return i.id !== itemId; });
+            syncLocalStorage();
+            renderMenuGrid();
+            renderCategoryFilters();
+            updateAdminDashboard();
+            showToast('Item deleted.');
+        }
+    }
+
+    function openAdminGate() { document.getElementById('admin-gate-modal').classList.add('active'); }
+    function closeAdminGate() { document.getElementById('admin-gate-modal').classList.remove('active'); }
+
+    function validatePasskey() {
+        var pass = document.getElementById('admin-passkey-input').value;
+        if (pass === 'admin123') {
+            state.adminAuthenticated = true;
+            closeAdminGate();
+            document.getElementById('customer-view-container').style.display = 'none';
+            document.getElementById('admin-view-panel').classList.add('active');
+            document.body.classList.add('admin-active');
+            updateAdminDashboard();
+            showToast('Admin access granted.');
+        } else {
+            showToast('Invalid password.', 'warning');
+        }
+    }
+
+    function exitAdmin() {
+        state.adminAuthenticated = false;
+        document.getElementById('admin-view-panel').classList.remove('active');
+        document.getElementById('customer-view-container').style.display = 'block';
+        document.body.classList.remove('admin-active');
+        document.getElementById('admin-passkey-input').value = '';
+    }
+
+    function closeCheckout() { document.getElementById('checkout-modal').classList.remove('active'); }
+    function closeBill() { document.getElementById('bill-modal').classList.remove('active'); }
+    function closeTracking() { document.getElementById('tracking-modal').classList.remove('active'); }
+    function closePayment() { document.getElementById('payment-modal').classList.remove('active'); }
+
+    // ===== EVENT LISTENERS =====
+    function setupEventListeners() {
+        document.getElementById('cart-toggle-btn').addEventListener('click', function() {
+            document.getElementById('cart-sidebar-panel').classList.add('active');
+            document.getElementById('cart-sidebar-overlay').classList.add('active');
+        });
+        document.getElementById('cart-close-btn').addEventListener('click', function() {
+            document.getElementById('cart-sidebar-panel').classList.remove('active');
+            document.getElementById('cart-sidebar-overlay').classList.remove('active');
+        });
+        document.getElementById('cart-sidebar-overlay').addEventListener('click', function() {
+            document.getElementById('cart-sidebar-panel').classList.remove('active');
+            document.getElementById('cart-sidebar-overlay').classList.remove('active');
+        });
+
+        document.getElementById('nav-toggle-btn').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        document.getElementById('menu-search-input').addEventListener('input', function(e) {
+            state.currentSearch = e.target.value.toLowerCase();
+            renderMenuGrid();
+        });
+
+        document.querySelectorAll('.diet-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.diet-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                state.currentDiet = btn.dataset.diet;
+                renderMenuGrid();
+            });
+        });
+
+        document.getElementById('order-type').addEventListener('change', function() {
+            var dineFields = document.getElementById('dine-in-fields');
+            if (this.value === 'Dine-in') {
+                dineFields.style.display = 'block';
+            } else {
+                dineFields.style.display = 'none';
+            }
+            updateOrderSummary();
+        });
+
+        document.getElementById('order-name').addEventListener('input', updateOrderSummary);
+        document.getElementById('order-phone').addEventListener('input', updateOrderSummary);
+        document.getElementById('order-table').addEventListener('change', updateOrderSummary);
+        document.getElementById('order-guests').addEventListener('change', updateOrderSummary);
+
+        document.getElementById('admin-panel-btn').addEventListener('click', openAdminGate);
+        document.getElementById('validate-admin-btn').addEventListener('click', validatePasskey);
+        document.getElementById('admin-exit-btn').addEventListener('click', exitAdmin);
+
+        document.getElementById('checkout-start-btn').addEventListener('click', function() {
+            if (state.cart.length === 0) { showToast('Cart is empty!', 'warning'); return; }
+            document.getElementById('cart-sidebar-panel').classList.remove('active');
+            document.getElementById('cart-sidebar-overlay').classList.remove('active');
+            document.getElementById('checkout-modal').classList.add('active');
+            updateOrderSummary();
+        });
+        document.getElementById('close-checkout').addEventListener('click', closeCheckout);
+        document.getElementById('place-order-btn').addEventListener('click', placeOrder);
+
+        document.getElementById('close-payment').addEventListener('click', closePayment);
+        document.getElementById('confirm-payment-btn').addEventListener('click', confirmPayment);
+
+        document.getElementById('close-bill').addEventListener('click', closeBill);
+        document.getElementById('close-tracking').addEventListener('click', closeTracking);
+        document.getElementById('print-bill-btn').addEventListener('click', function() {
+            var printContents = document.getElementById('bill-content').innerHTML;
+            var win = window.open('', '_blank');
+            win.document.write('<html><head><title>TASTYBITES Invoice</title><style>body{font-family:monospace;padding:20px;}</style></head><body>');
+            win.document.write(printContents);
+            win.document.write('</body></html>');
+            win.document.close();
+            win.print();
+        });
+
+        document.querySelectorAll('.admin-nav-item').forEach(function(item) {
+            if (item.dataset.tab) {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.admin-nav-item').forEach(function(i) { i.classList.remove('active'); });
+                    document.querySelectorAll('.admin-panel-tab').forEach(function(t) { t.classList.remove('active'); });
+                    item.classList.add('active');
+                    document.getElementById(item.dataset.tab).classList.add('active');
+                });
+            }
+        });
+
+        document.getElementById('open-add-item-modal').addEventListener('click', function() {
+            document.getElementById('add-item-modal-overlay').classList.add('active');
+        });
+        document.getElementById('admin-item-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var newItem = {
+                id: 700 + state.menu.length + Math.floor(Math.random() * 100),
+                name: document.getElementById('add-item-name').value,
+                category: document.getElementById('add-item-category').value,
+                type: document.getElementById('add-item-type').value,
+                price: parseFloat(document.getElementById('add-item-price').value),
+                special: document.getElementById('add-item-special').value === 'true',
+                image: document.getElementById('add-item-image').value || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center',
+                description: document.getElementById('add-item-desc').value
+            };
+            state.menu.push(newItem);
+            syncLocalStorage();
+            renderMenuGrid();
+            renderCategoryFilters();
+            updateAdminDashboard();
+            document.getElementById('add-item-modal-overlay').classList.remove('active');
+            showToast('Item added!');
+            document.getElementById('admin-item-form').reset();
+        });
+
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if(!state.selectedBookingTable) {
+                showToast('Select a table from the map.', 'warning');
+                return;
+            }
+            var table = state.tables.find(function(t) { return t.id === state.selectedBookingTable; });
+            if(table) {
+                table.booked = true;
+                table.bookedBy = document.getElementById('reserve-name').value;
+                table.phone = document.getElementById('reserve-phone').value;
+                table.time = document.getElementById('reserve-date').value + ' @ ' + document.getElementById('reserve-time').value;
+                syncLocalStorage();
+                renderInteractiveBookingGrid();
+                showToast('Table ' + table.id + ' booked!');
+                document.getElementById('reservation-form').reset();
+                state.selectedBookingTable = null;
+                document.getElementById('reserve-table-num').value = '';
+            }
+        });
+    }
+
+    function updateOrderSummary() {
+        var name = document.getElementById('order-name').value.trim();
+        var phone = document.getElementById('order-phone').value.trim();
+        var orderType = document.getElementById('order-type').value;
+        var summaryDiv = document.getElementById('order-summary');
+        var itemsDiv = document.getElementById('order-summary-items');
+
+        if (state.cart.length === 0 || !name || !phone || !orderType) {
+            summaryDiv.style.display = 'none';
+            return;
+        }
+
+        summaryDiv.style.display = 'block';
+        
+        var totals = calculateCartTotals();
+        var itemsHTML = '';
+        state.cart.forEach(function(item) {
+            itemsHTML += 
+                '<div style="display:flex; justify-content:space-between; font-size:13px; padding:3px 0;">' +
+                    '<span>' + item.name + ' × ' + item.quantity + '</span>' +
+                    '<span>₹' + (item.price * item.quantity).toFixed(2) + '</span>' +
+                '</div>';
+        });
+        itemsDiv.innerHTML = itemsHTML;
+
+        document.getElementById('summary-subtotal').textContent = '₹' + totals.subtotal.toFixed(2);
+        document.getElementById('summary-discount').textContent = '-₹' + (totals.comboDiscount + totals.specialDiscount).toFixed(2);
+        document.getElementById('summary-gst').textContent = '₹' + totals.gst.toFixed(2);
+        document.getElementById('summary-grand').textContent = '₹' + totals.grandTotal.toFixed(2);
+    }
+
+    function initHeaderTracking() {
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
+
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        document.querySelectorAll('.nav-link').forEach(function(l) {
+            if (l.getAttribute('href') === '#' + id) {
+                l.classList.add('active');
+            } else {
+                l.classList.remove('active');
+            }
+        });
+    }
+    </script>
 </body>
 </html>
- 
- 
