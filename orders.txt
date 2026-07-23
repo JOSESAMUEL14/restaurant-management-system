@@ -1,0 +1,39 @@
+=== ORDER #1001 ===
+Date: 23/07/2026 09:46:21
+Customer: samuel
+Phone: 9597896379
+Order Type: Dine-in
+Items:
+Mutton Biryani x2 = ₹840.0
+Chicken Tikka x2 = ₹560.0
+Chicken Wings x3 = ₹780.0
+Subtotal: ₹2180.0
+GST: ₹392.4
+Discount: ₹218.0
+Grand Total: ₹2354.4
+Payment: UPI
+Status: Completed
+Rating: 5 stars
+========================================
+
+═══════════════════════════════════════════════════════════════
+=== ORDER #1001 ===
+Date: 23/07/2026 10:18:51
+Customer: samuel
+Phone: 9597896379
+Order Type: Dine-in
+Table: 4
+Status: Delivered
+Items:
+  Grilled Chicken x3 = ₹1500.0
+  Mutton Biryani x3 = ₹1260.0
+Subtotal: ₹2760.0
+Combo Discount: ₹0.0
+Special Discount: ₹276.0
+GST: ₹447.12
+Grand Total: ₹2931.12
+Payment: Card
+Rating: 5 stars
+Special Instructions: 
+═══════════════════════════════════════════════════════════════
+
