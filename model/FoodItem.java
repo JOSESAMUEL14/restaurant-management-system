@@ -8,18 +8,20 @@ public class FoodItem {
     private String type;
     private boolean isSpecial;
     private double discountPercentage;
+    private String imageUrl; // Added field for image URL
     
-    public FoodItem(int id, String name, double price, String category, String type) {
+    public FoodItem(int id, String name, double price, String category, String type, String imageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.type = type;
+        this.imageUrl = imageUrl;
         this.isSpecial = false;
         this.discountPercentage = 0;
     }
     
-    public FoodItem(int id, String name, double price, String category, String type, boolean isSpecial) {
+    public FoodItem(int id, String name, double price, String category, String type, boolean isSpecial, String imageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -27,6 +29,7 @@ public class FoodItem {
         this.type = type;
         this.isSpecial = isSpecial;
         this.discountPercentage = 0;
+        this.imageUrl = imageUrl;
     }
     
     public int getId() { return id; }
@@ -36,12 +39,14 @@ public class FoodItem {
     public String getType() { return type; }
     public boolean isSpecial() { return isSpecial; }
     public double getDiscountPercentage() { return discountPercentage; }
+    public String getImageUrl() { return imageUrl; }
     
     public void setName(String name) { this.name = name; }
     public void setPrice(double price) { this.price = price; }
     public void setCategory(String category) { this.category = category; }
     public void setSpecial(boolean isSpecial) { this.isSpecial = isSpecial; }
     public void setDiscountPercentage(double discountPercentage) { this.discountPercentage = discountPercentage; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
     
     public double getDiscountedPrice() {
         return price - (price * discountPercentage / 100);
@@ -56,6 +61,6 @@ public class FoodItem {
     
     @Override
     public String toString() {
-        return id + "," + name + "," + price + "," + category + "," + type + "," + isSpecial + "," + discountPercentage;
+        return id + "," + name + "," + price + "," + category + "," + type + "," + isSpecial + "," + discountPercentage + "," + imageUrl;
     }
 }
