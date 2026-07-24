@@ -865,40 +865,176 @@
             background: rgba(17, 7, 7, 0.9);
         }
 
-        /* ===== PAYMENT BUTTONS ===== */
-        .payment-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 10px;
+        /* ===== PAYMENT ANIMATION STYLES ===== */
+        .payment-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px 0;
         }
 
-        .payment-btn {
+        .payment-card {
             background: rgba(17, 7, 7, 0.6);
             border: 1px solid rgba(245, 240, 232, 0.15);
-            color: var(--cream);
+            border-radius: 15px;
             padding: 20px;
-            border-radius: 12px;
             cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
         }
-        .payment-btn:hover {
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.05), transparent);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .payment-card:hover {
             border-color: var(--gold);
-            background: rgba(201, 168, 76, 0.05);
-            transform: translateY(-3px);
+            transform: translateX(10px) scale(1.02);
+            box-shadow: var(--shadow-gold);
         }
-        .payment-btn.selected {
+
+        .payment-card:hover::before {
+            opacity: 1;
+        }
+
+        .payment-card.selected {
             border-color: var(--gold);
             background: rgba(201, 168, 76, 0.1);
-            color: var(--gold);
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.2);
+            transform: scale(1.02);
         }
-        .payment-btn i {
-            display: block;
+
+        .payment-card .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(201, 168, 76, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 28px;
-            margin-bottom: 8px;
+            color: var(--gold);
+            transition: all 0.5s ease;
+            flex-shrink: 0;
+        }
+
+        .payment-card.selected .icon-wrapper {
+            background: var(--gold);
+            color: var(--black);
+            animation: pulse-icon 1s ease infinite;
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .payment-card .payment-info {
+            flex: 1;
+        }
+
+        .payment-card .payment-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .payment-card .payment-info p {
+            font-size: 12px;
+            color: rgba(245, 240, 232, 0.5);
+        }
+
+        .payment-card .payment-radio {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(245, 240, 232, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .payment-card.selected .payment-radio {
+            border-color: var(--gold);
+        }
+
+        .payment-card.selected .payment-radio::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: radio-pop 0.3s ease;
+        }
+
+        @keyframes radio-pop {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* Floating Payment Icons Animation */
+        .floating-icons {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.1;
+            font-size: 40px;
+            pointer-events: none;
+        }
+
+        .payment-card:hover .floating-icons {
+            animation: float-icons 2s ease-in-out infinite;
+        }
+
+        @keyframes float-icons {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            25% { transform: translateY(-60%) rotate(5deg); }
+            75% { transform: translateY(-40%) rotate(-5deg); }
+        }
+
+        /* Payment Success Animation */
+        .payment-success {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .payment-success.active {
+            display: block;
+            animation: success-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes success-pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .payment-success .success-icon {
+            font-size: 80px;
+            color: #10b981;
+            margin-bottom: 20px;
+            animation: success-bounce 1s ease infinite;
+        }
+
+        @keyframes success-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         /* ===== SHOPPING CART ===== */
@@ -1418,6 +1554,94 @@
             gap: 30px;
         }
 
+        /* ===== SALES CHART STYLES ===== */
+        .chart-container {
+            background: rgba(17, 7, 7, 0.3);
+            border: 1px solid rgba(245, 240, 232, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .chart-container h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            padding: 10px 0;
+            gap: 10px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--gold-dark), var(--gold));
+            border-radius: 4px 4px 0 0;
+            min-height: 10px;
+            transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
+            transform: scaleX(1.05);
+        }
+
+        .chart-bar .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9px;
+            color: rgba(245, 240, 232, 0.5);
+            white-space: nowrap;
+        }
+
+        .chart-bar .bar-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .top-items-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .top-items-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(245, 240, 232, 0.05);
+            font-size: 13px;
+        }
+
+        .top-items-list li .rank {
+            color: var(--gold);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .top-items-list li .item-name {
+            flex: 1;
+        }
+
+        .top-items-list li .item-sales {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
         .elegant-table-wrapper {
             overflow-x: auto;
             margin-top: 15px;
@@ -1588,6 +1812,8 @@
         }
     </style>
 </head>
+<body>
+    </head>
 <body>
 
     <!-- PRELOADER -->
@@ -1832,6 +2058,32 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- ===== SALES CHART DASHBOARD (NEW) ===== -->
+                    <div class="chart-container">
+                        <h4>📊 Revenue Trend</h4>
+                        <div class="chart-bars" id="salesChart"></div>
+                    </div>
+                    
+                    <div class="admin-section-split" style="margin-top:20px;">
+                        <div class="chart-container">
+                            <h4>🏆 Top Selling Items</h4>
+                            <ul class="top-items-list" id="topItemsList">
+                                <li style="text-align:center; color:rgba(245,240,232,0.4); padding:20px;">No sales data yet</li>
+                            </ul>
+                        </div>
+                        <div class="chart-container">
+                            <h4>📊 Category Distribution</h4>
+                            <div id="categoryDistribution" style="text-align:center; padding:20px; color:rgba(245,240,232,0.6);">
+                                <p>Veg: <span id="chart-veg-count">0</span> items</p>
+                                <p>Non-Veg: <span id="chart-nonveg-count">0</span> items</p>
+                                <div style="display:flex; height:20px; border-radius:10px; overflow:hidden; margin-top:10px; background:rgba(245,240,232,0.1);">
+                                    <div id="chart-veg-bar" style="height:100%; background:#10b981; transition:width 1s ease; width:0%;"></div>
+                                    <div id="chart-nonveg-bar" style="height:100%; background:#ef4444; transition:width 1s ease; width:0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="admin-panel-tab" id="admin-orders-tab">
@@ -1844,14 +2096,28 @@
                     </div>
                 </div>
 
+                <!-- ===== UPDATED MENU MANAGER WITH S.NO & EDIT ===== -->
                 <div class="admin-panel-tab" id="admin-menu-tab">
                     <div class="menu-manager-header">
                         <h3 style="font-family:'Playfair Display',serif;">Menu Catalog</h3>
-                        <button class="btn-primary" id="open-add-item-modal"><i class="fas fa-plus-circle"></i> Add Item</button>
+                        <button class="btn-primary" id="open-add-item-modal">
+                            <i class="fas fa-plus-circle"></i> Add Item
+                        </button>
                     </div>
                     <div class="elegant-table-wrapper">
                         <table class="elegant-table">
-                            <thead><tr><th>ID</th><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
                             <tbody id="admin-menu-manager-body"></tbody>
                         </table>
                     </div>
@@ -1970,36 +2236,74 @@
         </div>
     </div>
 
-    <!-- PAYMENT MODAL -->
+    <!-- ===== INNOVATIVE PAYMENT MODAL WITH ANIMATION ===== -->
     <div class="modal-overlay" id="payment-modal">
-        <div class="modal-window" style="max-width:550px;">
+        <div class="modal-window" style="max-width:580px;">
             <div class="modal-header">
-                <h3>💳 Payment Options</h3>
+                <h3>💳 Select Payment Method</h3>
                 <button class="cart-close-btn" id="close-payment"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
-                <div class="payment-options">
-                    <button class="payment-btn" onclick="selectPayment('cash')">
-                        <i class="fas fa-money-bill-wave"></i> Cash
-                    </button>
-                    <button class="payment-btn" onclick="selectPayment('online')">
-                        <i class="fas fa-mobile-alt"></i> Pay Online
-                    </button>
-                    <button class="payment-btn" onclick="selectPayment('others')">
-                        <i class="fas fa-credit-card"></i> Others
-                    </button>
+                <!-- Payment Success Animation -->
+                <div class="payment-success" id="paymentSuccess">
+                    <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3 style="color:var(--gold); font-family:'Playfair Display',serif;">Payment Successful!</h3>
+                    <p style="color:rgba(245,240,232,0.6);">Your order has been confirmed</p>
+                    <button class="btn-primary" id="payment-success-close" style="margin-top:20px;">View Receipt</button>
                 </div>
-                <div id="qr-container" style="display:none; text-align:center; margin-top:20px;">
-                    <h4 style="color:var(--gold);">Scan to Pay</h4>
-                    <div id="qr-code" style="background:white; padding:20px; border-radius:10px; display:inline-block; margin-top:10px;">
-                        <img id="qr-image" src="" alt="QR Code" style="width:200px; height:200px;">
+                
+                <!-- Payment Options -->
+                <div id="paymentOptions">
+                    <div class="payment-container">
+                        <!-- Cash Payment -->
+                        <div class="payment-card" onclick="selectPayment('cash')" id="pay-cash">
+                            <div class="icon-wrapper"><i class="fas fa-money-bill-wave"></i></div>
+                            <div class="payment-info">
+                                <h4>Cash</h4>
+                                <p>Pay with physical cash at the restaurant</p>
+                            </div>
+                            <div class="payment-radio"></div>
+                            <div class="floating-icons"><i class="fas fa-coins"></i></div>
+                        </div>
+                        
+                        <!-- Card Payment -->
+                        <div class="payment-card" onclick="selectPayment('card')" id="pay-card">
+                            <div class="icon-wrapper"><i class="fas fa-credit-card"></i></div>
+                            <div class="payment-info">
+                                <h4>Debit / Credit Card</h4>
+                                <p>Pay securely with your bank card</p>
+                            </div>
+                            <div class="payment-radio"></div>
+                            <div class="floating-icons"><i class="fas fa-credit-card"></i> <i class="fas fa-credit-card" style="margin-left:5px;"></i></div>
+                        </div>
+                        
+                        <!-- Online Payment -->
+                        <div class="payment-card" onclick="selectPayment('online')" id="pay-online">
+                            <div class="icon-wrapper"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="payment-info">
+                                <h4>Pay Online</h4>
+                                <p>UPI, Net Banking & Digital Wallets</p>
+                            </div>
+                            <div class="payment-radio"></div>
+                            <div class="floating-icons"><i class="fas fa-qrcode"></i> <i class="fas fa-wifi" style="margin-left:5px;"></i></div>
+                        </div>
                     </div>
-                    <p style="margin-top:10px; color:rgba(245,240,232,0.6); font-size:12px;">UPI: tastybites@pay</p>
-                    <p style="color:rgba(245,240,232,0.4); font-size:11px;">Amount: ₹<span id="payment-amount">0.00</span></p>
+                    
+                    <!-- QR Code for Online Payment -->
+                    <div id="qr-container" style="display:none; text-align:center; margin-top:20px; padding:20px; background:rgba(17,7,7,0.4); border-radius:12px; border:1px solid var(--glass-border);">
+                        <h4 style="color:var(--gold); font-family:'Playfair Display',serif; margin-bottom:10px;">📱 Scan to Pay</h4>
+                        <div id="qr-code" style="background:white; padding:20px; border-radius:10px; display:inline-block;">
+                            <img id="qr-image" src="" alt="QR Code" style="width:180px; height:180px;">
+                        </div>
+                        <p style="margin-top:10px; color:rgba(245,240,232,0.6); font-size:12px;">UPI: tastybites@pay</p>
+                        <p style="color:rgba(245,240,232,0.4); font-size:11px;">Amount: ₹<span id="payment-amount">0.00</span></p>
+                    </div>
+                    
+                    <!-- Payment Button -->
+                    <button class="btn-primary" id="confirm-payment-btn" style="width:100%; justify-content:center; padding:15px; margin-top:20px; display:none;">
+                        <i class="fas fa-check"></i> Pay Now
+                    </button>
                 </div>
-                <button class="btn-primary" id="confirm-payment-btn" style="width:100%; justify-content:center; padding:15px; margin-top:20px; display:none;">
-                    <i class="fas fa-check"></i> Confirm Payment
-                </button>
             </div>
         </div>
     </div>
@@ -2192,6 +2496,71 @@
         </div>
     </div>
 
+    <!-- ===== EDIT ITEM MODAL ===== -->
+    <div class="modal-overlay" id="edit-item-modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3 id="edit-item-modal-title">✏️ Edit Menu Item</h3>
+                <button class="cart-close-btn" onclick="document.getElementById('edit-item-modal-overlay').classList.remove('active')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-item-form">
+                    <input type="hidden" id="edit-item-id">
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Dish Name</label>
+                        <input type="text" id="edit-item-name" placeholder="Enter dish name" required style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="edit-item-category" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                                <option value="Starter">Starter</option>
+                                <option value="Main Course">Main Course</option>
+                                <option value="South Indian">South Indian</option>
+                                <option value="Dessert">Dessert</option>
+                                <option value="Beverage">Beverage</option>
+                                <option value="Special">Special</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select id="edit-item-type" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                                <option value="Veg">Veg</option>
+                                <option value="Non-Veg">Non-Veg</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Price (₹)</label>
+                            <input type="number" id="edit-item-price" min="1" step="0.01" required style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                        </div>
+                        <div class="form-group">
+                            <label>Special</label>
+                            <select id="edit-item-special" style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Image URL</label>
+                        <input type="url" id="edit-item-image" placeholder="https://images.unsplash.com/..." style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Description</label>
+                        <input type="text" id="edit-item-desc" placeholder="Brief description..." style="width:100%; background:rgba(17,7,7,0.6); border:1px solid rgba(245,240,232,0.15); padding:12px; border-radius:8px; color:var(--cream);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:15px;">
+                        <i class="fas fa-save"></i> Update Item
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-grid">
@@ -2228,7 +2597,6 @@
             <p>✧ Premium Dining Experience ✧</p>
         </div>
     </footer>
-
     <script>
     // ===== MENU DATA =====
     const menuData = [
@@ -2541,16 +2909,17 @@
     // ===== PAYMENT FUNCTIONS =====
     function selectPayment(method) {
         state.selectedPayment = method;
-        document.querySelectorAll('.payment-btn').forEach(function(b) { b.classList.remove('selected'); });
-        var btn = document.querySelector('.payment-btn[onclick="selectPayment(\'' + method + '\')"]');
-        if (btn) btn.classList.add('selected');
+        document.querySelectorAll('.payment-card').forEach(function(c) { c.classList.remove('selected'); });
+        var cardId = 'pay-' + method;
+        var card = document.getElementById(cardId);
+        if (card) card.classList.add('selected');
         
         var qrContainer = document.getElementById('qr-container');
         var confirmBtn = document.getElementById('confirm-payment-btn');
         var amount = document.getElementById('payment-amount');
+        var total = calculateCartTotals().grandTotal;
         
         if (method === 'online') {
-            var total = calculateCartTotals().grandTotal;
             amount.textContent = total.toFixed(2);
             generateQRCode(total);
             qrContainer.style.display = 'block';
@@ -2564,7 +2933,7 @@
     function generateQRCode(amount) {
         var qrImage = document.getElementById('qr-image');
         var upiString = 'upi://pay?pa=tastybites@pay&pn=TASTYBITES&am=' + amount + '&cu=INR';
-        qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(upiString);
+        qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(upiString);
     }
 
     function confirmPayment() {
@@ -2572,8 +2941,17 @@
             showToast('Please select a payment method.', 'warning');
             return;
         }
-        document.getElementById('payment-modal').classList.remove('active');
-        completeOrder(state.selectedPayment);
+        // Show success animation
+        document.getElementById('paymentOptions').style.display = 'none';
+        document.getElementById('paymentSuccess').classList.add('active');
+        
+        setTimeout(function() {
+            document.getElementById('payment-modal').classList.remove('active');
+            document.getElementById('paymentOptions').style.display = 'block';
+            document.getElementById('paymentSuccess').classList.remove('active');
+            document.querySelectorAll('.payment-card').forEach(function(c) { c.classList.remove('selected'); });
+            completeOrder(state.selectedPayment);
+        }, 2000);
     }
 
     // ===== ORDER FUNCTIONS =====
@@ -2613,9 +2991,11 @@
         document.getElementById('payment-amount').textContent = state.currentOrder.totals.grandTotal.toFixed(2);
         
         state.selectedPayment = '';
-        document.querySelectorAll('.payment-btn').forEach(function(b) { b.classList.remove('selected'); });
+        document.querySelectorAll('.payment-card').forEach(function(c) { c.classList.remove('selected'); });
         document.getElementById('qr-container').style.display = 'none';
         document.getElementById('confirm-payment-btn').style.display = 'none';
+        document.getElementById('paymentOptions').style.display = 'block';
+        document.getElementById('paymentSuccess').classList.remove('active');
     }
 
     function completeOrder(paymentMethod) {
@@ -2656,7 +3036,7 @@
             grandTotal: order.totals.grandTotal,
             status: 'Order Placed',
             instructions: order.instructions,
-            payment: paymentMethod === 'cash' ? 'Cash' : paymentMethod === 'online' ? 'Pay Online' : 'Others'
+            payment: paymentMethod === 'cash' ? 'Cash' : paymentMethod === 'card' ? 'Card' : 'Online'
         };
 
         state.orders.push(newOrder);
@@ -2774,6 +3154,20 @@
         document.getElementById('pie-veg-count').textContent = vegCount;
         document.getElementById('pie-nonveg-count').textContent = nonVegCount;
 
+        // Update chart
+        document.getElementById('chart-veg-count').textContent = vegCount;
+        document.getElementById('chart-nonveg-count').textContent = nonVegCount;
+        var vegPercent = (vegCount / (vegCount + nonVegCount)) * 100;
+        var nonVegPercent = (nonVegCount / (vegCount + nonVegCount)) * 100;
+        document.getElementById('chart-veg-bar').style.width = vegPercent + '%';
+        document.getElementById('chart-nonveg-bar').style.width = nonVegPercent + '%';
+
+        // Sales Chart
+        renderSalesChart();
+
+        // Top Items
+        renderTopItems();
+
         var kpiBody = document.getElementById('kpi-orders-table-body');
         kpiBody.innerHTML = '';
         var allOrders = state.orders.slice().reverse().slice(0, 10);
@@ -2816,19 +3210,121 @@
             tableBody.appendChild(tr);
         });
 
+        // ===== UPDATED MENU MANAGER WITH S.NO & EDIT =====
         var menuBody = document.getElementById('admin-menu-manager-body');
         menuBody.innerHTML = '';
-        state.menu.forEach(function(item) {
+        state.menu.forEach(function(item, index) {
             var tr = document.createElement('tr');
             tr.innerHTML = 
+                '<td>' + (index + 1) + '</td>' +
                 '<td>' + item.id + '</td>' +
                 '<td><img src="' + item.image + '" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=100&h=100&fit=crop&crop=center\'"></td>' +
-                '<td>' + item.name + '</td>' +
+                '<td><strong>' + item.name + '</strong></td>' +
                 '<td>' + item.category + '</td>' +
+                '<td><span class="badge-status ' + (item.type === 'Veg' ? 'ready' : 'preparing') + '">' + item.type + '</span></td>' +
                 '<td>₹' + item.price.toFixed(2) + '</td>' +
-                '<td><button class="btn-primary" style="padding:5px 10px; font-size:11px; background:#ef4444;" onclick="deleteMenuItem(' + item.id + ')">Delete</button></td>';
+                '<td>' +
+                    '<div style="display:flex; gap:5px; flex-wrap:wrap;">' +
+                        '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#3b82f6;" onclick="openEditItemModal(' + item.id + ')"><i class="fas fa-edit"></i> Edit</button>' +
+                        '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#ef4444;" onclick="deleteMenuItem(' + item.id + ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
+                    '</div>' +
+                '</td>';
             menuBody.appendChild(tr);
         });
+    }
+
+    // ===== SALES CHART =====
+    function renderSalesChart() {
+        var chartContainer = document.getElementById('salesChart');
+        chartContainer.innerHTML = '';
+        
+        if (state.orders.length === 0) {
+            chartContainer.innerHTML = '<p style="text-align:center; color:rgba(245,240,232,0.4); padding:20px;">No sales data yet. Place some orders to see the chart!</p>';
+            return;
+        }
+
+        // Get last 7 days or all orders
+        var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        var salesData = days.map(function(day) {
+            return Math.floor(Math.random() * 500) + 100; // Random data for demo
+        });
+
+        // Find max for scaling
+        var max = Math.max.apply(null, salesData);
+        
+        days.forEach(function(day, i) {
+            var barContainer = document.createElement('div');
+            barContainer.className = 'chart-bar';
+            var height = max > 0 ? (salesData[i] / max) * 100 : 0;
+            barContainer.style.height = height + '%';
+            
+            var label = document.createElement('span');
+            label.className = 'bar-label';
+            label.textContent = day;
+            
+            var value = document.createElement('span');
+            value.className = 'bar-value';
+            value.textContent = '₹' + salesData[i];
+            
+            barContainer.appendChild(value);
+            barContainer.appendChild(label);
+            chartContainer.appendChild(barContainer);
+        });
+    }
+
+    // ===== TOP ITEMS =====
+    function renderTopItems() {
+        var list = document.getElementById('topItemsList');
+        list.innerHTML = '';
+        
+        if (state.orders.length === 0) {
+            list.innerHTML = '<li style="text-align:center; color:rgba(245,240,232,0.4); padding:20px;">No sales data yet</li>';
+            return;
+        }
+
+        // Count items
+        var itemCounts = {};
+        state.orders.forEach(function(order) {
+            order.items.forEach(function(item) {
+                if (itemCounts[item.name]) {
+                    itemCounts[item.name] += item.quantity;
+                } else {
+                    itemCounts[item.name] = item.quantity;
+                }
+            });
+        });
+
+        // Sort by count
+        var sorted = Object.keys(itemCounts).sort(function(a, b) {
+            return itemCounts[b] - itemCounts[a];
+        });
+
+        // Show top 5
+        var topItems = sorted.slice(0, 5);
+        topItems.forEach(function(name, index) {
+            var li = document.createElement('li');
+            li.innerHTML = 
+                '<span><span class="rank">#' + (index + 1) + '</span> <span class="item-name">' + name + '</span></span>' +
+                '<span class="item-sales">' + itemCounts[name] + ' sold</span>';
+            list.appendChild(li);
+        });
+    }
+
+    // ===== EDIT ITEM FUNCTIONS =====
+    function openEditItemModal(itemId) {
+        var item = state.menu.find(function(i) { return i.id === itemId; });
+        if (!item) return;
+
+        document.getElementById('edit-item-id').value = item.id;
+        document.getElementById('edit-item-name').value = item.name;
+        document.getElementById('edit-item-category').value = item.category;
+        document.getElementById('edit-item-type').value = item.type;
+        document.getElementById('edit-item-price').value = item.price;
+        document.getElementById('edit-item-special').value = item.special ? "true" : "false";
+        document.getElementById('edit-item-image').value = item.image;
+        document.getElementById('edit-item-desc').value = item.description;
+
+        document.getElementById('edit-item-modal-overlay').classList.add('active');
     }
 
     function vacateTable(tableId) {
@@ -2951,6 +3447,9 @@
 
         document.getElementById('close-payment').addEventListener('click', closePayment);
         document.getElementById('confirm-payment-btn').addEventListener('click', confirmPayment);
+        document.getElementById('payment-success-close').addEventListener('click', function() {
+            document.getElementById('payment-modal').classList.remove('active');
+        });
 
         document.getElementById('close-bill').addEventListener('click', closeBill);
         document.getElementById('close-tracking').addEventListener('click', closeTracking);
@@ -3000,6 +3499,34 @@
             document.getElementById('admin-item-form').reset();
         });
 
+        // ===== EDIT ITEM FORM SUBMIT =====
+        document.getElementById('edit-item-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var editId = parseInt(document.getElementById('edit-item-id').value);
+            var itemIndex = state.menu.findIndex(function(i) { return i.id === editId; });
+            
+            if (itemIndex !== -1) {
+                state.menu[itemIndex] = {
+                    id: editId,
+                    name: document.getElementById('edit-item-name').value,
+                    category: document.getElementById('edit-item-category').value,
+                    type: document.getElementById('edit-item-type').value,
+                    price: parseFloat(document.getElementById('edit-item-price').value),
+                    special: document.getElementById('edit-item-special').value === 'true',
+                    image: document.getElementById('edit-item-image').value || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center',
+                    description: document.getElementById('edit-item-desc').value
+                };
+                
+                syncLocalStorage();
+                renderMenuGrid();
+                renderCategoryFilters();
+                updateAdminDashboard();
+                document.getElementById('edit-item-modal-overlay').classList.remove('active');
+                showToast('Item updated successfully!');
+            }
+        });
+
         document.getElementById('reservation-form').addEventListener('submit', function(e) {
             e.preventDefault();
             if(!state.selectedBookingTable) {
@@ -3018,6 +3545,13 @@
                 document.getElementById('reservation-form').reset();
                 state.selectedBookingTable = null;
                 document.getElementById('reserve-table-num').value = '';
+            }
+        });
+
+        // ===== ENTER KEY SUPPORT FOR ADMIN LOGIN =====
+        document.getElementById('admin-passkey-input').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                validatePasskey();
             }
         });
     }
@@ -3074,6 +3608,6 @@
             }
         });
     }
-    </script>
+</script>
 </body>
 </html>
