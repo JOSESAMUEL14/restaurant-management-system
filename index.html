@@ -18,19 +18,21 @@
         }
 
         [data-theme="light"] {
-            --bg-primary: #f5f0e8;
-            --bg-secondary: #ffffff;
+            --bg-primary: #faf3ea;
+            --bg-secondary: #fff8f0;
             --bg-card: #ffffff;
-            --text-primary: #1a0a0a;
-            --text-secondary: #4a3a3a;
-            --text-muted: #7a6a6a;
-            --border-color: rgba(26, 10, 10, 0.1);
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(201, 168, 76, 0.2);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-            --input-bg: rgba(255, 255, 255, 0.8);
-            --hero-overlay: rgba(245, 240, 232, 0.85);
-            --hero-overlay2: rgba(245, 240, 232, 0.8);
+            --text-primary: #2d1b0e;
+            --text-secondary: #5a3d2b;
+            --text-muted: #8b6f5a;
+            --border-color: rgba(201, 168, 76, 0.2);
+            --glass-bg: rgba(255, 248, 240, 0.85);
+            --glass-border: rgba(201, 168, 76, 0.3);
+            --shadow: 0 8px 32px rgba(201, 168, 76, 0.12);
+            --input-bg: rgba(255, 248, 240, 0.9);
+            --hero-overlay: rgba(250, 243, 234, 0.88);
+            --hero-overlay2: rgba(255, 248, 240, 0.82);
+            --card-hover: rgba(201, 168, 76, 0.05);
+            --warm-glow: rgba(201, 168, 76, 0.08);
         }
 
         [data-theme="dark"] {
@@ -47,6 +49,8 @@
             --input-bg: rgba(17, 7, 7, 0.6);
             --hero-overlay: rgba(17, 7, 7, 0.85);
             --hero-overlay2: rgba(17, 7, 7, 0.75);
+            --card-hover: rgba(201, 168, 76, 0.05);
+            --warm-glow: rgba(201, 168, 76, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -349,6 +353,10 @@
                         url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1920&q=80') center/cover no-repeat;
         }
 
+        [data-theme="light"] .hero-slide {
+            background-blend-mode: overlay;
+        }
+
         .hero-slide.active { opacity: 1; z-index: 2; }
 
         .hero-slide .hero-content {
@@ -566,330 +574,7 @@
             letter-spacing: 1px;
         }
 
-        .mind-section {
-            padding: 60px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .mind-carousel {
-            display: flex;
-            gap: 25px;
-            overflow-x: auto;
-            padding: 20px 10px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-        .mind-carousel::-webkit-scrollbar { height: 6px; }
-        .mind-carousel::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 10px;
-        }
-        .mind-item {
-            flex: 0 0 140px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 15px 10px;
-            border-radius: 15px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-        }
-        .mind-item:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-            box-shadow: var(--shadow);
-        }
-        .mind-item .mind-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 8px;
-            display: block;
-            border: 2px solid var(--gold);
-            transition: all 0.3s ease;
-        }
-        .mind-item:hover .mind-image {
-            transform: scale(1.05);
-            border-color: var(--gold-light);
-        }
-        .mind-item span {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-primary);
-            display: block;
-        }
-
-        .categories-section {
-            padding: 80px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
-        }
-        .category-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        [data-theme="dark"] .category-card {
-            background: rgba(30, 15, 15, 0.6);
-            border: 1px solid rgba(201, 168, 76, 0.15);
-        }
-        [data-theme="light"] .category-card {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(201, 168, 76, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), transparent);
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-        .category-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--gold);
-            box-shadow: var(--shadow-gold);
-        }
-        .category-card:hover::before { opacity: 1; }
-        .category-card .category-icon {
-            font-size: 40px;
-            color: var(--gold);
-            margin-bottom: 15px;
-            transition: all 0.4s ease;
-        }
-        .category-card:hover .category-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-        .category-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-        }
-        .category-card p {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-        .category-count {
-            display: inline-block;
-            font-size: 10px;
-            padding: 3px 12px;
-            background: rgba(201, 168, 76, 0.15);
-            color: var(--gold);
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .featured-section {
-            padding: 80px 40px;
-            background: var(--bg-secondary);
-        }
-        .featured-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .featured-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            position: relative;
-        }
-        .featured-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-            box-shadow: var(--shadow);
-        }
-        .featured-card .chef-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--gold);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            z-index: 5;
-        }
-        .featured-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: all 0.4s ease;
-        }
-        .featured-card:hover img { transform: scale(1.05); }
-        .featured-card .featured-body { padding: 20px; }
-        .featured-card .featured-body h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-        }
-        .featured-card .featured-body p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-        .featured-card .featured-body .featured-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .popular-chains-section {
-            padding: 80px 40px;
-            background: var(--bg-secondary);
-        }
-        .popular-chains-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .chain-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-        .chain-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-            box-shadow: var(--shadow);
-        }
-        .chain-card .discount-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--gold);
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            z-index: 5;
-        }
-        .chain-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-        .chain-card:hover img { transform: scale(1.05); }
-        .chain-card .chain-body { padding: 15px 20px; }
-        .chain-card .chain-body h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            margin-bottom: 3px;
-            color: var(--text-primary);
-        }
-        .chain-card .chain-body p {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        .chain-card .chain-body .chain-rating {
-            color: var(--gold);
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        .quick-filters {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px 0;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .quick-filter-btn {
-            padding: 12px 28px;
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            backdrop-filter: blur(5px);
-        }
-        [data-theme="dark"] .quick-filter-btn {
-            background: rgba(30, 15, 15, 0.6);
-            border-color: rgba(201, 168, 76, 0.15);
-        }
-        [data-theme="light"] .quick-filter-btn {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(201, 168, 76, 0.2);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .quick-filter-btn:hover,
-        .quick-filter-btn.active {
-            border-color: var(--gold);
-            background: rgba(201, 168, 76, 0.15);
-            color: var(--gold);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-gold);
-        }
-
-        .cta-section {
-            padding: 80px 40px;
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .cta-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-        .cta-content p {
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            font-size: 16px;
-        }
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
+        /* ===== OFFERS SECTION - MOVED TO TOP ===== */
         .offers-section {
             padding: 80px 40px;
             background: var(--bg-secondary);
@@ -910,6 +595,10 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+        }
+        [data-theme="light"] .offer-card {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .offer-card::before {
             content: '';
@@ -962,6 +651,358 @@
             font-weight: 500;
         }
 
+        /* ===== WHAT'S ON YOUR MIND? ===== */
+        .mind-section {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .mind-carousel {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .mind-carousel::-webkit-scrollbar { height: 6px; }
+        .mind-carousel::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+        .mind-item {
+            flex: 0 0 140px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 15px 10px;
+            border-radius: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+        [data-theme="light"] .mind-item {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
+        .mind-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow);
+        }
+        .mind-item .mind-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 8px;
+            display: block;
+            border: 2px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+        .mind-item:hover .mind-image {
+            transform: scale(1.05);
+            border-color: var(--gold-light);
+        }
+        .mind-item span {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        /* ===== CATEGORIES SECTION - SINGLE ROW ===== */
+        .categories-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .categories-scroll {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            padding: 20px 10px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .categories-scroll::-webkit-scrollbar { height: 6px; }
+        .categories-scroll::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+        .category-card {
+            flex: 0 0 180px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        [data-theme="dark"] .category-card {
+            background: rgba(30, 15, 15, 0.6);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+        [data-theme="light"] .category-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.08);
+        }
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), transparent);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
+        }
+        .category-card:hover::before { opacity: 1; }
+        .category-card .category-icon {
+            font-size: 40px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+        }
+        .category-card:hover .category-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        .category-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        .category-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .category-count {
+            display: inline-block;
+            font-size: 10px;
+            padding: 3px 12px;
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--gold);
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* ===== FEATURED DISHES ===== */
+        .featured-section {
+            padding: 80px 40px;
+            background: var(--bg-secondary);
+        }
+        .featured-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .featured-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        [data-theme="light"] .featured-card {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
+        .featured-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow);
+        }
+        .featured-card .chef-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 5;
+        }
+        .featured-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+        .featured-card:hover img { transform: scale(1.05); }
+        .featured-card .featured-body { padding: 20px; }
+        .featured-card .featured-body h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        .featured-card .featured-body p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .featured-card .featured-body .featured-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* ===== POPULAR CHAINS ===== */
+        .popular-chains-section {
+            padding: 80px 40px;
+            background: var(--bg-secondary);
+        }
+        .popular-chains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chain-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        [data-theme="light"] .chain-card {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
+        .chain-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow);
+        }
+        .chain-card .discount-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--gold);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            z-index: 5;
+        }
+        .chain-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        .chain-card:hover img { transform: scale(1.05); }
+        .chain-card .chain-body { padding: 15px 20px; }
+        .chain-card .chain-body h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            margin-bottom: 3px;
+            color: var(--text-primary);
+        }
+        .chain-card .chain-body p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .chain-card .chain-body .chain-rating {
+            color: var(--gold);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* ===== QUICK FILTERS ===== */
+        .quick-filters {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .quick-filter-btn {
+            padding: 12px 28px;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(5px);
+        }
+        [data-theme="dark"] .quick-filter-btn {
+            background: rgba(30, 15, 15, 0.6);
+            border-color: rgba(201, 168, 76, 0.15);
+        }
+        [data-theme="light"] .quick-filter-btn {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+            box-shadow: 0 2px 10px rgba(201, 168, 76, 0.06);
+        }
+        .quick-filter-btn:hover,
+        .quick-filter-btn.active {
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ===== CTA SECTION - MOVED TO LAST ===== */
+        .cta-section {
+            padding: 80px 40px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        .cta-content p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== MENU SECTION ===== */
         .menu-section {
             padding: 80px 40px;
             max-width: 1200px;
@@ -985,9 +1026,9 @@
             border-color: rgba(201, 168, 76, 0.15);
         }
         [data-theme="light"] .search-filter-bar {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(201, 168, 76, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.08);
         }
         .search-box {
             position: relative;
@@ -1035,7 +1076,7 @@
             border-color: rgba(245, 240, 232, 0.15);
         }
         [data-theme="light"] .filter-btn, [data-theme="light"] .diet-btn {
-            border-color: rgba(26, 10, 10, 0.15);
+            border-color: rgba(201, 168, 76, 0.25);
         }
         .filter-btn:hover, .filter-btn.active {
             border-color: var(--gold);
@@ -1073,6 +1114,10 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+        }
+        [data-theme="light"] .menu-card {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .menu-card:hover {
             transform: translateY(-8px);
@@ -1222,6 +1267,7 @@
         .view-more-btn i { margin-left: 10px; transition: var(--transition); }
         .view-more-btn:hover i { transform: rotate(180deg); }
 
+        /* ===== REVIEWS SECTION ===== */
         .reviews-section {
             padding: 80px 40px;
             max-width: 1200px;
@@ -1241,6 +1287,10 @@
             border-radius: 15px;
             max-width: 600px;
             margin: 0 auto;
+        }
+        [data-theme="light"] .review-card {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .review-card.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn {
@@ -1277,6 +1327,7 @@
             transform: scale(1.3);
         }
 
+        /* ===== TABLE BOOKING ===== */
         .booking-section {
             padding: 80px 40px;
             max-width: 1200px;
@@ -1291,6 +1342,10 @@
             border-radius: 20px;
             overflow: hidden;
         }
+        [data-theme="light"] .booking-layout {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
         .booking-visual {
             padding: 40px;
             background: linear-gradient(135deg, rgba(45, 27, 14, 0.3), rgba(17, 7, 7, 0.9)), 
@@ -1300,7 +1355,7 @@
             justify-content: space-between;
         }
         [data-theme="light"] .booking-visual {
-            background: linear-gradient(135deg, rgba(245, 240, 232, 0.9), rgba(245, 240, 232, 0.8)), 
+            background: linear-gradient(135deg, rgba(250, 243, 234, 0.92), rgba(255, 248, 240, 0.85)), 
                         url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80') center/cover;
         }
         .booking-visual-text h3 {
@@ -1309,13 +1364,13 @@
             margin-bottom: 15px;
             color: #fff;
         }
-        [data-theme="light"] .booking-visual-text h3 { color: #1a0a0a; }
+        [data-theme="light"] .booking-visual-text h3 { color: #2d1b0e; }
         .booking-visual-text p {
             font-size: 14px;
             color: rgba(255, 255, 255, 0.7);
             margin-bottom: 25px;
         }
-        [data-theme="light"] .booking-visual-text p { color: rgba(26, 10, 10, 0.7); }
+        [data-theme="light"] .booking-visual-text p { color: rgba(45, 27, 14, 0.7); }
         .table-legend {
             display: flex;
             gap: 20px;
@@ -1328,7 +1383,7 @@
             gap: 8px;
             color: #fff;
         }
-        [data-theme="light"] .legend-item { color: #1a0a0a; }
+        [data-theme="light"] .legend-item { color: #2d1b0e; }
         .legend-color {
             width: 14px;
             height: 14px;
@@ -1355,7 +1410,7 @@
             transition: var(--transition);
             color: #fff;
         }
-        [data-theme="light"] .table-node { color: #1a0a0a; }
+        [data-theme="light"] .table-node { color: #2d1b0e; }
         .table-node:hover:not(.booked) {
             background: rgba(201, 168, 76, 0.1);
             transform: scale(1.05);
@@ -1416,6 +1471,7 @@
             background: var(--bg-primary);
         }
 
+        /* ===== PAYMENT ===== */
         .payment-container {
             display: flex;
             flex-direction: column;
@@ -1434,6 +1490,10 @@
             gap: 20px;
             position: relative;
             overflow: hidden;
+        }
+        [data-theme="light"] .payment-card {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .payment-card::before {
             content: '';
@@ -1555,6 +1615,7 @@
             50% { transform: scale(1.1); }
         }
 
+        /* ===== CART ===== */
         .cart-sidebar {
             position: fixed;
             top: 0;
@@ -1568,6 +1629,10 @@
             display: flex;
             flex-direction: column;
             box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        }
+        [data-theme="light"] .cart-sidebar {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .cart-sidebar.active { right: 0; }
         .cart-header {
@@ -1692,6 +1757,7 @@
         }
         .cart-overlay.active { opacity: 1; pointer-events: auto; }
 
+        /* ===== MODALS ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1722,6 +1788,10 @@
             transform: scale(0.9);
             transition: var(--transition);
         }
+        [data-theme="light"] .modal-window {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
         .modal-overlay.active .modal-window { transform: scale(1); }
         .modal-header {
             padding: 25px;
@@ -1737,6 +1807,7 @@
         }
         .modal-body { padding: 25px; }
 
+        /* ===== BILL ===== */
         .bill-container {
             background: #fff;
             color: #000;
@@ -1798,6 +1869,7 @@
             margin-top: 15px;
         }
 
+        /* ===== TRACKING ===== */
         .tracking-container {
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
@@ -1908,6 +1980,7 @@
         }
         .tracking-node.completed .tracking-label { color: var(--gold); }
 
+        /* ===== TOAST ===== */
         .toast-container {
             position: fixed;
             bottom: 30px;
@@ -1931,6 +2004,10 @@
             animation: slideInLeft 0.3s forwards;
             min-width: 280px;
         }
+        [data-theme="light"] .toast-notification {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
         .toast-notification.fadeOut { animation: slideOutLeft 0.3s forwards; }
         @keyframes slideInLeft {
             from { transform: translateX(-120%); opacity: 0; }
@@ -1941,6 +2018,7 @@
             to { transform: translateX(-120%); opacity: 0; }
         }
 
+        /* ===== ADMIN ===== */
         .admin-dashboard-section {
             display: none;
             padding: 100px 40px 60px;
@@ -1960,6 +2038,10 @@
             border-radius: 15px;
             padding: 20px;
             height: fit-content;
+        }
+        [data-theme="light"] .admin-sidebar {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .admin-nav-list {
             list-style: none;
@@ -1993,6 +2075,10 @@
             border-radius: 15px;
             padding: 35px;
         }
+        [data-theme="light"] .admin-main-panel {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
         .admin-panel-tab { display: none; }
         .admin-panel-tab.active { display: block; }
         .admin-kpi-grid {
@@ -2009,6 +2095,10 @@
             display: flex;
             align-items: center;
             gap: 20px;
+        }
+        [data-theme="light"] .kpi-card {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .kpi-icon {
             font-size: 24px;
@@ -2044,6 +2134,10 @@
             border-radius: 12px;
             padding: 20px;
             margin-top: 15px;
+        }
+        [data-theme="light"] .chart-container {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
         }
         .chart-container h4 {
             font-family: 'Playfair Display', serif;
@@ -2144,6 +2238,7 @@
 
         .admin-active .navbar .nav-menu { display: none !important; }
 
+        /* ===== FOOTER ===== */
         footer {
             background: var(--bg-secondary);
             padding: 80px 40px 30px;
@@ -2233,6 +2328,7 @@
             color: var(--text-muted);
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
             .booking-layout, .admin-layout, .admin-section-split {
                 grid-template-columns: 1fr;
@@ -2277,6 +2373,9 @@
             .search-filter-bar { flex-direction: column; align-items: stretch; }
             .filter-controls, .diet-controls { justify-content: center; }
             .admin-kpi-grid { grid-template-columns: 1fr 1fr; }
+            .categories-scroll { gap: 15px; }
+            .category-card { flex: 0 0 150px; padding: 20px 15px; }
+            .offers-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -2303,9 +2402,11 @@
             </a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#offers" class="nav-link">Offers</a></li>
                 <li><a href="#mind" class="nav-link">Craving</a></li>
+                <li><a href="#categories" class="nav-link">Categories</a></li>
                 <li><a href="#chains" class="nav-link">Chains</a></li>
-                <li><a href="#menu" class="nav-link">Our Menu</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
                 <li><a href="#booking" class="nav-link">Reservations</a></li>
             </ul>
             <div class="nav-actions">
@@ -2436,6 +2537,43 @@
             </div>
         </section>
 
+        <!-- ===== GOURMET PRIVILEGES & COMBOS - MOVED ABOVE WHAT'S ON YOUR MIND ===== -->
+        <section class="offers-section" id="offers">
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">✦ PRIVILEGES ✦</span>
+                <h2>Gourmet <span class="gold-text">Privileges & Combos</span></h2>
+                <p>Exquisite promotional pricing meticulously engineered to complement your dining profile.</p>
+            </div>
+            <div class="offers-container">
+                <div class="offers-grid">
+                    <div class="offer-card scroll-reveal-left">
+                        <div class="offer-icon"><i class="fas fa-tags"></i></div>
+                        <div class="offer-info">
+                            <h3>High-Value Elite Benefit</h3>
+                            <p>Receive an automatic 10% markdown on bills exceeding ₹500.</p>
+                            <span class="offer-badge">Always Active</span>
+                        </div>
+                    </div>
+                    <div class="offer-card scroll-reveal-scale">
+                        <div class="offer-icon"><i class="fas fa-gift"></i></div>
+                        <div class="offer-info">
+                            <h3>Royal Combo Multipliers</h3>
+                            <p>Unlock cascading benefits: 10% off for 3 unique items, or 20% off for 4+ unique items.</p>
+                            <span class="offer-badge">Auto Applied</span>
+                        </div>
+                    </div>
+                    <div class="offer-card scroll-reveal-right">
+                        <div class="offer-icon"><i class="fas fa-crown"></i></div>
+                        <div class="offer-info">
+                            <h3>Loyalty Ledger</h3>
+                            <p>Earn 10 points for every ₹100 settled. Redeem 100 points to save ₹10.</p>
+                            <span class="offer-badge">Member Benefit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ===== WHAT'S ON YOUR MIND? ===== -->
         <section class="mind-section" id="mind">
             <div class="section-header scroll-reveal">
@@ -2554,14 +2692,14 @@
             </div>
         </section>
 
-        <!-- ===== CATEGORIES SECTION ===== -->
+        <!-- ===== CATEGORIES SECTION - SINGLE ROW SCROLL ===== -->
         <section class="categories-section" id="categories">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ EXPLORE ✦</span>
                 <h2>Our Culinary <span class="gold-text">Categories</span></h2>
                 <p>Discover our diverse range of culinary offerings crafted to perfection.</p>
             </div>
-            <div class="categories-grid">
+            <div class="categories-scroll">
                 <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Starter')">
                     <div class="category-icon"><i class="fas fa-appetizer"></i></div>
                     <h3>Starters</h3>
@@ -2611,62 +2749,6 @@
             <div class="featured-grid" id="featuredGrid"></div>
         </section>
 
-        <!-- ===== CTA SECTION ===== -->
-        <section class="cta-section">
-            <div class="cta-container">
-                <div class="cta-content scroll-reveal-scale">
-                    <span class="section-tag">✦ RESERVE NOW ✦</span>
-                    <h2>Ready for an <span class="gold-text">Unforgettable</span> Experience?</h2>
-                    <p>Book your table now and let us take you on a culinary journey like no other.</p>
-                    <div class="cta-buttons">
-                        <button class="btn-primary" onclick="scrollToSection('booking')">
-                            <i class="fas fa-calendar-check"></i> Reserve a Table
-                        </button>
-                        <button class="gold-border-btn" onclick="scrollToSection('menu')">
-                            <i class="fas fa-utensils"></i> Browse Menu
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== OFFERS SECTION ===== -->
-        <section class="offers-section" id="offers">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">✦ PRIVILEGES ✦</span>
-                <h2>Gourmet <span class="gold-text">Privileges & Combos</span></h2>
-                <p>Exquisite promotional pricing meticulously engineered to complement your dining profile.</p>
-            </div>
-            <div class="offers-container">
-                <div class="offers-grid">
-                    <div class="offer-card scroll-reveal-left">
-                        <div class="offer-icon"><i class="fas fa-tags"></i></div>
-                        <div class="offer-info">
-                            <h3>High-Value Elite Benefit</h3>
-                            <p>Receive an automatic 10% markdown on bills exceeding ₹500.</p>
-                            <span class="offer-badge">Always Active</span>
-                        </div>
-                    </div>
-                    <div class="offer-card scroll-reveal-scale">
-                        <div class="offer-icon"><i class="fas fa-gift"></i></div>
-                        <div class="offer-info">
-                            <h3>Royal Combo Multipliers</h3>
-                            <p>Unlock cascading benefits: 10% off for 3 unique items, or 20% off for 4+ unique items.</p>
-                            <span class="offer-badge">Auto Applied</span>
-                        </div>
-                    </div>
-                    <div class="offer-card scroll-reveal-right">
-                        <div class="offer-icon"><i class="fas fa-crown"></i></div>
-                        <div class="offer-info">
-                            <h3>Loyalty Ledger</h3>
-                            <p>Earn 10 points for every ₹100 settled. Redeem 100 points to save ₹10.</p>
-                            <span class="offer-badge">Member Benefit</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- ===== MENU SECTION ===== -->
         <section class="menu-section" id="menu">
             <div class="section-header scroll-reveal">
@@ -2697,7 +2779,7 @@
             </div>
         </section>
 
-        <!-- ===== REVIEWS SECTION - MOVED TO BOTTOM ===== -->
+        <!-- ===== REVIEWS SECTION ===== -->
         <section class="reviews-section" id="reviews">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ TESTIMONIALS ✦</span>
@@ -2819,6 +2901,25 @@
                             <i class="fas fa-signature"></i> Finalize Booking
                         </button>
                     </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA SECTION - MOVED TO LAST ===== -->
+        <section class="cta-section" id="cta">
+            <div class="cta-container">
+                <div class="cta-content scroll-reveal-scale">
+                    <span class="section-tag">✦ RESERVE NOW ✦</span>
+                    <h2>Ready for an <span class="gold-text">Unforgettable</span> Experience?</h2>
+                    <p>Book your table now and let us take you on a culinary journey like no other.</p>
+                    <div class="cta-buttons">
+                        <button class="btn-primary" onclick="scrollToSection('booking')">
+                            <i class="fas fa-calendar-check"></i> Reserve a Table
+                        </button>
+                        <button class="gold-border-btn" onclick="scrollToSection('menu')">
+                            <i class="fas fa-utensils"></i> Browse Menu
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -3391,7 +3492,9 @@
                 <h3>Quick Navigation</h3>
                 <ul class="footer-links">
                     <li><a href="#home">Home Base</a></li>
+                    <li><a href="#offers">Privileges</a></li>
                     <li><a href="#mind">Craving</a></li>
+                    <li><a href="#categories">Categories</a></li>
                     <li><a href="#chains">Chains</a></li>
                     <li><a href="#menu">Our Menu</a></li>
                     <li><a href="#booking">Reservations</a></li>
