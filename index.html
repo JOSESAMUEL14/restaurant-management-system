@@ -711,7 +711,7 @@
             display: block;
         }
 
-        /* ===== CATEGORIES - PROFESSIONAL IMAGES ===== */
+        /* ===== CATEGORIES - PROFESSIONAL IMAGES (FIXED) ===== */
         .categories-section {
             padding: 80px 40px;
             max-width: 1200px;
@@ -1672,21 +1672,21 @@
         }
         .modal-body { padding: 25px; }
 
-        /* ===== BOOKING POPUP ===== */
+        /* ===== BOOKING POPUP - RESTORED GOOD DESIGN ===== */
         .booking-popup-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
         }
         .booking-popup-visual {
-            padding: 20px;
+            padding: 25px;
             background: linear-gradient(135deg, rgba(45, 27, 14, 0.3), rgba(17, 7, 7, 0.9)), 
                         url('https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80') center/cover;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 400px;
+            min-height: 380px;
         }
         [data-theme="light"] .booking-popup-visual {
             background: linear-gradient(135deg, rgba(250, 243, 234, 0.92), rgba(255, 248, 240, 0.85)), 
@@ -1694,8 +1694,9 @@
         }
         .booking-popup-visual h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 22px;
             color: #fff;
+            margin-bottom: 8px;
         }
         [data-theme="light"] .booking-popup-visual h3 { color: #2d1b0e; }
         .booking-popup-visual p {
@@ -1754,6 +1755,56 @@
             height: 12px;
             border-radius: 3px;
             display: inline-block;
+        }
+
+        .booking-form-container {
+            padding: 5px 0;
+        }
+        .booking-form-container h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        .booking-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .booking-form-grid .full-width {
+            grid-column: span 2;
+        }
+        .booking-form-grid .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .booking-form-grid .form-group label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .booking-form-grid .form-group input {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 13px;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .booking-form-grid .form-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: var(--bg-primary);
+        }
+        .booking-form-grid .form-group input[readonly] {
+            background: var(--bg-secondary);
+            cursor: not-allowed;
         }
 
         .bill-container {
@@ -2283,6 +2334,8 @@
             .categories-grid { grid-template-columns: repeat(3, 1fr); }
             .booking-popup-grid { grid-template-columns: 1fr; }
             .popup-tables-grid { grid-template-columns: repeat(4, 1fr); }
+            .booking-form-grid { grid-template-columns: 1fr; }
+            .booking-form-grid .full-width { grid-column: span 1; }
         }
 
         @media (max-width: 768px) {
@@ -2321,6 +2374,8 @@
             .mind-item { flex: 0 0 110px; padding: 10px; }
             .mind-item .mind-image { width: 60px; height: 60px; }
             .modal-window { max-width: 95%; }
+            .booking-form-grid { grid-template-columns: 1fr; }
+            .booking-form-grid .full-width { grid-column: span 1; }
         }
 
         @media (max-width: 480px) {
@@ -2629,7 +2684,7 @@
             </button>
         </section>
 
-        <!-- ===== CATEGORIES - PROFESSIONAL IMAGES ===== -->
+        <!-- ===== CATEGORIES - PROFESSIONAL IMAGES (FIXED) ===== -->
         <section class="categories-section" id="categories">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ EXPLORE ✦</span>
@@ -2809,7 +2864,7 @@
         </section>
     </div>
 
-    <!-- ===== BOOKING POPUP ===== -->
+    <!-- ===== BOOKING POPUP - RESTORED GOOD DESIGN ===== -->
     <div class="modal-overlay" id="booking-popup">
         <div class="modal-window">
             <div class="modal-header">
@@ -2832,10 +2887,10 @@
                             <div class="popup-tables-grid" id="popup-tables-grid"></div>
                         </div>
                     </div>
-                    <div>
-                        <h3 style="font-family:'Playfair Display',serif; margin-bottom:20px;">Reservation Registry</h3>
+                    <div class="booking-form-container">
+                        <h3>Reservation Registry</h3>
                         <form id="reservation-popup-form">
-                            <div class="form-grid">
+                            <div class="booking-form-grid">
                                 <div class="form-group">
                                     <label><i class="fas fa-user"></i> Full Name</label>
                                     <input type="text" id="popup-reserve-name" placeholder="John Doe" required>
@@ -2857,7 +2912,7 @@
                                     <input type="text" id="popup-reserve-table-num" placeholder="Select a table from the map" readonly required>
                                 </div>
                             </div>
-                            <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+                            <button type="submit" class="btn-primary" style="width:100%; justify-content:center; margin-top:15px;">
                                 <i class="fas fa-signature"></i> Finalize Booking
                             </button>
                         </form>
