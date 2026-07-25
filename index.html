@@ -31,8 +31,6 @@
             --input-bg: rgba(255, 248, 240, 0.9);
             --hero-overlay: rgba(250, 243, 234, 0.88);
             --hero-overlay2: rgba(255, 248, 240, 0.82);
-            --card-hover: rgba(201, 168, 76, 0.05);
-            --warm-glow: rgba(201, 168, 76, 0.08);
         }
 
         [data-theme="dark"] {
@@ -49,8 +47,6 @@
             --input-bg: rgba(17, 7, 7, 0.6);
             --hero-overlay: rgba(17, 7, 7, 0.85);
             --hero-overlay2: rgba(17, 7, 7, 0.75);
-            --card-hover: rgba(201, 168, 76, 0.05);
-            --warm-glow: rgba(201, 168, 76, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -650,23 +646,30 @@
             font-weight: 500;
         }
 
+        /* ===== CRAVINGS CAROUSEL - SLOW ANIMATION ===== */
         .mind-section {
             padding: 60px 40px;
             max-width: 1200px;
             margin: 0 auto;
+            overflow: hidden;
+        }
+        .mind-carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
         }
         .mind-carousel {
             display: flex;
             gap: 25px;
-            overflow-x: auto;
-            padding: 20px 10px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+            animation: slowScroll 30s linear infinite;
+            width: max-content;
         }
-        .mind-carousel::-webkit-scrollbar { height: 6px; }
-        .mind-carousel::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 10px;
+        .mind-carousel:hover {
+            animation-play-state: paused;
+        }
+        @keyframes slowScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
         .mind-item {
             flex: 0 0 140px;
@@ -683,9 +686,9 @@
             border-color: var(--glass-border);
         }
         .mind-item:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) scale(1.05);
             border-color: var(--gold);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-gold);
         }
         .mind-item .mind-image {
             width: 80px;
@@ -853,7 +856,7 @@
             color: var(--gold);
         }
 
-        /* ===== POPULAR CHAINS - 8 ITEMS ===== */
+        /* ===== POPULAR CHAINS ===== */
         .popular-chains-section {
             padding: 80px 40px;
             background: var(--bg-secondary);
@@ -919,6 +922,26 @@
             margin-top: 5px;
         }
 
+        .view-more-chains-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 14px 45px;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .view-more-chains-btn:hover {
+            background: var(--gold);
+            color: #fff;
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-3px);
+        }
+
         .quick-filters {
             display: flex;
             gap: 15px;
@@ -959,7 +982,6 @@
             box-shadow: var(--shadow-gold);
         }
 
-        /* ===== CTA SECTION - ONLY "READY FOR AN UNFORGETTABLE EXPERIENCE?" ===== */
         .cta-section {
             padding: 80px 40px;
             background: var(--bg-secondary);
@@ -987,160 +1009,6 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-        }
-
-        /* ===== BOOKING SECTION - HIDDEN BY DEFAULT ===== */
-        .booking-section {
-            display: none;
-            padding: 80px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .booking-section.active {
-            display: block;
-            animation: slideDown 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes slideDown {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .booking-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 50px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        [data-theme="light"] .booking-layout {
-            background: var(--glass-bg);
-            border-color: var(--glass-border);
-        }
-        .booking-visual {
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(45, 27, 14, 0.3), rgba(17, 7, 7, 0.9)), 
-                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80') center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        [data-theme="light"] .booking-visual {
-            background: linear-gradient(135deg, rgba(250, 243, 234, 0.92), rgba(255, 248, 240, 0.85)), 
-                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80') center/cover;
-        }
-        .booking-visual-text h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-        [data-theme="light"] .booking-visual-text h3 { color: #2d1b0e; }
-        .booking-visual-text p {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 25px;
-        }
-        [data-theme="light"] .booking-visual-text p { color: rgba(45, 27, 14, 0.7); }
-        .table-legend {
-            display: flex;
-            gap: 20px;
-            font-size: 12px;
-            margin-bottom: 20px;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #fff;
-        }
-        [data-theme="light"] .legend-item { color: #2d1b0e; }
-        .legend-color {
-            width: 14px;
-            height: 14px;
-            border-radius: 3px;
-        }
-        .legend-color.available { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--gold); }
-        .legend-color.booked { background: var(--gold); }
-        .legend-color.selected { background: #3b82f6; }
-        .tables-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-        .table-node {
-            aspect-ratio: 1;
-            border: 1px solid var(--gold);
-            background: rgba(201, 168, 76, 0.03);
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            color: #fff;
-        }
-        [data-theme="light"] .table-node { color: #2d1b0e; }
-        .table-node:hover:not(.booked) {
-            background: rgba(201, 168, 76, 0.1);
-            transform: scale(1.05);
-        }
-        .table-node.booked {
-            background: var(--gold);
-            color: #fff;
-            cursor: not-allowed;
-        }
-        .table-node.selected {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            color: white;
-        }
-        .table-node i { font-size: 16px; margin-bottom: 5px; }
-        .table-node span { font-size: 10px; font-weight: 500; }
-        .table-node .capacity { font-size: 8px; opacity: 0.8; }
-        .booking-form-container { padding: 40px; }
-        .booking-form-container h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            color: var(--text-primary);
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .form-group.full-width { grid-column: span 2; }
-        .form-group label {
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-        .form-group input, .form-group select {
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            padding: 12px 15px;
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 13px;
-            transition: var(--transition);
-        }
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--gold);
-            background: var(--bg-primary);
         }
 
         .menu-section {
@@ -1773,7 +1641,7 @@
             border: 1px solid var(--gold);
             border-radius: 20px;
             width: 100%;
-            max-width: 550px;
+            max-width: 650px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
@@ -1798,6 +1666,90 @@
             color: var(--text-primary);
         }
         .modal-body { padding: 25px; }
+
+        /* ===== BOOKING POPUP ===== */
+        .booking-popup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .booking-popup-visual {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(45, 27, 14, 0.3), rgba(17, 7, 7, 0.9)), 
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80') center/cover;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+        [data-theme="light"] .booking-popup-visual {
+            background: linear-gradient(135deg, rgba(250, 243, 234, 0.92), rgba(255, 248, 240, 0.85)), 
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80') center/cover;
+        }
+        .booking-popup-visual h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #fff;
+        }
+        [data-theme="light"] .booking-popup-visual h3 { color: #2d1b0e; }
+        .booking-popup-visual p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        [data-theme="light"] .booking-popup-visual p { color: rgba(45, 27, 14, 0.7); }
+        .popup-tables-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .popup-table-node {
+            aspect-ratio: 1;
+            border: 1px solid var(--gold);
+            background: rgba(201, 168, 76, 0.03);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: #fff;
+            padding: 5px;
+        }
+        [data-theme="light"] .popup-table-node { color: #2d1b0e; }
+        .popup-table-node:hover:not(.booked) {
+            background: rgba(201, 168, 76, 0.1);
+            transform: scale(1.05);
+        }
+        .popup-table-node.booked {
+            background: var(--gold);
+            color: #fff;
+            cursor: not-allowed;
+        }
+        .popup-table-node.selected {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+        .popup-table-node i { font-size: 14px; margin-bottom: 3px; }
+        .popup-table-node span { font-size: 9px; font-weight: 500; }
+        .popup-table-node .capacity { font-size: 7px; opacity: 0.8; }
+        .popup-legend {
+            display: flex;
+            gap: 15px;
+            font-size: 10px;
+            margin: 10px 0;
+            color: #fff;
+        }
+        [data-theme="light"] .popup-legend { color: #2d1b0e; }
+        .popup-legend .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            display: inline-block;
+        }
 
         .bill-container {
             background: #fff;
@@ -2316,7 +2268,7 @@
         }
 
         @media (max-width: 992px) {
-            .booking-layout, .admin-layout, .admin-section-split {
+            .admin-layout, .admin-section-split {
                 grid-template-columns: 1fr;
             }
             .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2324,6 +2276,8 @@
             .stats-container { grid-template-columns: repeat(2, 1fr); }
             .popular-chains-grid { grid-template-columns: repeat(2, 1fr); }
             .categories-grid { grid-template-columns: repeat(3, 1fr); }
+            .booking-popup-grid { grid-template-columns: 1fr; }
+            .popup-tables-grid { grid-template-columns: repeat(4, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -2345,17 +2299,11 @@
             .nav-toggle { display: block; }
             .hero-title { font-size: 38px; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-            .tables-grid { grid-template-columns: repeat(3, 1fr); }
-            .form-grid { grid-template-columns: 1fr; }
-            .form-group.full-width { grid-column: span 1; }
             .cart-sidebar { width: 100%; right: -100%; }
             .slider-arrow { display: none; }
             .stats-container { grid-template-columns: 1fr 1fr; }
             .hero-buttons { flex-direction: column; align-items: center; }
             .cta-buttons { flex-direction: column; align-items: center; }
-            .mind-carousel { gap: 15px; }
-            .mind-item { flex: 0 0 110px; padding: 10px; }
-            .mind-item .mind-image { width: 60px; height: 60px; }
             .popular-chains-grid { grid-template-columns: 1fr 1fr; }
             .delivery-bar { flex-direction: column; text-align: center; }
             .search-filter-bar { flex-direction: column; align-items: stretch; }
@@ -2363,11 +2311,17 @@
             .admin-kpi-grid { grid-template-columns: 1fr 1fr; }
             .categories-grid { grid-template-columns: repeat(2, 1fr); }
             .offers-grid { grid-template-columns: 1fr; }
+            .booking-popup-grid { grid-template-columns: 1fr; }
+            .popup-tables-grid { grid-template-columns: repeat(3, 1fr); }
+            .mind-item { flex: 0 0 110px; padding: 10px; }
+            .mind-item .mind-image { width: 60px; height: 60px; }
+            .modal-window { max-width: 95%; }
         }
 
         @media (max-width: 480px) {
             .categories-grid { grid-template-columns: 1fr 1fr; }
             .popular-chains-grid { grid-template-columns: 1fr; }
+            .popup-tables-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -2434,7 +2388,7 @@
                             <button class="btn-primary" onclick="scrollToSection('menu')">
                                 <i class="fas fa-utensils"></i> Explore Menu
                             </button>
-                            <button class="gold-border-btn" onclick="scrollToSection('cta')">
+                            <button class="gold-border-btn" onclick="openBookingPopup()">
                                 <i class="fas fa-chair"></i> Book Private Dining
                             </button>
                         </div>
@@ -2461,7 +2415,7 @@
                         <h1 class="hero-title text-animate text-animate-d2">Private <span class="gold-text">Dining Experience</span></h1>
                         <p class="hero-subtitle text-animate text-animate-d3">Celebrate special moments with our bespoke private dining packages.</p>
                         <div class="hero-buttons text-animate text-animate-d4">
-                            <button class="btn-primary" onclick="scrollToSection('cta')">
+                            <button class="btn-primary" onclick="openBookingPopup()">
                                 <i class="fas fa-crown"></i> Book Private Salon
                             </button>
                             <button class="gold-border-btn" onclick="scrollToSection('menu')">
@@ -2566,45 +2520,81 @@
             </div>
         </section>
 
-        <!-- ===== WHAT'S ON YOUR MIND? ===== -->
+        <!-- ===== CRAVINGS - SLOW ANIMATION CAROUSEL ===== -->
         <section class="mind-section" id="mind">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ CRAVINGS ✦</span>
                 <h2>What's on your <span class="gold-text">Mind?</span></h2>
                 <p>Discover popular cravings and order instantly.</p>
             </div>
-            <div class="mind-carousel" id="mindCarousel">
-                <div class="mind-item" onclick="scrollToCategory('Biryani')">
-                    <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=150&h=150&fit=crop&crop=center" alt="Biryani" class="mind-image">
-                    <span>Biryani</span>
-                </div>
-                <div class="mind-item" onclick="scrollToCategory('Dessert')">
-                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=150&h=150&fit=crop&crop=center" alt="Cakes" class="mind-image">
-                    <span>Cakes</span>
-                </div>
-                <div class="mind-item" onclick="scrollToCategory('Starter')">
-                    <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=150&h=150&fit=crop&crop=center" alt="Fried Rice" class="mind-image">
-                    <span>Fried Rice</span>
-                </div>
-                <div class="mind-item" onclick="scrollToCategory('South Indian')">
-                    <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="Parotta" class="mind-image">
-                    <span>Parotta</span>
-                </div>
-                <div class="mind-item" onclick="scrollToCategory('Beverage')">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Burger" class="mind-image">
-                    <span>Burger</span>
-                </div>
-                <div class="mind-item" onclick="scrollToCategory('Special')">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Pizza" class="mind-image">
-                    <span>Pizza</span>
-                </div>
-                <div class="mind-item" onclick="scrollToCategory('Main Course')">
-                    <img src="https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=150&h=150&fit=crop&crop=center" alt="Curry" class="mind-image">
-                    <span>Curry</span>
-                </div>
-                <div class="mind-item" onclick="scrollToCategory('South Indian')">
-                    <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="Dosa" class="mind-image">
-                    <span>Dosa</span>
+            <div class="mind-carousel-wrapper">
+                <div class="mind-carousel" id="mindCarousel">
+                    <!-- First set -->
+                    <div class="mind-item" onclick="scrollToCategory('Biryani')">
+                        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=150&h=150&fit=crop&crop=center" alt="Biryani" class="mind-image">
+                        <span>Biryani</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Dessert')">
+                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=150&h=150&fit=crop&crop=center" alt="Cakes" class="mind-image">
+                        <span>Cakes</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Starter')">
+                        <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=150&h=150&fit=crop&crop=center" alt="Fried Rice" class="mind-image">
+                        <span>Fried Rice</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('South Indian')">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="Parotta" class="mind-image">
+                        <span>Parotta</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Beverage')">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Burger" class="mind-image">
+                        <span>Burger</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Special')">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Pizza" class="mind-image">
+                        <span>Pizza</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Main Course')">
+                        <img src="https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=150&h=150&fit=crop&crop=center" alt="Curry" class="mind-image">
+                        <span>Curry</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('South Indian')">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="Dosa" class="mind-image">
+                        <span>Dosa</span>
+                    </div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="mind-item" onclick="scrollToCategory('Biryani')">
+                        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=150&h=150&fit=crop&crop=center" alt="Biryani" class="mind-image">
+                        <span>Biryani</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Dessert')">
+                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=150&h=150&fit=crop&crop=center" alt="Cakes" class="mind-image">
+                        <span>Cakes</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Starter')">
+                        <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=150&h=150&fit=crop&crop=center" alt="Fried Rice" class="mind-image">
+                        <span>Fried Rice</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('South Indian')">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="Parotta" class="mind-image">
+                        <span>Parotta</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Beverage')">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Burger" class="mind-image">
+                        <span>Burger</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Special')">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Pizza" class="mind-image">
+                        <span>Pizza</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('Main Course')">
+                        <img src="https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=150&h=150&fit=crop&crop=center" alt="Curry" class="mind-image">
+                        <span>Curry</span>
+                    </div>
+                    <div class="mind-item" onclick="scrollToCategory('South Indian')">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="Dosa" class="mind-image">
+                        <span>Dosa</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2626,83 +2616,15 @@
                 <h2>Popular <span class="gold-text">Chains</span></h2>
                 <p>Discover top-rated restaurants near you.</p>
             </div>
-            <div class="popular-chains-grid">
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Flat 20% OFF</span>
-                    <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=200&fit=crop&crop=center" alt="Chinese Mok">
-                    <div class="chain-body">
-                        <h4>CHINESE MOK</h4>
-                        <p>Chinese • 4.5 ★</p>
-                        <div class="chain-rating">★★★★★</div>
-                    </div>
-                </div>
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Flat 15% OFF</span>
-                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=200&fit=crop&crop=center" alt="Wow Momo">
-                    <div class="chain-body">
-                        <h4>WOW! MOMO</h4>
-                        <p>Fast Food • 4.3 ★</p>
-                        <div class="chain-rating">★★★★☆</div>
-                    </div>
-                </div>
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Flat 10% OFF</span>
-                    <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=200&fit=crop&crop=center" alt="Ambur Star Briyani">
-                    <div class="chain-body">
-                        <h4>AMBUR STAR BRIYANI</h4>
-                        <p>Biryani • 4.7 ★</p>
-                        <div class="chain-rating">★★★★★</div>
-                    </div>
-                </div>
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Premium</span>
-                    <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=200&fit=crop&crop=center" alt="Murugan Tandoori">
-                    <div class="chain-body">
-                        <h4>MURUGAN TANDOORI</h4>
-                        <p>Tandoori • 4.6 ★</p>
-                        <div class="chain-rating">★★★★★</div>
-                    </div>
-                </div>
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Flat 25% OFF</span>
-                    <img src="https://images.unsplash.com/photo-1565680018434-b5132b0e0c75?w=400&h=200&fit=crop&crop=center" alt="Noodle House">
-                    <div class="chain-body">
-                        <h4>NOODLE HOUSE</h4>
-                        <p>Asian • 4.4 ★</p>
-                        <div class="chain-rating">★★★★☆</div>
-                    </div>
-                </div>
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Flat 12% OFF</span>
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=200&fit=crop&crop=center" alt="Pizza Paradise">
-                    <div class="chain-body">
-                        <h4>PIZZA PARADISE</h4>
-                        <p>Italian • 4.2 ★</p>
-                        <div class="chain-rating">★★★★☆</div>
-                    </div>
-                </div>
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Flat 18% OFF</span>
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=200&fit=crop&crop=center" alt="Burger King">
-                    <div class="chain-body">
-                        <h4>BURGER KING</h4>
-                        <p>American • 4.1 ★</p>
-                        <div class="chain-rating">★★★★☆</div>
-                    </div>
-                </div>
-                <div class="chain-card scroll-reveal-scale">
-                    <span class="discount-badge">Flat 8% OFF</span>
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=200&fit=crop&crop=center" alt="Subway">
-                    <div class="chain-body">
-                        <h4>SUBWAY</h4>
-                        <p>Healthy • 4.0 ★</p>
-                        <div class="chain-rating">★★★★☆</div>
-                    </div>
-                </div>
+            <div class="popular-chains-grid" id="popularChainsGrid">
+                <!-- Generated by JavaScript -->
             </div>
+            <button class="view-more-chains-btn" onclick="openAllChainsPopup()">
+                <i class="fas fa-utensils"></i> View More Restaurants
+            </button>
         </section>
 
-        <!-- ===== CATEGORIES - NO SCROLL, GRID LAYOUT ===== -->
+        <!-- ===== CATEGORIES - NO SCROLL, ALL VISIBLE ===== -->
         <section class="categories-section" id="categories">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ EXPLORE ✦</span>
@@ -2862,7 +2784,7 @@
             </div>
         </section>
 
-        <!-- ===== CTA SECTION - ONLY "READY FOR AN UNFORGETTABLE EXPERIENCE?" ===== -->
+        <!-- ===== CTA SECTION - "READY FOR AN UNFORGETTABLE EXPERIENCE?" ===== -->
         <section class="cta-section" id="cta">
             <div class="cta-container">
                 <div class="cta-content scroll-reveal-scale">
@@ -2870,7 +2792,7 @@
                     <h2>Ready for an <span class="gold-text">Unforgettable</span> Experience?</h2>
                     <p>Book your table now and let us take you on a culinary journey like no other.</p>
                     <div class="cta-buttons">
-                        <button class="btn-primary" onclick="openBooking()">
+                        <button class="btn-primary" onclick="openBookingPopup()">
                             <i class="fas fa-calendar-check"></i> Reserve a Table
                         </button>
                         <button class="gold-border-btn" onclick="scrollToSection('menu')">
@@ -2880,62 +2802,77 @@
                 </div>
             </div>
         </section>
+    </div>
 
-        <!-- ===== BOOKING SECTION - HIDDEN, SHOWN WHEN CLICKING "RESERVE A TABLE" ===== -->
-        <section class="booking-section" id="booking">
-            <div class="section-header scroll-reveal">
-                <span class="section-tag">✦ RESERVATIONS ✦</span>
-                <h2>Secure Your <span class="gold-text">Private Salon</span></h2>
-                <p>Reserve an exclusive structural layout space for an uninterrupted culinary ceremony.</p>
-                <button class="btn-primary" onclick="closeBooking()" style="margin-top:15px; background:#ef4444; border-color:#ef4444;">
-                    <i class="fas fa-times"></i> Close Booking
-                </button>
+    <!-- ===== BOOKING POPUP ===== -->
+    <div class="modal-overlay" id="booking-popup">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>✦ Secure Your Private Salon</h3>
+                <button class="cart-close-btn" onclick="closeBookingPopup()"><i class="fas fa-times"></i></button>
             </div>
-            <div class="booking-layout scroll-reveal-scale">
-                <div class="booking-visual">
-                    <div class="booking-visual-text">
-                        <h3>Interactive Map</h3>
-                        <p>Select your table from our blueprint layout map. Green indicates availability.</p>
-                        <div class="table-legend">
-                            <div class="legend-item"><div class="legend-color available"></div><span>Ready</span></div>
-                            <div class="legend-item"><div class="legend-color booked"></div><span>Reserved</span></div>
-                            <div class="legend-item"><div class="legend-color selected"></div><span>Selected</span></div>
+            <div class="modal-body">
+                <div class="booking-popup-grid">
+                    <div class="booking-popup-visual">
+                        <div>
+                            <h3>Interactive Map</h3>
+                            <p>Select your table from our blueprint layout map. Green indicates availability.</p>
+                        </div>
+                        <div>
+                            <div class="popup-legend">
+                                <span><span class="legend-color" style="background:rgba(255,255,255,0.1);border:1px solid var(--gold);"></span> Ready</span>
+                                <span><span class="legend-color" style="background:var(--gold);"></span> Reserved</span>
+                                <span><span class="legend-color" style="background:#3b82f6;"></span> Selected</span>
+                            </div>
+                            <div class="popup-tables-grid" id="popup-tables-grid"></div>
                         </div>
                     </div>
-                    <div class="tables-grid" id="booking-layout-grid"></div>
-                </div>
-                <div class="booking-form-container">
-                    <h3>Reservation Registry</h3>
-                    <form id="reservation-form">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label><i class="fas fa-user"></i> Full Name</label>
-                                <input type="text" id="reserve-name" placeholder="John Doe" required>
+                    <div>
+                        <h3 style="font-family:'Playfair Display',serif; margin-bottom:20px;">Reservation Registry</h3>
+                        <form id="reservation-popup-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label><i class="fas fa-user"></i> Full Name</label>
+                                    <input type="text" id="popup-reserve-name" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-phone"></i> Phone</label>
+                                    <input type="tel" id="popup-reserve-phone" placeholder="+91 XXXXX XXXXX" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-alt"></i> Date</label>
+                                    <input type="date" id="popup-reserve-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-clock"></i> Time</label>
+                                    <input type="time" id="popup-reserve-time" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label><i class="fas fa-chair"></i> Selected Table</label>
+                                    <input type="text" id="popup-reserve-table-num" placeholder="Select a table from the map" readonly required>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-phone"></i> Phone</label>
-                                <input type="tel" id="reserve-phone" placeholder="+91 XXXXX XXXXX" required>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-calendar-alt"></i> Date</label>
-                                <input type="date" id="reserve-date" required>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-clock"></i> Time</label>
-                                <input type="time" id="reserve-time" required>
-                            </div>
-                            <div class="form-group full-width">
-                                <label><i class="fas fa-chair"></i> Selected Table</label>
-                                <input type="text" id="reserve-table-num" placeholder="Select a table from the map" readonly required>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
-                            <i class="fas fa-signature"></i> Finalize Booking
-                        </button>
-                    </form>
+                            <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+                                <i class="fas fa-signature"></i> Finalize Booking
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+
+    <!-- ===== ALL CHAINS POPUP (12 Restaurants) ===== -->
+    <div class="modal-overlay" id="all-chains-popup">
+        <div class="modal-window" style="max-width:800px;">
+            <div class="modal-header">
+                <h3>🍽️ All Top-Rated Restaurants</h3>
+                <button class="cart-close-btn" onclick="closeAllChainsPopup()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="popular-chains-grid" id="allChainsGrid" style="grid-template-columns:repeat(3,1fr);"></div>
+            </div>
+        </div>
     </div>
 
     <!-- ===== ADMIN PANEL ===== -->
@@ -2956,6 +2893,9 @@
                     </li>
                     <li class="admin-nav-item" data-tab="admin-menu-tab">
                         <button><i class="fas fa-utensils"></i> Menu Manager</button>
+                    </li>
+                    <li class="admin-nav-item" data-tab="admin-chains-tab">
+                        <button><i class="fas fa-store"></i> Chains Manager</button>
                     </li>
                     <li class="admin-nav-item" data-tab="admin-tables-tab">
                         <button><i class="fas fa-table"></i> Salon Status</button>
@@ -3057,6 +2997,32 @@
                     </div>
                 </div>
 
+                <!-- ===== CHAINS MANAGER ===== -->
+                <div class="admin-panel-tab" id="admin-chains-tab">
+                    <div class="menu-manager-header">
+                        <h3 style="font-family:'Playfair Display',serif;">Popular Chains Manager</h3>
+                        <button class="btn-primary" id="open-add-chain-modal">
+                            <i class="fas fa-plus-circle"></i> Add Chain
+                        </button>
+                    </div>
+                    <div class="elegant-table-wrapper">
+                        <table class="elegant-table">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Rating</th>
+                                    <th>Discount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-chains-manager-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="admin-panel-tab" id="admin-tables-tab">
                     <h3 style="font-family:'Playfair Display',serif; margin-bottom:15px;">Salon Status</h3>
                     <div class="elegant-table-wrapper">
@@ -3106,7 +3072,6 @@
                     <label>Phone Number</label>
                     <input type="tel" id="order-phone" placeholder="Enter phone number" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
                 </div>
-                
                 <div class="form-group" style="margin-bottom:15px;">
                     <label>Order Type</label>
                     <select id="order-type" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
@@ -3115,7 +3080,6 @@
                         <option value="Takeaway">Takeaway</option>
                     </select>
                 </div>
-                
                 <div id="dine-in-fields" style="display:none;">
                     <div class="form-group" style="margin-bottom:15px;">
                         <label>Table Number</label>
@@ -3144,12 +3108,10 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="form-group" style="margin-bottom:15px;">
                     <label>Special Instructions</label>
                     <input type="text" id="order-instructions" placeholder="Any special requests..." style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
                 </div>
-
                 <div id="order-summary" style="background:var(--bg-primary); padding:15px; border-radius:10px; margin-bottom:15px; display:none;">
                     <h4 style="font-family:'Playfair Display',serif; margin-bottom:10px;">Order Summary</h4>
                     <div id="order-summary-items"></div>
@@ -3162,7 +3124,6 @@
                         </div>
                     </div>
                 </div>
-
                 <button class="btn-primary" id="place-order-btn" style="width:100%; justify-content:center; padding:15px;">
                     <i class="fas fa-check"></i> Confirm Order
                 </button>
@@ -3184,7 +3145,6 @@
                     <p style="color:var(--text-muted);">Your order has been confirmed</p>
                     <button class="btn-primary" id="payment-success-close" style="margin-top:20px;">View Receipt</button>
                 </div>
-                
                 <div id="paymentOptions">
                     <div class="payment-container">
                         <div class="payment-card" onclick="selectPayment('cash')" id="pay-cash">
@@ -3196,7 +3156,6 @@
                             <div class="payment-radio"></div>
                             <div class="floating-icons"><i class="fas fa-coins"></i></div>
                         </div>
-                        
                         <div class="payment-card" onclick="selectPayment('card')" id="pay-card">
                             <div class="icon-wrapper"><i class="fas fa-credit-card"></i></div>
                             <div class="payment-info">
@@ -3206,7 +3165,6 @@
                             <div class="payment-radio"></div>
                             <div class="floating-icons"><i class="fas fa-credit-card"></i> <i class="fas fa-credit-card" style="margin-left:5px;"></i></div>
                         </div>
-                        
                         <div class="payment-card" onclick="selectPayment('online')" id="pay-online">
                             <div class="icon-wrapper"><i class="fas fa-mobile-alt"></i></div>
                             <div class="payment-info">
@@ -3217,7 +3175,6 @@
                             <div class="floating-icons"><i class="fas fa-qrcode"></i> <i class="fas fa-wifi" style="margin-left:5px;"></i></div>
                         </div>
                     </div>
-                    
                     <div id="qr-container" style="display:none; text-align:center; margin-top:20px; padding:20px; background:var(--bg-primary); border-radius:12px; border:1px solid var(--border-color);">
                         <h4 style="color:var(--gold); font-family:'Playfair Display',serif; margin-bottom:10px;">📱 Scan to Pay</h4>
                         <div id="qr-code" style="background:white; padding:20px; border-radius:10px; display:inline-block;">
@@ -3226,7 +3183,6 @@
                         <p style="margin-top:10px; color:var(--text-muted); font-size:12px;">UPI: tastybites@pay</p>
                         <p style="color:var(--text-muted); font-size:11px;">Amount: ₹<span id="payment-amount">0.00</span></p>
                     </div>
-                    
                     <button class="btn-primary" id="confirm-payment-btn" style="width:100%; justify-content:center; padding:15px; margin-top:20px; display:none;">
                         <i class="fas fa-check"></i> Pay Now
                     </button>
@@ -3309,7 +3265,6 @@
                         <div class="veggie">🧄</div>
                         <div class="veggie">🌶️</div>
                     </div>
-                    
                     <div class="tracking-content">
                         <h4 style="font-family:'Playfair Display',serif; margin-bottom:5px;">Order #<span id="tracking-order">TB-1001</span></h4>
                         <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Status: <span id="tracking-status" style="color:var(--gold); font-weight:600;">Order Placed</span></p>
@@ -3488,6 +3443,107 @@
         </div>
     </div>
 
+    <!-- ===== ADMIN ADD CHAIN MODAL ===== -->
+    <div class="modal-overlay" id="add-chain-modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Add Popular Chain</h3>
+                <button class="cart-close-btn" onclick="document.getElementById('add-chain-modal-overlay').classList.remove('active')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="admin-chain-form">
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Chain Name</label>
+                        <input type="text" id="add-chain-name" placeholder="Enter chain name" required style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input type="text" id="add-chain-category" placeholder="e.g., Chinese, Italian" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <input type="text" id="add-chain-rating" placeholder="e.g., 4.5 ★" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Discount Badge</label>
+                            <input type="text" id="add-chain-discount" placeholder="e.g., Flat 20% OFF" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                        <div class="form-group">
+                            <label>Stars</label>
+                            <select id="add-chain-stars" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                                <option value="★★★★★">★★★★★</option>
+                                <option value="★★★★☆" selected>★★★★☆</option>
+                                <option value="★★★☆☆">★★★☆☆</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Image URL</label>
+                        <input type="url" id="add-chain-image" placeholder="https://images.unsplash.com/..." style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:15px;">
+                        <i class="fas fa-save"></i> Add Chain
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN EDIT CHAIN MODAL ===== -->
+    <div class="modal-overlay" id="edit-chain-modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>✏️ Edit Popular Chain</h3>
+                <button class="cart-close-btn" onclick="document.getElementById('edit-chain-modal-overlay').classList.remove('active')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-chain-form">
+                    <input type="hidden" id="edit-chain-id">
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Chain Name</label>
+                        <input type="text" id="edit-chain-name" placeholder="Enter chain name" required style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input type="text" id="edit-chain-category" placeholder="e.g., Chinese, Italian" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                        <div class="form-group">
+                            <label>Rating</label>
+                            <input type="text" id="edit-chain-rating" placeholder="e.g., 4.5 ★" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Discount Badge</label>
+                            <input type="text" id="edit-chain-discount" placeholder="e.g., Flat 20% OFF" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                        <div class="form-group">
+                            <label>Stars</label>
+                            <select id="edit-chain-stars" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                                <option value="★★★★★">★★★★★</option>
+                                <option value="★★★★☆" selected>★★★★☆</option>
+                                <option value="★★★☆☆">★★★☆☆</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Image URL</label>
+                        <input type="url" id="edit-chain-image" placeholder="https://images.unsplash.com/..." style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:15px;">
+                        <i class="fas fa-save"></i> Update Chain
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== FOOTER ===== -->
     <footer>
         <div class="footer-grid">
@@ -3565,9 +3621,26 @@
             { id: 602, name: "Grilled Chicken", price: 500, category: "Special", type: "Non-Veg", special: true, image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop&crop=center", description: "Herb-marinated grilled chicken" }
         ];
 
+        // ===== CHAINS DATA =====
+        const defaultChains = [
+            { id: 1, name: "CHINESE MOK", category: "Chinese", rating: "4.5 ★", discount: "Flat 20% OFF", stars: "★★★★★", image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400&h=200&fit=crop&crop=center" },
+            { id: 2, name: "WOW! MOMO", category: "Fast Food", rating: "4.3 ★", discount: "Flat 15% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=200&fit=crop&crop=center" },
+            { id: 3, name: "AMBUR STAR BRIYANI", category: "Biryani", rating: "4.7 ★", discount: "Flat 10% OFF", stars: "★★★★★", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=200&fit=crop&crop=center" },
+            { id: 4, name: "MURUGAN TANDOORI", category: "Tandoori", rating: "4.6 ★", discount: "Premium", stars: "★★★★★", image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=200&fit=crop&crop=center" },
+            { id: 5, name: "NOODLE HOUSE", category: "Asian", rating: "4.4 ★", discount: "Flat 25% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1565680018434-b5132b0e0c75?w=400&h=200&fit=crop&crop=center" },
+            { id: 6, name: "PIZZA PARADISE", category: "Italian", rating: "4.2 ★", discount: "Flat 12% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=200&fit=crop&crop=center" },
+            { id: 7, name: "BURGER KING", category: "American", rating: "4.1 ★", discount: "Flat 18% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=200&fit=crop&crop=center" },
+            { id: 8, name: "SUBWAY", category: "Healthy", rating: "4.0 ★", discount: "Flat 8% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=200&fit=crop&crop=center" },
+            { id: 9, name: "TACO BELL", category: "Mexican", rating: "4.3 ★", discount: "Flat 15% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&h=200&fit=crop&crop=center" },
+            { id: 10, name: "KFC", category: "Fried Chicken", rating: "4.4 ★", discount: "Flat 20% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400&h=200&fit=crop&crop=center" },
+            { id: 11, name: "DOMINO'S", category: "Pizza", rating: "4.2 ★", discount: "Flat 10% OFF", stars: "★★★★☆", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=200&fit=crop&crop=center" },
+            { id: 12, name: "STARBUCKS", category: "Coffee", rating: "4.6 ★", discount: "Premium", stars: "★★★★★", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=200&fit=crop&crop=center" }
+        ];
+
         // ===== SYSTEM STATE =====
         let state = {
             menu: JSON.parse(localStorage.getItem('tb_menu_catalogue')) || menuData,
+            chains: JSON.parse(localStorage.getItem('tb_chains_catalogue')) || defaultChains,
             cart: [],
             orders: JSON.parse(localStorage.getItem('tb_order_register')) || [],
             tables: [
@@ -3588,7 +3661,8 @@
             showAllItems: false,
             selectedPayment: '',
             currentOrder: null,
-            theme: 'dark'
+            theme: 'dark',
+            popupSelectedTable: null
         };
 
         // ===== THEME TOGGLE =====
@@ -3617,20 +3691,72 @@
 
         function syncLocalStorage() {
             localStorage.setItem('tb_menu_catalogue', JSON.stringify(state.menu));
+            localStorage.setItem('tb_chains_catalogue', JSON.stringify(state.chains));
             localStorage.setItem('tb_order_register', JSON.stringify(state.orders));
             localStorage.setItem('tb_tables', JSON.stringify(state.tables));
         }
 
-        // ===== BOOKING TOGGLE FUNCTIONS =====
-        function openBooking() {
-            document.getElementById('booking').classList.add('active');
-            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-            renderInteractiveBookingGrid();
+        // ===== BOOKING POPUP FUNCTIONS =====
+        function openBookingPopup() {
+            document.getElementById('booking-popup').classList.add('active');
+            renderPopupBookingGrid();
         }
 
-        function closeBooking() {
-            document.getElementById('booking').classList.remove('active');
-            document.getElementById('cta').scrollIntoView({ behavior: 'smooth' });
+        function closeBookingPopup() {
+            document.getElementById('booking-popup').classList.remove('active');
+            state.popupSelectedTable = null;
+            document.getElementById('popup-reserve-table-num').value = '';
+        }
+
+        function renderPopupBookingGrid() {
+            var grid = document.getElementById('popup-tables-grid');
+            grid.innerHTML = '';
+
+            state.tables.forEach(function(table) {
+                var node = document.createElement('div');
+                node.className = 'popup-table-node' + (table.booked ? ' booked' : '') + (state.popupSelectedTable === table.id ? ' selected' : '');
+                node.innerHTML = 
+                    '<i class="fas fa-chair"></i>' +
+                    '<span>' + table.id + '</span>' +
+                    '<span class="capacity">Cap: ' + table.capacity + '</span>';
+                if(!table.booked) {
+                    node.addEventListener('click', function() {
+                        document.querySelectorAll('.popup-table-node').forEach(function(n) { n.classList.remove('selected'); });
+                        node.classList.add('selected');
+                        state.popupSelectedTable = table.id;
+                        document.getElementById('popup-reserve-table-num').value = 'Table ' + table.id + ' (Capacity: ' + table.capacity + ')';
+                    });
+                }
+                grid.appendChild(node);
+            });
+        }
+
+        // ===== ALL CHAINS POPUP =====
+        function openAllChainsPopup() {
+            document.getElementById('all-chains-popup').classList.add('active');
+            renderAllChainsGrid();
+        }
+
+        function closeAllChainsPopup() {
+            document.getElementById('all-chains-popup').classList.remove('active');
+        }
+
+        function renderAllChainsGrid() {
+            var grid = document.getElementById('allChainsGrid');
+            grid.innerHTML = '';
+            state.chains.forEach(function(chain) {
+                var card = document.createElement('div');
+                card.className = 'chain-card';
+                card.innerHTML = 
+                    '<span class="discount-badge">' + chain.discount + '</span>' +
+                    '<img src="' + chain.image + '" alt="' + chain.name + '" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=200&fit=crop&crop=center\'">' +
+                    '<div class="chain-body">' +
+                        '<h4>' + chain.name + '</h4>' +
+                        '<p>' + chain.category + ' • ' + chain.rating + '</p>' +
+                        '<div class="chain-rating">' + chain.stars + '</div>' +
+                    '</div>';
+                grid.appendChild(card);
+            });
         }
 
         // ===== INITIALIZATION =====
@@ -3644,7 +3770,7 @@
 
             renderCategoryFilters();
             renderMenuGrid();
-            renderInteractiveBookingGrid();
+            renderPopularChains();
             updateCartSidebarView();
             setupEventListeners();
             initHeaderTracking();
@@ -3683,7 +3809,49 @@
                     document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
                 });
             });
+
+            // Popup reservation form
+            document.getElementById('reservation-popup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if(!state.popupSelectedTable) {
+                    showToast('Select a table from the map.', 'warning');
+                    return;
+                }
+                var table = state.tables.find(function(t) { return t.id === state.popupSelectedTable; });
+                if(table) {
+                    table.booked = true;
+                    table.bookedBy = document.getElementById('popup-reserve-name').value;
+                    table.phone = document.getElementById('popup-reserve-phone').value;
+                    table.time = document.getElementById('popup-reserve-date').value + ' @ ' + document.getElementById('popup-reserve-time').value;
+                    syncLocalStorage();
+                    renderPopupBookingGrid();
+                    showToast('Table ' + table.id + ' booked successfully! 🎉');
+                    closeBookingPopup();
+                    document.getElementById('reservation-popup-form').reset();
+                    state.popupSelectedTable = null;
+                }
+            });
         });
+
+        // ===== RENDER POPULAR CHAINS =====
+        function renderPopularChains() {
+            var grid = document.getElementById('popularChainsGrid');
+            grid.innerHTML = '';
+            var displayChains = state.chains.slice(0, 8);
+            displayChains.forEach(function(chain) {
+                var card = document.createElement('div');
+                card.className = 'chain-card scroll-reveal-scale';
+                card.innerHTML = 
+                    '<span class="discount-badge">' + chain.discount + '</span>' +
+                    '<img src="' + chain.image + '" alt="' + chain.name + '" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=200&fit=crop&crop=center\'">' +
+                    '<div class="chain-body">' +
+                        '<h4>' + chain.name + '</h4>' +
+                        '<p>' + chain.category + ' • ' + chain.rating + '</p>' +
+                        '<div class="chain-rating">' + chain.stars + '</div>' +
+                    '</div>';
+                grid.appendChild(card);
+            });
+        }
 
         // ===== HERO SLIDER =====
         function initHeroSlider() {
@@ -3914,29 +4082,6 @@
             initScrollReveal();
         }
 
-        function renderInteractiveBookingGrid() {
-            var grid = document.getElementById('booking-layout-grid');
-            grid.innerHTML = '';
-
-            state.tables.forEach(function(table) {
-                var node = document.createElement('div');
-                node.className = 'table-node' + (table.booked ? ' booked' : '') + (state.selectedBookingTable === table.id ? ' selected' : '');
-                node.innerHTML = 
-                    '<i class="fas fa-chair"></i>' +
-                    '<span>T - ' + table.id + '</span>' +
-                    '<span class="capacity">Cap: ' + table.capacity + '</span>';
-                if(!table.booked) {
-                    node.addEventListener('click', function() {
-                        document.querySelectorAll('.table-node').forEach(function(n) { n.classList.remove('selected'); });
-                        node.classList.add('selected');
-                        state.selectedBookingTable = table.id;
-                        document.getElementById('reserve-table-num').value = 'Table ' + table.id + ' (Capacity: ' + table.capacity + ')';
-                    });
-                }
-                grid.appendChild(node);
-            });
-        }
-
         // ===== CART FUNCTIONS =====
         function addItemToCart(itemId) {
             var item = state.menu.find(function(i) { return i.id === itemId; });
@@ -4132,7 +4277,6 @@
                         table.phone = order.phone;
                         table.time = new Date().toLocaleString();
                         syncLocalStorage();
-                        renderInteractiveBookingGrid();
                         updateAdminDashboard();
                     }
                 }
@@ -4342,6 +4486,27 @@
                     '</td>';
                 menuBody.appendChild(tr);
             });
+
+            // Chains Manager
+            var chainBody = document.getElementById('admin-chains-manager-body');
+            chainBody.innerHTML = '';
+            state.chains.forEach(function(chain, index) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = 
+                    '<td>' + (index + 1) + '</td>' +
+                    '<td><img src="' + chain.image + '" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=100&h=100&fit=crop&crop=center\'"></td>' +
+                    '<td><strong>' + chain.name + '</strong></td>' +
+                    '<td>' + chain.category + '</td>' +
+                    '<td>' + chain.rating + '</td>' +
+                    '<td><span class="badge-status ready">' + chain.discount + '</span></td>' +
+                    '<td>' +
+                        '<div style="display:flex; gap:5px; flex-wrap:wrap;">' +
+                            '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#3b82f6;" onclick="openEditChainModal(' + chain.id + ')"><i class="fas fa-edit"></i> Edit</button>' +
+                            '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#ef4444;" onclick="deleteChain(' + chain.id + ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
+                        '</div>' +
+                    '</td>';
+                chainBody.appendChild(tr);
+            });
         }
 
         function renderSalesChart() {
@@ -4414,6 +4579,32 @@
             });
         }
 
+        // ===== CHAIN FUNCTIONS =====
+        function openEditChainModal(chainId) {
+            var chain = state.chains.find(function(c) { return c.id === chainId; });
+            if (!chain) return;
+
+            document.getElementById('edit-chain-id').value = chain.id;
+            document.getElementById('edit-chain-name').value = chain.name;
+            document.getElementById('edit-chain-category').value = chain.category;
+            document.getElementById('edit-chain-rating').value = chain.rating;
+            document.getElementById('edit-chain-discount').value = chain.discount;
+            document.getElementById('edit-chain-stars').value = chain.stars;
+            document.getElementById('edit-chain-image').value = chain.image;
+
+            document.getElementById('edit-chain-modal-overlay').classList.add('active');
+        }
+
+        function deleteChain(chainId) {
+            if (confirm('Delete this chain?')) {
+                state.chains = state.chains.filter(function(c) { return c.id !== chainId; });
+                syncLocalStorage();
+                renderPopularChains();
+                updateAdminDashboard();
+                showToast('Chain deleted.');
+            }
+        }
+
         function openEditItemModal(itemId) {
             var item = state.menu.find(function(i) { return i.id === itemId; });
             if (!item) return;
@@ -4438,7 +4629,6 @@
                 table.phone = '';
                 table.time = '';
                 syncLocalStorage();
-                renderInteractiveBookingGrid();
                 updateAdminDashboard();
                 showToast('Table ' + tableId + ' released.');
             }
@@ -4629,24 +4819,52 @@
                 }
             });
 
-            document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            // Add Chain
+            document.getElementById('open-add-chain-modal').addEventListener('click', function() {
+                document.getElementById('add-chain-modal-overlay').classList.add('active');
+            });
+            document.getElementById('admin-chain-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                if(!state.selectedBookingTable) {
-                    showToast('Select a table from the map.', 'warning');
-                    return;
-                }
-                var table = state.tables.find(function(t) { return t.id === state.selectedBookingTable; });
-                if(table) {
-                    table.booked = true;
-                    table.bookedBy = document.getElementById('reserve-name').value;
-                    table.phone = document.getElementById('reserve-phone').value;
-                    table.time = document.getElementById('reserve-date').value + ' @ ' + document.getElementById('reserve-time').value;
+                var newChain = {
+                    id: state.chains.length + 1 + Math.floor(Math.random() * 100),
+                    name: document.getElementById('add-chain-name').value,
+                    category: document.getElementById('add-chain-category').value || 'Restaurant',
+                    rating: document.getElementById('add-chain-rating').value || '4.5 ★',
+                    discount: document.getElementById('add-chain-discount').value || 'Special Offer',
+                    stars: document.getElementById('add-chain-stars').value,
+                    image: document.getElementById('add-chain-image').value || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=200&fit=crop&crop=center'
+                };
+                state.chains.push(newChain);
+                syncLocalStorage();
+                renderPopularChains();
+                updateAdminDashboard();
+                document.getElementById('add-chain-modal-overlay').classList.remove('active');
+                showToast('Chain added!');
+                document.getElementById('admin-chain-form').reset();
+            });
+
+            // Edit Chain
+            document.getElementById('edit-chain-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var editId = parseInt(document.getElementById('edit-chain-id').value);
+                var chainIndex = state.chains.findIndex(function(c) { return c.id === editId; });
+                
+                if (chainIndex !== -1) {
+                    state.chains[chainIndex] = {
+                        id: editId,
+                        name: document.getElementById('edit-chain-name').value,
+                        category: document.getElementById('edit-chain-category').value || 'Restaurant',
+                        rating: document.getElementById('edit-chain-rating').value || '4.5 ★',
+                        discount: document.getElementById('edit-chain-discount').value || 'Special Offer',
+                        stars: document.getElementById('edit-chain-stars').value,
+                        image: document.getElementById('edit-chain-image').value || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=200&fit=crop&crop=center'
+                    };
+                    
                     syncLocalStorage();
-                    renderInteractiveBookingGrid();
-                    showToast('Table ' + table.id + ' booked!');
-                    document.getElementById('reservation-form').reset();
-                    state.selectedBookingTable = null;
-                    document.getElementById('reserve-table-num').value = '';
+                    renderPopularChains();
+                    updateAdminDashboard();
+                    document.getElementById('edit-chain-modal-overlay').classList.remove('active');
+                    showToast('Chain updated successfully!');
                 }
             });
 
