@@ -646,7 +646,7 @@
             font-weight: 500;
         }
 
-        /* ===== CRAVINGS CAROUSEL - SLOW ANIMATION ===== */
+        /* ===== CRAVINGS - SLOW AUTO-SCROLLING ANIMATION ===== */
         .mind-section {
             padding: 60px 40px;
             max-width: 1200px;
@@ -711,7 +711,7 @@
             display: block;
         }
 
-        /* ===== CATEGORIES - NO SCROLL, ALL VISIBLE ===== */
+        /* ===== CATEGORIES - PROFESSIONAL IMAGES ===== */
         .categories-section {
             padding: 80px 40px;
             max-width: 1200px;
@@ -726,7 +726,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 15px;
-            padding: 30px 20px;
+            padding: 25px 15px;
             text-align: center;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -760,25 +760,30 @@
             box-shadow: var(--shadow-gold);
         }
         .category-card:hover::before { opacity: 1; }
-        .category-card .category-icon {
-            font-size: 40px;
-            color: var(--gold);
-            margin-bottom: 15px;
+        .category-card .category-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 12px;
+            display: block;
+            border: 2px solid var(--gold);
             transition: all 0.4s ease;
         }
-        .category-card:hover .category-icon {
-            transform: scale(1.2) rotate(5deg);
+        .category-card:hover .category-img {
+            transform: scale(1.1);
+            border-color: var(--gold-light);
         }
         .category-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            margin-bottom: 5px;
+            font-size: 17px;
+            margin-bottom: 3px;
             color: var(--text-primary);
         }
         .category-card p {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .category-count {
             display: inline-block;
@@ -2520,7 +2525,7 @@
             </div>
         </section>
 
-        <!-- ===== CRAVINGS - SLOW ANIMATION CAROUSEL ===== -->
+        <!-- ===== CRAVINGS - SLOW AUTO-SCROLLING ===== -->
         <section class="mind-section" id="mind">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ CRAVINGS ✦</span>
@@ -2609,7 +2614,7 @@
             <button class="quick-filter-btn" data-filter="premium">👑 Premium Dining</button>
         </div>
 
-        <!-- ===== POPULAR CHAINS - 8 ITEMS ===== -->
+        <!-- ===== POPULAR CHAINS ===== -->
         <section class="popular-chains-section" id="chains">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ POPULAR ✦</span>
@@ -2624,7 +2629,7 @@
             </button>
         </section>
 
-        <!-- ===== CATEGORIES - NO SCROLL, ALL VISIBLE ===== -->
+        <!-- ===== CATEGORIES - PROFESSIONAL IMAGES ===== -->
         <section class="categories-section" id="categories">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ EXPLORE ✦</span>
@@ -2633,37 +2638,37 @@
             </div>
             <div class="categories-grid">
                 <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Starter')">
-                    <div class="category-icon">🍤</div>
+                    <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=150&h=150&fit=crop&crop=center" alt="Starters" class="category-img">
                     <h3>Starters</h3>
                     <p>Perfect beginnings</p>
                     <span class="category-count">10 items</span>
                 </div>
                 <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Main Course')">
-                    <div class="category-icon">🍛</div>
+                    <img src="https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=150&h=150&fit=crop&crop=center" alt="Main Course" class="category-img">
                     <h3>Main Course</h3>
                     <p>Hearty and flavorful</p>
                     <span class="category-count">10 items</span>
                 </div>
                 <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('South Indian')">
-                    <div class="category-icon">🥞</div>
+                    <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="South Indian" class="category-img">
                     <h3>South Indian</h3>
                     <p>Authentic flavors</p>
                     <span class="category-count">30 items</span>
                 </div>
                 <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Dessert')">
-                    <div class="category-icon">🍰</div>
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=150&h=150&fit=crop&crop=center" alt="Desserts" class="category-img">
                     <h3>Desserts</h3>
                     <p>Sweet endings</p>
                     <span class="category-count">5 items</span>
                 </div>
                 <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Beverage')">
-                    <div class="category-icon">🍹</div>
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=150&h=150&fit=crop&crop=center" alt="Beverages" class="category-img">
                     <h3>Beverages</h3>
                     <p>Refreshing drinks</p>
                     <span class="category-count">7 items</span>
                 </div>
                 <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Special')">
-                    <div class="category-icon">⭐</div>
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Special" class="category-img">
                     <h3>Today's Special</h3>
                     <p>Chef's creations</p>
                     <span class="category-count">3 items</span>
@@ -2784,7 +2789,7 @@
             </div>
         </section>
 
-        <!-- ===== CTA SECTION - "READY FOR AN UNFORGETTABLE EXPERIENCE?" ===== -->
+        <!-- ===== CTA SECTION ===== -->
         <section class="cta-section" id="cta">
             <div class="cta-container">
                 <div class="cta-content scroll-reveal-scale">
@@ -2862,7 +2867,7 @@
         </div>
     </div>
 
-    <!-- ===== ALL CHAINS POPUP (12 Restaurants) ===== -->
+    <!-- ===== ALL CHAINS POPUP ===== -->
     <div class="modal-overlay" id="all-chains-popup">
         <div class="modal-window" style="max-width:800px;">
             <div class="modal-header">
