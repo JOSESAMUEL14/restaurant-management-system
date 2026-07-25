@@ -711,7 +711,7 @@
             display: block;
         }
 
-        /* ===== CATEGORIES - PROFESSIONAL IMAGES (FIXED) ===== */
+        /* ===== CATEGORIES - PROFESSIONAL IMAGES ===== */
         .categories-section {
             padding: 80px 40px;
             max-width: 1200px;
@@ -1623,6 +1623,7 @@
         }
         .cart-overlay.active { opacity: 1; pointer-events: auto; }
 
+        /* ===== MODAL - LARGER FOR BOOKING ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1646,8 +1647,8 @@
             border: 1px solid var(--gold);
             border-radius: 20px;
             width: 100%;
-            max-width: 650px;
-            max-height: 90vh;
+            max-width: 900px;
+            max-height: 92vh;
             overflow-y: auto;
             position: relative;
             transform: scale(0.9);
@@ -1672,49 +1673,49 @@
         }
         .modal-body { padding: 25px; }
 
-        /* ===== BOOKING POPUP - RESTORED GOOD DESIGN ===== */
+        /* ===== BOOKING POPUP - LARGER DESIGN ===== */
         .booking-popup-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 35px;
         }
         .booking-popup-visual {
-            padding: 25px;
+            padding: 30px;
             background: linear-gradient(135deg, rgba(45, 27, 14, 0.3), rgba(17, 7, 7, 0.9)), 
-                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80') center/cover;
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80') center/cover;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 380px;
+            min-height: 450px;
         }
         [data-theme="light"] .booking-popup-visual {
             background: linear-gradient(135deg, rgba(250, 243, 234, 0.92), rgba(255, 248, 240, 0.85)), 
-                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80') center/cover;
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80') center/cover;
         }
         .booking-popup-visual h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
+            font-size: 28px;
             color: #fff;
             margin-bottom: 8px;
         }
         [data-theme="light"] .booking-popup-visual h3 { color: #2d1b0e; }
         .booking-popup-visual p {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
         }
         [data-theme="light"] .booking-popup-visual p { color: rgba(45, 27, 14, 0.7); }
         .popup-tables-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 20px;
         }
         .popup-table-node {
             aspect-ratio: 1;
             border: 1px solid var(--gold);
             background: rgba(201, 168, 76, 0.03);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1722,7 +1723,8 @@
             cursor: pointer;
             transition: var(--transition);
             color: #fff;
-            padding: 5px;
+            padding: 8px;
+            min-height: 70px;
         }
         [data-theme="light"] .popup-table-node { color: #2d1b0e; }
         .popup-table-node:hover:not(.booked) {
@@ -1739,31 +1741,31 @@
             border-color: #3b82f6;
             color: white;
         }
-        .popup-table-node i { font-size: 14px; margin-bottom: 3px; }
-        .popup-table-node span { font-size: 9px; font-weight: 500; }
-        .popup-table-node .capacity { font-size: 7px; opacity: 0.8; }
+        .popup-table-node i { font-size: 20px; margin-bottom: 5px; }
+        .popup-table-node span { font-size: 12px; font-weight: 600; }
+        .popup-table-node .capacity { font-size: 9px; opacity: 0.8; }
         .popup-legend {
             display: flex;
-            gap: 15px;
-            font-size: 10px;
-            margin: 10px 0;
+            gap: 20px;
+            font-size: 12px;
+            margin: 15px 0;
             color: #fff;
         }
         [data-theme="light"] .popup-legend { color: #2d1b0e; }
         .popup-legend .legend-color {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 3px;
             display: inline-block;
         }
+        .popup-legend .legend-color.available { background: rgba(255,255,255,0.1); border: 1px solid var(--gold); }
+        .popup-legend .legend-color.booked { background: var(--gold); }
+        .popup-legend .legend-color.selected { background: #3b82f6; }
 
-        .booking-form-container {
-            padding: 5px 0;
-        }
         .booking-form-container h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 26px;
+            margin-bottom: 25px;
             color: var(--text-primary);
         }
         .booking-form-grid {
@@ -1789,11 +1791,11 @@
         .booking-form-grid .form-group input {
             background: var(--input-bg);
             border: 1px solid var(--border-color);
-            padding: 10px 14px;
+            padding: 12px 16px;
             border-radius: 8px;
             color: var(--text-primary);
             font-family: inherit;
-            font-size: 13px;
+            font-size: 14px;
             transition: var(--transition);
             width: 100%;
         }
@@ -2376,6 +2378,7 @@
             .modal-window { max-width: 95%; }
             .booking-form-grid { grid-template-columns: 1fr; }
             .booking-form-grid .full-width { grid-column: span 1; }
+            .booking-popup-visual { min-height: 300px; }
         }
 
         @media (max-width: 480px) {
@@ -2684,51 +2687,14 @@
             </button>
         </section>
 
-        <!-- ===== CATEGORIES - PROFESSIONAL IMAGES (FIXED) ===== -->
+        <!-- ===== CATEGORIES - RENDERED BY JAVASCRIPT ===== -->
         <section class="categories-section" id="categories">
             <div class="section-header scroll-reveal">
                 <span class="section-tag">✦ EXPLORE ✦</span>
                 <h2>Our Culinary <span class="gold-text">Categories</span></h2>
                 <p>Discover our diverse range of culinary offerings crafted to perfection.</p>
             </div>
-            <div class="categories-grid">
-                <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Starter')">
-                    <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=150&h=150&fit=crop&crop=center" alt="Starters" class="category-img">
-                    <h3>Starters</h3>
-                    <p>Perfect beginnings</p>
-                    <span class="category-count">10 items</span>
-                </div>
-                <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Main Course')">
-                    <img src="https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=150&h=150&fit=crop&crop=center" alt="Main Course" class="category-img">
-                    <h3>Main Course</h3>
-                    <p>Hearty and flavorful</p>
-                    <span class="category-count">10 items</span>
-                </div>
-                <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('South Indian')">
-                    <img src="https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" alt="South Indian" class="category-img">
-                    <h3>South Indian</h3>
-                    <p>Authentic flavors</p>
-                    <span class="category-count">30 items</span>
-                </div>
-                <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Dessert')">
-                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=150&h=150&fit=crop&crop=center" alt="Desserts" class="category-img">
-                    <h3>Desserts</h3>
-                    <p>Sweet endings</p>
-                    <span class="category-count">5 items</span>
-                </div>
-                <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Beverage')">
-                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=150&h=150&fit=crop&crop=center" alt="Beverages" class="category-img">
-                    <h3>Beverages</h3>
-                    <p>Refreshing drinks</p>
-                    <span class="category-count">7 items</span>
-                </div>
-                <div class="category-card scroll-reveal-scale" onclick="scrollToCategory('Special')">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" alt="Special" class="category-img">
-                    <h3>Today's Special</h3>
-                    <p>Chef's creations</p>
-                    <span class="category-count">3 items</span>
-                </div>
-            </div>
+            <div class="categories-grid" id="categories-grid"></div>
         </section>
 
         <!-- ===== FEATURED DISHES ===== -->
@@ -2864,7 +2830,7 @@
         </section>
     </div>
 
-    <!-- ===== BOOKING POPUP - RESTORED GOOD DESIGN ===== -->
+    <!-- ===== BOOKING POPUP - LARGER ===== -->
     <div class="modal-overlay" id="booking-popup">
         <div class="modal-window">
             <div class="modal-header">
@@ -2880,9 +2846,9 @@
                         </div>
                         <div>
                             <div class="popup-legend">
-                                <span><span class="legend-color" style="background:rgba(255,255,255,0.1);border:1px solid var(--gold);"></span> Ready</span>
-                                <span><span class="legend-color" style="background:var(--gold);"></span> Reserved</span>
-                                <span><span class="legend-color" style="background:#3b82f6;"></span> Selected</span>
+                                <span><span class="legend-color available"></span> Ready</span>
+                                <span><span class="legend-color booked"></span> Reserved</span>
+                                <span><span class="legend-color selected"></span> Selected</span>
                             </div>
                             <div class="popup-tables-grid" id="popup-tables-grid"></div>
                         </div>
@@ -2956,6 +2922,9 @@
                     </li>
                     <li class="admin-nav-item" data-tab="admin-chains-tab">
                         <button><i class="fas fa-store"></i> Chains Manager</button>
+                    </li>
+                    <li class="admin-nav-item" data-tab="admin-categories-tab">
+                        <button><i class="fas fa-th-large"></i> Categories Manager</button>
                     </li>
                     <li class="admin-nav-item" data-tab="admin-tables-tab">
                         <button><i class="fas fa-table"></i> Salon Status</button>
@@ -3079,6 +3048,31 @@
                                 </tr>
                             </thead>
                             <tbody id="admin-chains-manager-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ===== CATEGORIES MANAGER ===== -->
+                <div class="admin-panel-tab" id="admin-categories-tab">
+                    <div class="menu-manager-header">
+                        <h3 style="font-family:'Playfair Display',serif;">Categories Manager</h3>
+                        <button class="btn-primary" id="open-add-category-modal">
+                            <i class="fas fa-plus-circle"></i> Add Category
+                        </button>
+                    </div>
+                    <div class="elegant-table-wrapper">
+                        <table class="elegant-table">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Item Count</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-categories-manager-body"></tbody>
                         </table>
                     </div>
                 </div>
@@ -3604,6 +3598,79 @@
         </div>
     </div>
 
+    <!-- ===== ADMIN ADD CATEGORY MODAL ===== -->
+    <div class="modal-overlay" id="add-category-modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Add New Category</h3>
+                <button class="cart-close-btn" onclick="document.getElementById('add-category-modal-overlay').classList.remove('active')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="admin-category-form">
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Category Name</label>
+                        <input type="text" id="add-category-name" placeholder="Enter category name" required style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Description</label>
+                        <input type="text" id="add-category-desc" placeholder="Brief description" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Item Count</label>
+                            <input type="text" id="add-category-count" placeholder="e.g., 10 items" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="url" id="add-category-image" placeholder="https://images.unsplash.com/..." style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:15px;">
+                        <i class="fas fa-save"></i> Add Category
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN EDIT CATEGORY MODAL ===== -->
+    <div class="modal-overlay" id="edit-category-modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>✏️ Edit Category</h3>
+                <button class="cart-close-btn" onclick="document.getElementById('edit-category-modal-overlay').classList.remove('active')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-category-form">
+                    <input type="hidden" id="edit-category-id">
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Category Name</label>
+                        <input type="text" id="edit-category-name" placeholder="Enter category name" required style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <div class="form-group" style="margin-bottom:15px;">
+                        <label>Description</label>
+                        <input type="text" id="edit-category-desc" placeholder="Brief description" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
+                        <div class="form-group">
+                            <label>Item Count</label>
+                            <input type="text" id="edit-category-count" placeholder="e.g., 10 items" style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="url" id="edit-category-image" placeholder="https://images.unsplash.com/..." style="width:100%; background:var(--input-bg); border:1px solid var(--border-color); padding:12px; border-radius:8px; color:var(--text-primary);">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:15px;">
+                        <i class="fas fa-save"></i> Update Category
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== FOOTER ===== -->
     <footer>
         <div class="footer-grid">
@@ -3697,10 +3764,21 @@
             { id: 12, name: "STARBUCKS", category: "Coffee", rating: "4.6 ★", discount: "Premium", stars: "★★★★★", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=200&fit=crop&crop=center" }
         ];
 
+        // ===== CATEGORIES DATA =====
+        const defaultCategories = [
+            { id: 1, name: "Starters", description: "Perfect beginnings", count: "10 items", image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=150&h=150&fit=crop&crop=center" },
+            { id: 2, name: "Main Course", description: "Hearty and flavorful", count: "10 items", image: "https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=150&h=150&fit=crop&crop=center" },
+            { id: 3, name: "South Indian", description: "Authentic flavors", count: "30 items", image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=150&h=150&fit=crop&crop=center" },
+            { id: 4, name: "Desserts", description: "Sweet endings", count: "5 items", image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=150&h=150&fit=crop&crop=center" },
+            { id: 5, name: "Beverages", description: "Refreshing drinks", count: "7 items", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=150&h=150&fit=crop&crop=center" },
+            { id: 6, name: "Today's Special", description: "Chef's creations", count: "3 items", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&h=150&fit=crop&crop=center" }
+        ];
+
         // ===== SYSTEM STATE =====
         let state = {
             menu: JSON.parse(localStorage.getItem('tb_menu_catalogue')) || menuData,
             chains: JSON.parse(localStorage.getItem('tb_chains_catalogue')) || defaultChains,
+            categories: JSON.parse(localStorage.getItem('tb_categories_data')) || defaultCategories,
             cart: [],
             orders: JSON.parse(localStorage.getItem('tb_order_register')) || [],
             tables: [
@@ -3752,6 +3830,7 @@
         function syncLocalStorage() {
             localStorage.setItem('tb_menu_catalogue', JSON.stringify(state.menu));
             localStorage.setItem('tb_chains_catalogue', JSON.stringify(state.chains));
+            localStorage.setItem('tb_categories_data', JSON.stringify(state.categories));
             localStorage.setItem('tb_order_register', JSON.stringify(state.orders));
             localStorage.setItem('tb_tables', JSON.stringify(state.tables));
         }
@@ -3819,6 +3898,74 @@
             });
         }
 
+        // ===== RENDER CATEGORIES =====
+        function renderCategories() {
+            var grid = document.getElementById('categories-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            state.categories.forEach(function(cat) {
+                var card = document.createElement('div');
+                card.className = 'category-card scroll-reveal-scale';
+                card.setAttribute('onclick', "scrollToCategory('" + cat.name + "')");
+                card.innerHTML = 
+                    '<img src="' + cat.image + '" alt="' + cat.name + '" class="category-img" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=150&h=150&fit=crop&crop=center\'">' +
+                    '<h3>' + cat.name + '</h3>' +
+                    '<p>' + cat.description + '</p>' +
+                    '<span class="category-count">' + cat.count + '</span>';
+                grid.appendChild(card);
+            });
+            // Re-trigger scroll reveal
+            initScrollReveal();
+        }
+
+        // ===== RENDER CATEGORIES MANAGER =====
+        function renderCategoriesManager() {
+            var body = document.getElementById('admin-categories-manager-body');
+            if (!body) return;
+            body.innerHTML = '';
+            state.categories.forEach(function(cat, index) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = 
+                    '<td>' + (index + 1) + '</td>' +
+                    '<td><img src="' + cat.image + '" style="width:50px;height:50px;object-fit:cover;border-radius:50%;border:2px solid var(--gold);" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=100&h=100&fit=crop&crop=center\'"></td>' +
+                    '<td><strong>' + cat.name + '</strong></td>' +
+                    '<td>' + cat.description + '</td>' +
+                    '<td>' + cat.count + '</td>' +
+                    '<td>' +
+                        '<div style="display:flex; gap:5px; flex-wrap:wrap;">' +
+                            '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#3b82f6;" onclick="openEditCategoryModal(' + cat.id + ')"><i class="fas fa-edit"></i> Edit</button>' +
+                            '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#ef4444;" onclick="deleteCategory(' + cat.id + ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
+                        '</div>' +
+                    '</td>';
+                body.appendChild(tr);
+            });
+        }
+
+        // ===== CATEGORY FUNCTIONS =====
+        function openEditCategoryModal(catId) {
+            var cat = state.categories.find(function(c) { return c.id === catId; });
+            if (!cat) return;
+
+            document.getElementById('edit-category-id').value = cat.id;
+            document.getElementById('edit-category-name').value = cat.name;
+            document.getElementById('edit-category-desc').value = cat.description;
+            document.getElementById('edit-category-count').value = cat.count;
+            document.getElementById('edit-category-image').value = cat.image;
+
+            document.getElementById('edit-category-modal-overlay').classList.add('active');
+        }
+
+        function deleteCategory(catId) {
+            if (confirm('Delete this category?')) {
+                state.categories = state.categories.filter(function(c) { return c.id !== catId; });
+                syncLocalStorage();
+                renderCategories();
+                renderCategoriesManager();
+                updateAdminDashboard();
+                showToast('Category deleted.');
+            }
+        }
+
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
             const savedTables = localStorage.getItem('tb_tables');
@@ -3831,6 +3978,8 @@
             renderCategoryFilters();
             renderMenuGrid();
             renderPopularChains();
+            renderCategories();
+            renderCategoriesManager();
             updateCartSidebarView();
             setupEventListeners();
             initHeaderTracking();
@@ -3896,6 +4045,7 @@
         // ===== RENDER POPULAR CHAINS =====
         function renderPopularChains() {
             var grid = document.getElementById('popularChainsGrid');
+            if (!grid) return;
             grid.innerHTML = '';
             var displayChains = state.chains.slice(0, 8);
             displayChains.forEach(function(chain) {
@@ -3979,6 +4129,7 @@
         // ===== FEATURED DISHES =====
         function renderFeaturedDishes() {
             const grid = document.getElementById('featuredGrid');
+            if (!grid) return;
             const featured = state.menu.filter(item => item.special).slice(0, 3);
             
             if (featured.length === 0) {
@@ -4078,6 +4229,7 @@
             });
             
             var container = document.getElementById('category-filters-container');
+            if (!container) return;
             container.innerHTML = '';
             categories.forEach(function(cat) {
                 var btn = document.createElement('button');
@@ -4095,6 +4247,7 @@
 
         function renderMenuGrid() {
             var grid = document.getElementById('menu-display-grid');
+            if (!grid) return;
             grid.innerHTML = '';
 
             var filtered = state.menu.filter(function(item) {
@@ -4190,6 +4343,7 @@
 
         function updateCartSidebarView() {
             var container = document.getElementById('cart-items-container');
+            if (!container) return;
             var totalQty = 0;
             state.cart.forEach(function(item) { totalQty += item.quantity; });
             document.getElementById('cart-count').textContent = totalQty;
@@ -4549,24 +4703,29 @@
 
             // Chains Manager
             var chainBody = document.getElementById('admin-chains-manager-body');
-            chainBody.innerHTML = '';
-            state.chains.forEach(function(chain, index) {
-                var tr = document.createElement('tr');
-                tr.innerHTML = 
-                    '<td>' + (index + 1) + '</td>' +
-                    '<td><img src="' + chain.image + '" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=100&h=100&fit=crop&crop=center\'"></td>' +
-                    '<td><strong>' + chain.name + '</strong></td>' +
-                    '<td>' + chain.category + '</td>' +
-                    '<td>' + chain.rating + '</td>' +
-                    '<td><span class="badge-status ready">' + chain.discount + '</span></td>' +
-                    '<td>' +
-                        '<div style="display:flex; gap:5px; flex-wrap:wrap;">' +
-                            '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#3b82f6;" onclick="openEditChainModal(' + chain.id + ')"><i class="fas fa-edit"></i> Edit</button>' +
-                            '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#ef4444;" onclick="deleteChain(' + chain.id + ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
-                        '</div>' +
-                    '</td>';
-                chainBody.appendChild(tr);
-            });
+            if (chainBody) {
+                chainBody.innerHTML = '';
+                state.chains.forEach(function(chain, index) {
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = 
+                        '<td>' + (index + 1) + '</td>' +
+                        '<td><img src="' + chain.image + '" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.src=\'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=100&h=100&fit=crop&crop=center\'"></td>' +
+                        '<td><strong>' + chain.name + '</strong></td>' +
+                        '<td>' + chain.category + '</td>' +
+                        '<td>' + chain.rating + '</td>' +
+                        '<td><span class="badge-status ready">' + chain.discount + '</span></td>' +
+                        '<td>' +
+                            '<div style="display:flex; gap:5px; flex-wrap:wrap;">' +
+                                '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#3b82f6;" onclick="openEditChainModal(' + chain.id + ')"><i class="fas fa-edit"></i> Edit</button>' +
+                                '<button class="btn-primary" style="padding:4px 10px; font-size:11px; background:#ef4444;" onclick="deleteChain(' + chain.id + ')"><i class="fas fa-trash-alt"></i> Delete</button>' +
+                            '</div>' +
+                        '</td>';
+                    chainBody.appendChild(tr);
+                });
+            }
+
+            // Categories Manager
+            renderCategoriesManager();
         }
 
         function renderSalesChart() {
@@ -4925,6 +5084,52 @@
                     updateAdminDashboard();
                     document.getElementById('edit-chain-modal-overlay').classList.remove('active');
                     showToast('Chain updated successfully!');
+                }
+            });
+
+            // Add Category
+            document.getElementById('open-add-category-modal').addEventListener('click', function() {
+                document.getElementById('add-category-modal-overlay').classList.add('active');
+            });
+            document.getElementById('admin-category-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var newCat = {
+                    id: state.categories.length + 1 + Math.floor(Math.random() * 100),
+                    name: document.getElementById('add-category-name').value,
+                    description: document.getElementById('add-category-desc').value || 'Category',
+                    count: document.getElementById('add-category-count').value || '0 items',
+                    image: document.getElementById('add-category-image').value || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=150&h=150&fit=crop&crop=center'
+                };
+                state.categories.push(newCat);
+                syncLocalStorage();
+                renderCategories();
+                renderCategoriesManager();
+                updateAdminDashboard();
+                document.getElementById('add-category-modal-overlay').classList.remove('active');
+                showToast('Category added!');
+                document.getElementById('admin-category-form').reset();
+            });
+
+            // Edit Category
+            document.getElementById('edit-category-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var editId = parseInt(document.getElementById('edit-category-id').value);
+                var catIndex = state.categories.findIndex(function(c) { return c.id === editId; });
+                
+                if (catIndex !== -1) {
+                    state.categories[catIndex] = {
+                        id: editId,
+                        name: document.getElementById('edit-category-name').value,
+                        description: document.getElementById('edit-category-desc').value || 'Category',
+                        count: document.getElementById('edit-category-count').value || '0 items',
+                        image: document.getElementById('edit-category-image').value || 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=150&h=150&fit=crop&crop=center'
+                    };
+                    syncLocalStorage();
+                    renderCategories();
+                    renderCategoriesManager();
+                    updateAdminDashboard();
+                    document.getElementById('edit-category-modal-overlay').classList.remove('active');
+                    showToast('Category updated successfully!');
                 }
             });
 
