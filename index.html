@@ -3713,80 +3713,42 @@
     <script>
         // ===== MENU DATA =====
         const menuData = [
-            // ===== STARTERS =====
-            { id: 101, name: "Paneer Tikka", price: 220, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=300&fit=crop&crop=center", description: "Cottage cheese marinated in royal spices, slow-grilled" },
-            
-            { id: 102, name: "Spring Rolls", price: 180, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1626074353765-517a681e40be?w=400&h=300&fit=crop&crop=center", description: "Crispy skin rolls packed with julienned exotic vegetables" },
-            
-            { id: 103, name: "Mushroom Fry", price: 200, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop&crop=center", description: "Fresh farm mushrooms wok-tossed with green peppercorns" },
-            
-            { id: 104, name: "Hara Bhara Kabab", price: 190, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop&crop=center", description: "Minced spinach, sweet potato, and green pea patties" },
-            
-            { id: 105, name: "Veg Seekh Kabab", price: 210, category: "Starter", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop&crop=center", description: "Skewered vegetable paste cooked over structural flame pits" },
-            
-            { id: 106, name: "Chicken Tikka", price: 280, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop&crop=center", description: "Yogurt-mustard tempered chicken chunks charcoal-cooked" },
-            
-            { id: 107, name: "Fish Fry", price: 300, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=300&fit=crop&crop=center", description: "Coastal-spice coated sea bass pieces crispy-pan-seared" },
-            
-            { id: 108, name: "Chicken Wings", price: 260, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400&h=300&fit=crop&crop=center", description: "Crisp chicken wings glazed in high-sweet chili reductions" },
-            
-            { id: 109, name: "Mutton Seekh", price: 320, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop&crop=center", description: "Tender minced lamb with dynamic spices cooked over hickory" },
-            
-            { id: 110, name: "Prawn Fry", price: 350, category: "Starter", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1565680018434-b5132b0e0c75?w=400&h=300&fit=crop&crop=center", description: "Golden fried tiger prawns coated lightly with coastal crust" },
-
-            // ===== MAIN COURSE =====
-            { id: 201, name: "Paneer Butter Masala", price: 320, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=400&h=300&fit=crop&crop=center", description: "Cottage cheese cubes slow-simmered in rich tomato gravy" },
-            
-            { id: 202, name: "Veg Biryani", price: 280, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop&crop=center", description: "Saffron stained basmati rice with exotic forest vegetables" },
-            
-            { id: 203, name: "Dal Makhani", price: 250, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center", description: "Whole black urad lentils slow-churned on low charcoal" },
-            
-            { id: 204, name: "Shahi Paneer", price: 340, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1631452180519-c96fe8b7e4b6?w=400&h=300&fit=crop&crop=center", description: "Paneer in royal white cashew and pine-nut gravy" },
-            
-            { id: 205, name: "Malai Kofta", price: 310, category: "Main Course", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop&crop=center", description: "Vegetable cream cheese dumplings in aromatic reduction" },
-            
-            { id: 206, name: "Chicken Butter Masala", price: 380, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop&crop=center", description: "Tandoori chicken in thick sweet-butter gravy" },
-            
-            { id: 207, name: "Mutton Biryani", price: 420, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop&crop=center", description: "Fragrant rice with tender mutton in whole spices" },
-            
-            { id: 208, name: "Fish Curry", price: 350, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=300&fit=crop&crop=center", description: "Catfish steaks simmered in mustard seed paste" },
-            
-            { id: 209, name: "Chicken Biryani", price: 360, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop&crop=center", description: "Dum cooked basmati with spice-engorged chicken" },
-            
-            { id: 210, name: "Prawn Curry", price: 400, category: "Main Course", type: "Non-Veg", special: false, image: "https://images.unsplash.com/photo-1565680018434-b5132b0e0c75?w=400&h=300&fit=crop&crop=center", description: "Shelled pink prawns slow-stewed in coconut milk" },
-
-            // ===== SOUTH INDIAN =====
-            { id: 301, name: "Plain Idli (2 pcs)", price: 80, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Steamed fermented rice cakes, light and soft" },
-            
-            { id: 302, name: "Rava Idli (2 pcs)", price: 90, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Semolina idli with cashews and curry leaves" },
-            
-            { id: 303, name: "Plain Dosa", price: 100, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Crispy golden fermented rice crepe" },
-            
-            { id: 304, name: "Masala Dosa", price: 120, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Crisp dosa with seasoned turmeric potato stuffing" },
-            
-            { id: 305, name: "Medu Vada (2 pcs)", price: 90, category: "South Indian", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Crispy lentil donuts served with chutney" },
-
-            // ===== DESSERTS =====
-            { id: 401, name: "Gulab Jamun", price: 120, category: "Dessert", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1589301760014-d929f3979c3d?w=400&h=300&fit=crop&crop=center", description: "Golden milk globes in saffron syrup" },
-            
-            { id: 402, name: "Ice Cream", price: 100, category: "Dessert", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop&crop=center", description: "Premium vanilla ice cream with chocolate sauce" },
-            
-            { id: 403, name: "Brownie", price: 150, category: "Dessert", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop&crop=center", description: "Warm chocolate brownie with ice cream" },
-
-            // ===== BEVERAGES =====
-            { id: 501, name: "Soft Drink", price: 80, category: "Beverage", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop&crop=center", description: "Chilled carbonated drink" },
-            
-            { id: 502, name: "Fresh Juice", price: 120, category: "Beverage", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop&crop=center", description: "Seasonal fresh fruit juice" },
-            
-            { id: 503, name: "Coffee", price: 90, category: "Beverage", type: "Veg", special: false, image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&crop=center", description: "Premium freshly brewed coffee" },
-
-            // ===== SPECIAL / CHEF'S PICK =====
-            { id: 601, name: "Chef's Special Pizza", price: 450, category: "Special", type: "Veg", special: true, image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop&crop=center", description: "Artisan pizza with gourmet toppings" },
-            
-            { id: 602, name: "Grilled Chicken", price: 500, category: "Special", type: "Non-Veg", special: true, image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&h=300&fit=crop&crop=center", description: "Herb-marinated grilled chicken" },
-            
-            { id: 603, name: "Butter Garlic Naan", price: 180, category: "Special", type: "Veg", special: true, image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=400&h=300&fit=crop&crop=center", description: "Soft naan bread with butter and garlic" }
-        ];
+    // ===== STARTERS =====
+    { id: 101, name: "Paneer Tikka", price: 220, category: "Starter", type: "Veg", special: false, image: "https://i.pinimg.com/736x/e7/39/e3/e739e3705b842e5e14a9548b21d998b7.jpg", description: "Cottage cheese marinated in royal spices, slow-grilled" },
+    { id: 102, name: "Spring Rolls", price: 180, category: "Starter", type: "Veg", special: false, image: "https://i.pinimg.com/1200x/4e/ef/68/4eef689dafa4a856a39497fbcb7175b2.jpg", description: "Crispy skin rolls packed with julienned exotic vegetables" },
+    { id: 103, name: "Mushroom Fry", price: 200, category: "Starter", type: "Veg", special: false, image: "https://i.pinimg.com/1200x/04/27/47/0427479aee7cd45805cca6fe1381056f.jpg", description: "Fresh farm mushrooms wok-tossed with green peppercorns" },
+    { id: 104, name: "Hara Bhara Kabab", price: 190, category: "Starter", type: "Veg", special: false, image: "https://i.pinimg.com/736x/bc/f6/82/bcf682353ac7756a6814e9a1eaf7f5b6.jpg", description: "Minced spinach, sweet potato, and green pea patties" },
+    { id: 105, name: "Veg Seekh Kabab", price: 210, category: "Starter", type: "Veg", special: false, image: "https://i.pinimg.com/1200x/52/0f/7a/520f7abfe0c8dcd30c1d11abb299dfdf.jpg", description: "Skewered vegetable paste cooked over structural flame pits" },
+    { id: 106, name: "Chicken Tikka", price: 280, category: "Starter", type: "Non-Veg", special: false, image: "https://i.pinimg.com/736x/4e/91/cb/4e91cb18acb215b1ea5e966217a6f116.jpg", description: "Yogurt-mustard tempered chicken chunks charcoal-cooked" },
+    { id: 107, name: "Fish Fry", price: 300, category: "Starter", type: "Non-Veg", special: false, image: "https://i.pinimg.com/736x/ce/be/b0/cebeb07967c2dffd9f280fd13910de23.jpg", description: "Coastal-spice coated sea bass pieces crispy-pan-seared" },
+    { id: 108, name: "Chicken Wings", price: 260, category: "Starter", type: "Non-Veg", special: false, image: "https://i.pinimg.com/1200x/d0/32/f5/d032f57f024427aa469cb5c2f5b2375d.jpg", description: "Crisp chicken wings glazed in high-sweet chili reductions" },
+    { id: 109, name: "Mutton Seekh", price: 320, category: "Starter", type: "Non-Veg", special: false, image: "https://i.pinimg.com/736x/03/4c/c6/034cc62a4a20bd29fc7960e279942286.jpg", description: "Tender minced lamb with dynamic spices cooked over hickory" },
+    { id: 110, name: "Prawn Fry", price: 350, category: "Starter", type: "Non-Veg", special: false, image: "https://i.pinimg.com/1200x/bc/af/87/bcaf875bc0f9eef21edd7ee23462010b.jpg", description: "Golden fried tiger prawns coated lightly with coastal crust" },
+    { id: 201, name: "Paneer Butter Masala", price: 320, category: "Main Course", type: "Veg", special: false, image: "https://i.pinimg.com/vwebp/1200x/75/25/c2/7525c28b815e93b8f4ad4a3bb889090e.webp", description: "Cottage cheese cubes slow-simmered in rich tomato gravy" },
+    { id: 202, name: "Veg Biryani", price: 280, category: "Main Course", type: "Veg", special: false, image: "https://i.pinimg.com/1200x/d9/68/72/d9687291cdf24450284204493887f476.jpg", description: "Saffron stained basmati rice with exotic forest vegetables" },
+    { id: 203, name: "Dal Makhani", price: 250, category: "Main Course", type: "Veg", special: false, image: "https://i.pinimg.com/1200x/be/5a/ab/be5aab77d41237a5d9bc2afbb0ccc808.jpg", description: "Whole black urad lentils slow-churned on low charcoal" },
+    { id: 204, name: "Shahi Paneer", price: 340, category: "Main Course", type: "Veg", special: false, image: "https://i.pinimg.com/1200x/40/6e/b1/406eb1c31ba11d68f3a2296d383a939c.jpg", description: "Paneer in royal white cashew and pine-nut gravy" },
+    { id: 205, name: "Malai Kofta", price: 310, category: "Main Course", type: "Veg", special: false, image: "https://i.pinimg.com/736x/62/3f/94/623f941ae8675b7e76eb1a021e8233e1.jpg", description: "Vegetable cream cheese dumplings in aromatic reduction" },
+    { id: 206, name: "Chicken Butter Masala", price: 380, category: "Main Course", type: "Non-Veg", special: false, image: "https://i.pinimg.com/vwebp/1200x/82/5c/01/825c01786eead0aa450390265a1a704a.webp", description: "Tandoori chicken in thick sweet-butter gravy" },
+    { id: 207, name: "Mutton Biryani", price: 420, category: "Main Course", type: "Non-Veg", special: false, image: "https://i.pinimg.com/736x/e1/e9/a9/e1e9a9bb4458f6cd0f0aba5fe4994f2a.jpg", description: "Fragrant rice with tender mutton in whole spices" },
+    { id: 208, name: "Fish Curry", price: 350, category: "Main Course", type: "Non-Veg", special: false, image: "https://i.pinimg.com/736x/f6/e8/31/f6e8316a80c7e683ebf9aa2abba7f101.jpg", description: "Catfish steaks simmered in mustard seed paste" },
+    { id: 209, name: "Chicken Biryani", price: 360, category: "Main Course", type: "Non-Veg", special: false, image: "https://i.pinimg.com/vwebp/1200x/55/7e/2b/557e2bc0a6b57a247264d1968f6d0d2a.webp", description: "Dum cooked basmati with spice-engorged chicken" },
+    { id: 210, name: "Prawn Curry", price: 400, category: "Main Course", type: "Non-Veg", special: false, image: "https://i.pinimg.com/736x/d3/4f/7a/d34f7a928941a4a92bd5170261b9af50.jpg", description: "Shelled pink prawns slow-stewed in coconut milk" },
+    { id: 301, name: "Plain Idli (2 pcs)", price: 80, category: "South Indian", type: "Veg", special: false, image: "https://i.pinimg.com/736x/5d/2d/38/5d2d38ecad301cb7fd0614e770070f95.jpg", description: "Steamed fermented rice cakes, light and soft" },
+    { id: 302, name: "Rava Idli (2 pcs)", price: 90, category: "South Indian", type: "Veg", special: false, image: "https://i.pinimg.com/1200x/fe/fd/2b/fefd2b0fad41cf43314c115e58122321.jpg", description: "Semolina idli with cashews and curry leaves" },
+    { id: 303, name: "Plain Dosa", price: 100, category: "South Indian", type: "Veg", special: false, image: "https://i.pinimg.com/736x/da/26/07/da2607596434e098807784328419a85d.jpg", description: "Crispy golden fermented rice crepe" },
+    { id: 304, name: "Masala Dosa", price: 120, category: "South Indian", type: "Veg", special: false, image: "https://i.pinimg.com/736x/ef/fc/94/effc9427474ba216f109190fc69a8b57.jpg", description: "Crisp dosa with seasoned turmeric potato stuffing" },
+    { id: 305, name: "Medu Vada (2 pcs)", price: 90, category: "South Indian", type: "Veg", special: false, image: "https://i.pinimg.com/736x/20/70/14/207014765fd693a571c85462d0d5ecf6.jpg", description: "Crispy lentil donuts served with chutney" },
+    { id: 401, name: "Gulab Jamun", price: 120, category: "Dessert", type: "Veg", special: false, image: "https://i.pinimg.com/736x/e6/51/46/e651469a60a2a99adfb2e8cd1fdbc6a4.jpg", description: "Golden milk globes in saffron syrup" },
+    { id: 402, name: "Ice Cream", price: 100, category: "Dessert", type: "Veg", special: false, image: "https://i.pinimg.com/736x/56/6f/f6/566ff65fa928ff567b663d0f81b71fb3.jpg", description: "Premium vanilla ice cream with chocolate sauce" },
+    { id: 403, name: "Brownie", price: 150, category: "Dessert", type: "Veg", special: false, image: "https://i.pinimg.com/736x/74/a6/59/74a65910781e2015f50fbe2c8ba3136d.jpg", description: "Warm chocolate brownie with ice cream" },
+    { id: 501, name: "Soft Drink", price: 80, category: "Beverage", type: "Veg", special: false, image: "https://i.pinimg.com/236x/38/ee/6e/38ee6e3279d4a3f89f21092720e0dbfe.jpg", description: "Chilled carbonated drink" },
+    { id: 502, name: "Fresh Juice", price: 120, category: "Beverage", type: "Veg", special: false, image: "https://i.pinimg.com/vwebp/1200x/6a/03/9a/6a039a0a80a4fd97093f62e2346fae15.webp", description: "Seasonal fresh fruit juice" },
+    { id: 503, name: "Coffee", price: 90, category: "Beverage", type: "Veg", special: false, image: "https://i.pinimg.com/736x/cd/54/7e/cd547e8961054524b4894c65dd71406a.jpg", description: "Premium freshly brewed coffee" },
+    { id: 601, name: "Chef's Special Pizza", price: 450, category: "Special", type: "Veg", special: true, image: "https://i.pinimg.com/vwebp/736x/d9/cb/5f/d9cb5fb5c6d0d7d3dc6f9a2926f47100.webp", description: "Artisan pizza with gourmet toppings" },
+    { id: 602, name: "Grilled Chicken", price: 500, category: "Special", type: "Non-Veg", special: true, image: "https://i.pinimg.com/1200x/86/34/49/86344933fd034de47d5b1a7e16a18ddd.jpg", description: "Herb-marinated grilled chicken" },
+    { id: 603, name: "Butter Garlic Naan", price: 180, category: "Special", type: "Veg", special: true, image: "https://i.pinimg.com/vwebp/1200x/fc/f1/de/fcf1dea14c28bd53e91f89f6860aced7.webp", description: "Soft naan bread with butter and garlic" }
+];
 
         // ===== CHAINS DATA =====
         const defaultChains = [
